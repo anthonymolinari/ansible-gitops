@@ -1,0 +1,16 @@
+name: gitops
+
+on:
+  push: 
+    branches: ['main']
+  
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: check
+        run: |
+          docker --version
