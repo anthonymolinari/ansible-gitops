@@ -1,0 +1,9 @@
+---
+- hosts: server
+  gather_facts: no
+  vars:
+    pip_install_packages:
+      - name: docker
+  tasks:
+    - import_tasks: tasks/containers.yml
+

@@ -1,0 +1,44 @@
+# run ansible script to deploy and update docker containers
+
+# traefik
+
+
+# homer
+- name: homer-dashboard
+  docker_container:
+    name: homer-dashboard
+    image: b4bz/homer:latest
+    volumes:
+      - "{{ docker_path }}/homer:/www/assets"
+    ports:
+      - "8385:8080"
+    restart_policy: unless-stopped
+
+# jekins
+
+# kanboard
+- name: kanboard
+
+# openbooks
+- name: openbooks
+
+# plex
+
+# audiobookshelf
+
+# airsonic
+
+# vpn
+
+# prowlarr
+
+# transmission
+
+# sonarr
+- name: sonarr
+
+# radarr
+- name: radarr
+
+# tdarr
+
