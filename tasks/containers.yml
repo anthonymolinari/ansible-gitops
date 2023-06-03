@@ -1,7 +1,7 @@
 # run ansible script to deploy and update docker containers
 
-# traefik
 
+# traefik
 
 # homer
 - name: homer-dashboard
@@ -17,10 +17,8 @@
 # jekins
 
 # kanboard
-- name: kanboard
 
 # openbooks
-- name: openbooks
 
 # plex
 

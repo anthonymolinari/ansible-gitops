@@ -1,0 +1,3 @@
+[server]
+ansible-test ansible_host=10.32.1.28 ansible_user=anthony
+
