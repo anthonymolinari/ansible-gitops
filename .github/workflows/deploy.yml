@@ -13,4 +13,4 @@ jobs:
 
       - name: run playbook
         run: |
-          ansible-playbook -C run.yml
+          ansible-playbook run.yml
