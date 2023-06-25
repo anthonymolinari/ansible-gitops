@@ -1,8 +1,19 @@
+---
 # run ansible script to deploy and update docker containers
 
 
 # traefik
-
+- name: traefik
+  docker_container:
+    name: traefik-reverse-proxy
+    image: traefik:v2.5
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "{{ docker_path }}/traefik/traefik.yml:/etc/traefik/traefik.yml"
+    ports:
+      - "8080:8080"
+      - "80:80"
+    restart_policy: unless-stopped
 
 # homer
 - name: homer-dashboard
@@ -18,10 +29,42 @@
 # jekins
 
 # kanboard
+- name: kanboard
+  docker_container:
+    name: kanboard
+    image: kanboard/kanboard:latest
+    volumes: 
+      - "{{ docker_path }}/kanboard/data:/var/www/app/data"
+      - "{{ docker_path }}/kanboard/plugins:/var/www/app/plugins"
+    ports:
+      - "8765:8765"
+    restart_policy: unless-stopped
 
 # openbooks
+- name: openbooks 
+  docker_container:
+    name: openbooks
+    image: evanbuss/openbooks:latest
+    volumes:
+      - "{{downloads_dir}}:/books"
+    command: ["--name", "iker_neptunus", "--persist", "-s", "irc.irchighway.net:9999"]
+    restart_policy: unless-stopped
 
 # plex
+- name: plex
+  docker_container:
+    name: plex
+    image: lscr.io/linuxserver/plex:latest
+    volumes:
+      - "{{ media_dir }}:/Media"
+      - "{{ docker_path }}/plex/config:/config"
+    network_mode: "host"
+    env:
+      PUID: 1000
+      PGID: 1000
+      VERSION: docker
+    restart_policy: unless-stopped
+
 
 # audiobookshelf
 
@@ -34,8 +77,38 @@
 # transmission
 
 # sonarr
+- name: sonarr
+  docker_container:
+    name: sonarr
+    image: linuxserver/sonarr:latest
+    ports:
+      - "8989:8989"
+    volumes:
+      - "{{ docker_path }}/sonarr/config:/config"
+      - "{{ media_dir }}:/tv"
+      - "{{ downloads_dir }}/torrents:/downloads"
+    env:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: "America/Los_Anegles"
+    restart_policy: unless-stopped
 
 # radarr
+- name: radarr
+  docker_container:
+    name: radarr
+    image: linuxserver/radarr:latest
+    ports:
+      - "7878:7878"
+    volumes:
+      - "{{ docker_path }}/radarr/config:/config"
+      - "{{ media_dir }}:/movies"
+      - "{{ downloads_dir }}/torrents:/downloads"
+    env:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: "America/Los_Anegles"
+    restart_policy: unless-stopped
 
 # tdarr
 
