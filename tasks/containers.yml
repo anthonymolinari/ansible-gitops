@@ -1,7 +1,6 @@
 ---
 # run ansible script to deploy and update docker containers
 
-
 # traefik
 - name: traefik
   docker_container:
