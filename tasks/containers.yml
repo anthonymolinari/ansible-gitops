@@ -59,9 +59,9 @@
       - "{{ docker_path }}/plex/config:/config"
     network_mode: "host"
     env:
-      PUID: 1000
-      PGID: 1000
-      VERSION: docker
+      PUID: "1000"
+      PGID: "1000"
+      VERSION: "docker"
     restart_policy: unless-stopped
 
 
