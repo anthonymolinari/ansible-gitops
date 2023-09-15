@@ -2,17 +2,17 @@
 # run ansible script to deploy and update docker containers
 
 # traefik
-- name: traefik
-  docker_container:
-    name: traefik-reverse-proxy
-    image: traefik:v2.5
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-      - "{{ docker_path }}/traefik/traefik.yml:/etc/traefik/traefik.yml"
-    ports:
-      - "8080:8080"
-      - "80:80"
-    restart_policy: unless-stopped
+# - name: traefik
+#   docker_container:
+#     name: traefik-reverse-proxy
+#     image: traefik:v2.5
+#     volumes:
+#       - "/var/run/docker.sock:/var/run/docker.sock"
+#       - "{{ docker_path }}/traefik/traefik.yml:/etc/traefik/traefik.yml"
+#     ports:
+#       - "8080:8080"
+#       - "80:80"
+#     restart_policy: unless-stopped
 
 # homer
 - name: homer-dashboard
