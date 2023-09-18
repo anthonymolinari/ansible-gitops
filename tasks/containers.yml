@@ -18,20 +18,18 @@
 - name: homer-dashboard
   docker_container:
     name: homer-dashboard
-    image: b4bz/homer:latest
+    image: b4bz/homer@sha256:23ef711ea0f5681f668930eae7661a8815184afd99885c387b0eef33fe6982b8
     volumes:
       - "{{ docker_path }}/homer:/www/assets"
     ports:
       - "8385:8080"
     restart_policy: unless-stopped
 
-# jekins
-
 # kanboard
 - name: kanboard
   docker_container:
     name: kanboard
-    image: kanboard/kanboard:latest
+    image: kanboard/kanboard@sha256:d3907466c5f063f918813c9a5d41b535d71a9d1a258b4f2eb93a65f633ad0a4b
     volumes: 
       - "{{ docker_path }}/kanboard/data:/var/www/app/data"
       - "{{ docker_path }}/kanboard/plugins:/var/www/app/plugins"
@@ -43,7 +41,7 @@
 - name: openbooks 
   docker_container:
     name: openbooks
-    image: evanbuss/openbooks:latest
+    image: evanbuss/openbooks@sha256:3b3d34d8b77e8261df1f470e1ca8344c035e316a86667dc7c1ab2e768d6359f1
     volumes:
       - "{{downloads_dir}}:/books"
     command: ["--name", "iker_neptunus", "--persist", "-s", "irc.irchighway.net:9999"]
@@ -53,7 +51,7 @@
 - name: plex
   docker_container:
     name: plex
-    image: lscr.io/linuxserver/plex:latest
+    image: linuxserver/plex@sha256:8e2526182faf21f5b9264e8bb8f3946fd96b6de0a6dbcd925547a9e812d98a48
     volumes:
       - "{{ media_dir }}:/Media"
       - "{{ docker_path }}/plex/config:/config"
@@ -79,7 +77,7 @@
 - name: sonarr
   docker_container:
     name: sonarr
-    image: linuxserver/sonarr:latest
+    image: linuxserver/sonarr@sha256:500af79ff1d83daee79143fd82d5d756bf0a33c048312a317a72ce747f62f0a9
     ports:
       - "8989:8989"
     volumes:
@@ -96,7 +94,7 @@
 - name: radarr
   docker_container:
     name: radarr
-    image: linuxserver/radarr:latest
+    image: linuxserver/radarr@sha256:8aa8c443dad68faedbed847cfdfa7205bd481b941d758ed98fa6d3c3d1fb1b37
     ports:
       - "7878:7878"
     volumes:
@@ -110,4 +108,3 @@
     restart_policy: unless-stopped
 
 # tdarr
-
