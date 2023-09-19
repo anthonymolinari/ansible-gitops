@@ -2,7 +2,7 @@
 #- hosts: main
 #  gather_facts: no
 #  tasks:
-#    - import_tasks: tasks/main/pre.yml
+#    - import_tasks: tasks/pre.yml
 
 - hosts: main
   gather_facts: no
@@ -10,7 +10,7 @@
     pip_install_packages:
       - name: docker
   tasks:
-    - import_tasks: tasks/main/containers.yml
+    - import_tasks: tasks/main_containers.yml
 
 - hosts: web
   gather_facts: no
@@ -18,4 +18,12 @@
     pip_install_packages:
       - name: docker
   tasks:
-    - import_tasks: tasks/web/containers.yml
+    - import_tasks: tasks/web_containers.yml
+
+#- hosts: network
+#  gather_facts: no
+#  vars:
+#    pip_install_packages:
+#      - name: docker
+#  tasks:
+#    - import_tasks: tasks/network_containers.yml
