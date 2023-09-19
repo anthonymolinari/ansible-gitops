@@ -3,10 +3,10 @@
   "extends": [
     "config:base"
   ],
-  "includePaths": [
-    ".github/workflows",
-    "tasks/main",
-    "tasks/network",
-    "tasks/web",
+  "packageRules": [
+    {
+        "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+        "automerge": true,
+    },
   ]
 }
