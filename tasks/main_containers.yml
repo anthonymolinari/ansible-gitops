@@ -47,16 +47,22 @@
       VERSION: "docker"
     restart_policy: unless-stopped
 
-
-# audiobookshelf
-
 # airsonic
-
-# vpn
-
-# prowlarr
-
-# transmission
+- name: airsonic
+  docker_container:
+    name: airsonic
+    image: linuxserver/airsonic@sha256:611c05dda8c8c7c86f5116e2343cf38f38fbb8595e90ba964e240f05f2746ef6
+    ports:
+      - "4040:4040"
+    volumes:
+      - "{{ media_dir }}/Media/Music:/media"
+      - "{{ docker_path }}:/airsonic/config"
+      - "{{ docker_path }}:/airsonic/playlists"
+    env:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: "America/Los_Angles"
+    restart_policy: unless-stopped
 
 # sonarr
 - name: sonarr
@@ -72,7 +78,7 @@
     env:
       PGID: "1000"
       PUID: "1000"
-      TZ: "America/Los_Anegles"
+      TZ: "America/Los_Angles"
     restart_policy: unless-stopped
 
 # radarr
@@ -89,7 +95,10 @@
     env:
       PGID: "1000"
       PUID: "1000"
-      TZ: "America/Los_Anegles"
+      TZ: "America/Los_Angles"
     restart_policy: unless-stopped
 
 # tdarr
+# vpn
+# prowlarr
+# transmission
