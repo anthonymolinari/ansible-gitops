@@ -4,6 +4,9 @@
     "config:base"
   ],
   "includePaths": [
-    "./tasks",
+    ".github/workflows",
+    "tasks/main",
+    "tasks/network",
+    "tasks/web",
   ]
 }
