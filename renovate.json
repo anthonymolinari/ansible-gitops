@@ -5,8 +5,13 @@
   ],
   "packageRules": [
     {
-        "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+        "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
         "automerge": true,
     },
+  ],
+  "timezone": "America/Los_Angeles",
+  "fileMatch": [
+    "(^|/)tasks/[^/]+\\.ya?ml$",
+    
   ]
 }
