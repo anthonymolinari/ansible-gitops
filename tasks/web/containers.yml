@@ -1,0 +1,9 @@
+---
+
+- name: wordle-clone
+  docker_container:
+    name: wordle-clone
+    image: anthonymolinari/word-guess@sha256:8c7f340b18bca7369fde8ab5bfeb70e812a1b195f6aaedbbe72e5d6087bca8f2
+    ports:
+      - "3210:3000"
+    restart_policy: unless-stopped

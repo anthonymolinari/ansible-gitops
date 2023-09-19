@@ -1,14 +1,21 @@
 ---
-#- hosts: server
+#- hosts: main
 #  gather_facts: no
 #  tasks:
-#    - import_tasks: tasks/pre.yml
+#    - import_tasks: tasks/main/pre.yml
 
-- hosts: server
+- hosts: main
   gather_facts: no
   vars:
     pip_install_packages:
       - name: docker
   tasks:
-    - import_tasks: tasks/containers.yml
+    - import_tasks: tasks/main/containers.yml
 
+- hosts: web
+  gather_facts: no
+  vars:
+    pip_install_packages:
+      - name: docker
+  tasks:
+    - import_tasks: tasks/web/containers.yml

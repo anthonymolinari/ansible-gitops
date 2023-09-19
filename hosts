@@ -1,3 +1,8 @@
-[server]
+[main]
 ansible-test ansible_host=10.32.1.28 ansible_user=anthony
 
+[network]
+soquel ansible_host=10.32.1.7 ansible_user=anthony
+
+[web]
+web-server ansible_host=10.32.1.12 ansible_user=anthony
