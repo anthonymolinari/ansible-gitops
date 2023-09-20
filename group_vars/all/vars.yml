@@ -1,6 +1,8 @@
 username: anthony
+
 # storage paths
 docker_path: /mnt/storage-fast/docker
 downloads_dir: /mnt/storage-media/Downloads
 media_dir: /mnt/storage-media/Media
 
+timezone: America/Los_Angeles

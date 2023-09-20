@@ -1,12 +1,20 @@
 ---
 
-#- name: copy traefik configuration
-#  ansible.builtin.copy:
-#    src: "configs/traefik.yml"
-#    dest: "{{ docker_path }}/traefik/traefik.yml"
-#    owner: root
-#    group: root
-#    mode: '0644'
+- name: copy prometheus configuration
+  ansible.builtin.copy:
+    src: "configs/prometheus.yml"
+    dest: "{{ docker_path }}/prometheus/prometheus.yml"
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: copy traefik configuration
+  ansible.builtin.copy:
+    src: "configs/traefik.yml"
+    dest: "{{ docker_path }}/traefik/traefik.yml"
+    owner: root
+    group: root
+    mode: '0644'
 
 - name: copy homer configuration
   ansible.builtin.copy:

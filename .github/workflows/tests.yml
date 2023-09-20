@@ -1,0 +1,14 @@
+name: tests
+
+on:
+  pull_request:
+    branches: ['main']
+
+jobs:
+  syntax_check:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: ansible syntax validation
+        run: ansible-playbook run.yml --syntax-check

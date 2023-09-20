@@ -29,6 +29,8 @@
     image: evanbuss/openbooks@sha256:3b3d34d8b77e8261df1f470e1ca8344c035e316a86667dc7c1ab2e768d6359f1
     volumes:
       - "{{downloads_dir}}:/books"
+    ports:
+      - "4567:80"
     command: ["--name", "iker_neptunus", "--persist", "-s", "irc.irchighway.net:9999"]
     restart_policy: unless-stopped
 
@@ -61,7 +63,7 @@
     env:
       PGID: "1000"
       PUID: "1000"
-      TZ: "America/Los_Angles"
+      TZ: "{{ timezone}}"
     restart_policy: unless-stopped
 
 # sonarr
@@ -78,7 +80,7 @@
     env:
       PGID: "1000"
       PUID: "1000"
-      TZ: "America/Los_Angles"
+      TZ: "{{ timezone }}"
     restart_policy: unless-stopped
 
 # radarr
@@ -95,9 +97,40 @@
     env:
       PGID: "1000"
       PUID: "1000"
-      TZ: "America/Los_Angles"
+      TZ: "{{ timezone }}"
     restart_policy: unless-stopped
 
+# node exporter
+- name: node-exporter
+  docker_container:
+    name: node-exporter
+    image: prom/node-exporter@sha256:40ba9ef2dc8d7564d76656feca7f679062d2df71653618211d38c0ec51ebc28c
+    command: ["--path.rootfs=/host"]
+    volumes:
+      - "/:/host:ro,rslave"
+    restart_policy: unless-stopped
+
+# promestheus
+- name: promestheus
+  docker_container:
+    name: promestheus
+    image: prom/promestheus@sha256:db03207fa305e4232ae907f04e51fac42ea4c7ca8359812562ed5c8bcc8e34e5
+    ports:
+      - "9090:9090"
+    volumes:
+      - "{{ docker_path }}/promestheus:/etc/promestheus"
+    restart_policy: unless-stopped
+
+# grafana
+- name: grafana
+  docker_container:
+    name: grafana
+    image: grafana/grafana@sha256:80b7e6a6451036c604fb0cb9294dbb5b63058db80b1a3b838cb5f80cf7c8c362
+    ports:
+    volumes:
+    restart_policy: unless-stopped
+
+# loki
 # tdarr
 # vpn
 # prowlarr
