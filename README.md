@@ -1,6 +1,7 @@
 # ansible-gitops
 
-![deployment](https://github.com/anthonymolinari/ansible-gitops/deploy.svg)
+![deployment](https://github.com/anthonymolinari/ansible-gitops/workflows/deploy.svg)
+![tests](https://github.com/anthonymolinari/ansible-gitops/workflows/tests.svg)
 
 #### List of services:
   - homer dashbaord
