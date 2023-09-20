@@ -142,7 +142,7 @@
     name: grafana
     image: grafana/grafana@sha256:80b7e6a6451036c604fb0cb9294dbb5b63058db80b1a3b838cb5f80cf7c8c362
     ports:
-    volumes:
+      - "3000:3000"
     restart_policy: unless-stopped
 
 # loki
