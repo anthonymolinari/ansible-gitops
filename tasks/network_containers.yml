@@ -10,6 +10,7 @@
     name: tautulli
     image: tautulli/tautulli@sha256:fd0b9332fc96cd4e536c026ba0e2e9e76af44baa0755f82621f4972b57e8db1e
     ports:
+      - "8181:8181"
     volumes:
       - "/home/anthony/docker-volumes/tautulli/config:/config"
       - "/home/anthony/docker-volumes/tautulli/logs:/logs"
