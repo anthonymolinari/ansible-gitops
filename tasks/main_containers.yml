@@ -8,6 +8,8 @@
     volumes:
       - "{{ docker_path }}/traefik/traefik.yml:/traefik.yml"
     ports:
+      - "80:80"
+      - "8080:8080"
     restart_policy: unless-stopped
 
 # homer
