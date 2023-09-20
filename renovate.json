@@ -10,5 +10,5 @@
     },
   ],
   "timezone": "America/Los_Angeles",
-  "ignoreTest": true,
+  "ignoreTests": true,
 }
