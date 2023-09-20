@@ -1,4 +1,6 @@
-#ansible-gitops
+# ansible-gitops
+
+![deployment](https://github.com/anthonymolinari/ansible-gitops/deploy.svg)
 
 #### List of services:
   - homer dashbaord
@@ -18,3 +20,5 @@
   - grafana
   - duckdns
   - wireguard
+  - home-assistant
+  - mosquitto
