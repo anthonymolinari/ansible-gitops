@@ -5,28 +5,20 @@
     path: "{{ docker_path }}/prometheus"
     state: directory
     
-
 - name: copy prometheus configuration
   ansible.builtin.copy:
     src: "configs/prometheus.yml"
     dest: "{{ docker_path }}/prometheus/prometheus.yml"
-    owner: root
-    group: root
-    mode: '0644'
 
+- name: ensures traefik dir exists
+  file:
+    path: "{{ docker_path }}/traefik"
+    state: directory
 
-#- name: ensures traefik dir exists
-#  file:
-#    path: "{{ docker_path }}/traefik"
-#    state: directory
-
-#- name: copy traefik configuration
-#  ansible.builtin.copy:
-#    src: "configs/traefik.yml"
-#    dest: "{{ docker_path }}/traefik/traefik.yml"
-#    owner: root
-#    group: root
-#    mode: '0644'
+- name: copy traefik configuration
+  ansible.builtin.copy:
+    src: "configs/traefik.yml"
+    dest: "{{ docker_path }}/traefik/traefik.yml"
 
 - name: ensures homer dir exists
   file:
@@ -37,6 +29,3 @@
   ansible.builtin.copy:
     src: "configs/homer_config.yml"
     dest: "{{ docker_path }}/homer/config.yml"
-    owner: root
-    group: root
-    mode: '0644'

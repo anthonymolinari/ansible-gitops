@@ -1,4 +1,15 @@
 ---
+
+# traefik
+- name: traefik
+  docker_container:
+    name: traefik
+    image: traefik:v2.5
+    volumes:
+      - "{{ docker_path }}/traefik/traefik.yml:/traefik.yml"
+    ports:
+    restart_policy: unless-stopped
+
 # homer
 - name: homer-dashboard
   docker_container:
