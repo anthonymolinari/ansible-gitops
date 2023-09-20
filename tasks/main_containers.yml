@@ -113,14 +113,14 @@
     restart_policy: unless-stopped
 
 # promestheus
-- name: promestheus
+- name: promstheus
   docker_container:
-    name: promestheus
+    name: prometheus
     image: prom/prometheus@sha256:c5dd3503828713c4949ae1bccd1d8d69f382c33d441954674a6b78ebe69c3331
     ports:
       - "9090:9090"
     volumes:
-      - "{{ docker_path }}/promestheus:/etc/promestheus"
+      - "{{ docker_path }}/prometheus:/etc/prometheus"
     restart_policy: unless-stopped
 
 # grafana
