@@ -1,8 +1,8 @@
 [main]
-ansible-test ansible_host=10.32.1.28 ansible_user=anthony
+ansible-test ansible_host=10.32.1.28 ansible_user=anthony interpreter_python=python3.10
 
 [network]
 soquel ansible_host=10.32.1.7 ansible_user=anthony interpreter_python=python3.6
 
 [web]
-web-server ansible_host=10.32.1.12 ansible_user=anthony
+web-server ansible_host=10.32.1.12 ansible_user=anthony interpreter_python=python3.10
