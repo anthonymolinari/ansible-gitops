@@ -2,8 +2,43 @@
 
 # duckdns
 
-# tautulli
-
 # wireguard
 
+# tautulli
+- name: tautulli
+  docker_container:
+    name: tautulli
+    image: tautulli/tautulli@sha256:fd0b9332fc96cd4e536c026ba0e2e9e76af44baa0755f82621f4972b57e8db1e
+    ports:
+    volumes:
+      - "/home/anthony/docker-volumes/tautulli/config:/config"
+      - "/home/anthony/docker-volumes/tautulli/logs:/logs"
+    env:
+      PUID: "1000"
+      PGID: "1000"
+    restart_policy: unless-stopped
+
 # home assistant
+#- name: home-assistant
+#  docker_container:
+#    name: home-assistant
+#    image:
+#    ports:
+#    volumes:
+#    restart_policy: unless-stopped
+
+# mosquitto
+- name: mosquitto
+  docker_container:
+    name: mosquitto
+    image: eclipse-mosquitto@sha256:5b9408e7df29ee3b41e4e5c406b3f0b08bdacaea75db36a6e68d6a3cbebf7ea2
+    ports:
+      - "1883:1883"
+    volumes:
+      - "/home/anthony/docker-volumes/mosquitto/data"
+      - "/home/anthony/docker-volumes/mosquitto/config"
+      - "/home/anthony/docker-volumes/mosquitto/logs"
+    env:
+      PUID: "1000"
+      PGID: "1000"
+    restart_policy: unless-stopped
