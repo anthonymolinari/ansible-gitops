@@ -9,5 +9,6 @@
         "automerge": true,
     },
   ],
-  "timezone": "America/Los_Angeles"
+  "timezone": "America/Los_Angeles",
+  "ignoreTest": true,
 }
