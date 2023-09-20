@@ -1,8 +1,8 @@
 ---
-#- hosts: main
-#  gather_facts: no
-#  tasks:
-#    - import_tasks: tasks/pre.yml
+- hosts: main
+  gather_facts: no
+  tasks:
+    - import_tasks: tasks/pre.yml
 
 - hosts: main
   gather_facts: no

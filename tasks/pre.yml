@@ -8,13 +8,13 @@
     group: root
     mode: '0644'
 
-- name: copy traefik configuration
-  ansible.builtin.copy:
-    src: "configs/traefik.yml"
-    dest: "{{ docker_path }}/traefik/traefik.yml"
-    owner: root
-    group: root
-    mode: '0644'
+#- name: copy traefik configuration
+#  ansible.builtin.copy:
+#    src: "configs/traefik.yml"
+#    dest: "{{ docker_path }}/traefik/traefik.yml"
+#    owner: root
+#    group: root
+#    mode: '0644'
 
 - name: copy homer configuration
   ansible.builtin.copy:
