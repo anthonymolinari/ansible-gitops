@@ -1,5 +1,11 @@
 ---
 
+- name: ensures prometheus dir exists
+  file:
+    path: "{{ docker_path }}/prometheus"
+    state: directory
+    
+
 - name: copy prometheus configuration
   ansible.builtin.copy:
     src: "configs/prometheus.yml"
@@ -8,6 +14,12 @@
     group: root
     mode: '0644'
 
+
+#- name: ensures traefik dir exists
+#  file:
+#    path: "{{ docker_path }}/traefik"
+#    state: directory
+
 #- name: copy traefik configuration
 #  ansible.builtin.copy:
 #    src: "configs/traefik.yml"
@@ -15,6 +27,11 @@
 #    owner: root
 #    group: root
 #    mode: '0644'
+
+- name: ensures homer dir exists
+  file:
+    path: "{{ docker_path }}/homer"
+    state: directory
 
 - name: copy homer configuration
   ansible.builtin.copy:
