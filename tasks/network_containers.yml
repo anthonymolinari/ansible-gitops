@@ -36,9 +36,9 @@
     ports:
       - "1883:1883"
     volumes:
-      - "/home/anthony/docker-volumes/mosquitto/data"
-      - "/home/anthony/docker-volumes/mosquitto/config"
-      - "/home/anthony/docker-volumes/mosquitto/logs"
+      - "/home/anthony/docker-volumes/mosquitto/data:/data"
+      - "/home/anthony/docker-volumes/mosquitto/config:/config"
+      - "/home/anthony/docker-volumes/mosquitto/logs:/logs"
     env:
       PUID: "1000"
       PGID: "1000"
