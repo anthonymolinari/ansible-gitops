@@ -172,7 +172,7 @@
 # promtail
 - name: promtail
   docker_container:
-    name: promtial
+    name: promtail
     image: grafana/promtail@sha256:7fac20cf7240da82804217ba62821515c22c6097613f23a27b37cfa9338aab48
     volumes:
      - "{{ docker_path }}/promtail:/etc/promtail"
