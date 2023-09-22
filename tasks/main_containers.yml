@@ -174,13 +174,10 @@
   docker_container:
     name: loki
     image: grafana/loki:2.5.0
-    user: "1000:1000"
     volumes:
       - "{{ docker_path }}/loki:/etc/loki"
     ports:
       - "3100:3100"
-    command: 
-      - ["-config.file=/etc/loki/config.yml"]
     networks:
       - name: "loki"
     restart_policy: never
@@ -190,12 +187,9 @@
   docker_container:
     name: promtail
     image: grafana/promtail:2.5.0
-    user: "1000:1000"
     volumes:
      - "{{ docker_path }}/promtail:/etc/promtail"
      - "/var/log:/var/log"
-    command:
-      - ["-config.file=/etc/promtail/config.yml"]
     networks:
       - name: "loki"
     restart_policy: never
