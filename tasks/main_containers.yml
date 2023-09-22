@@ -173,25 +173,29 @@
 - name: loki
   docker_container:
     name: loki
-    image: grafana/loki:2.9.1
+    image: grafana/loki:2.9.0
     volumes:
       - "{{ docker_path }}/loki:/etc/loki"
     ports:
       - "3100:3100"
     networks:
       - name: "loki"
+    command:
+     - ["-config.file=/etc/loki/local-config.yml"]
     restart_policy: unless-stopped
 
 # promtail
 - name: promtail
   docker_container:
     name: promtail
-    image: grafana/promtail:2.9.1
+    image: grafana/promtail:2.9.0
     volumes:
      - "{{ docker_path }}/promtail:/etc/promtail"
      - "/var/log:/var/log"
     networks:
       - name: "loki"
+    command: 
+      - ["-config.file=/etc/promtail/config.yml"]
     restart_policy: unless-stopped
 
 # vpn
