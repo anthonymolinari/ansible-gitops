@@ -1,5 +1,23 @@
 ---
 
+# create portainer volume
+- name: create portainer volume
+  docker_volumes:
+    name: portainer_data
+
+# portainer
+- name: portainer
+  docker_container:
+    name: portainer
+    image: portainer/portainer-ce:latest
+    volumes:
+      - "portainer_data:/data"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    ports:
+      - "8000:8000"
+      - "9443:9443"
+    restart_policy: always
+
 # traefik
 - name: traefik
   docker_container:
