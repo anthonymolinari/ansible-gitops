@@ -165,7 +165,7 @@
       - ["-config.file=/etc/loki/config.yml"]
     networks:
       - name: "loki"
-    restart_policy: unless-stopped
+    # restart_policy: unless-stopped
 
 # promtail
 - name: promtail
@@ -180,7 +180,7 @@
       - ["-config.file=/etc/promtail/config.yml"]
     networks:
       - name: "loki"
-    restart_policy: unless-stopped
+    # restart_policy: unless-stopped
 
 # vpn
 # prowlarr
