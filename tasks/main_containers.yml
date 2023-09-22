@@ -141,12 +141,43 @@
   docker_container:
     name: grafana
     image: grafana/grafana@sha256:80b7e6a6451036c604fb0cb9294dbb5b63058db80b1a3b838cb5f80cf7c8c362
+    user: "1000"
     ports:
       - "3000:3000"
+    volumes:
+      - "{{ docker_path }}/grafana:/var/lib/grafana"
+    networks:
+      - "loki"
     restart_policy: unless-stopped
 
 # loki
+- name: loki
+  docker_container:
+    name: loki
+    image: grafana/loki@sha256:bde9416a938f43d5c6e38f68aaea19b878184be79db2a6c0b6ec9a535053f5bf
+    volumes:
+      - "{{ docker_path }}/loki:/etc/loki"
+    ports:
+      - "3100:3100"
+    command: 
+      - ["-config.file=/etc/loki/loki-config.yml"]
+    networks:
+      - "loki"
+    restart_policy: unless-stopped
 
+# promtail
+- name: promtail
+  docker_container:
+    name: promtial
+    image: grafana/promtail@sha256:7fac20cf7240da82804217ba62821515c22c6097613f23a27b37cfa9338aab48
+    volumes:
+     - "{{ docker_path }}/promtail:/etc/promtail"
+     - "/var/log:/var/log"
+    command:
+      - ["--config.file=/etc/promtail/promtail-config.yml"]
+    networks:
+      - "loki"
+    restart_policy: unless-stopped
 
 # vpn
 # prowlarr
