@@ -1,8 +1,43 @@
 ---
 
 # duckdns
+# - name: duckdns
+#   docker_container:
+#     name: duckdns
+#     image: linuxserver/duckdns@sha256:15437356505cf8a7bf4633a4899d8e9b6c5a4b42604f0ca2f0e9948f0ffa0111
+#     volumes:
+#       - "/home/anthony/docker-volumes/duckdns/config:/config"
+#     env:
+#       PUID: "1000"
+#       PGID: "1000"
+#       TZ: "{{ timezone }}"
+#       SUBDOMAINS: ""
+#       TOKEN: ""
+#     restart_policy: unless-stopped
 
 # wireguard
+- name: wireguard
+  docker_container:
+    name: wireguard
+    image: linuxserver/wireguard@sha256:fb193da418ee846d2f7436d8818f8e849936e14de82bb0fc110ace289af39aff
+    ports:
+      - "51820:51820/udp"
+    volumes:
+      - "/home/anthony/docker-volumes/wireguard/config:/config"
+      - "/lib/modules:/lib/modules"
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      SERVERURL: "mole-homelab.duckdns.org"
+      PEERS: "desktop,laptop,phone,tablet"
+      INTERNAL_SUBNET: 10.13.13.0/24
+      TZ: "{{ timezone }}"
+    capabilities:
+      - net_admin
+      - sys_module
+    sysctls:
+      net.ipv4.conf.all.src_valid_mark: 1
+    restart_policy: unless-stopped
 
 # tautulli
 - name: tautulli
@@ -19,15 +54,6 @@
       PGID: "1000"
     restart_policy: unless-stopped
 
-# home assistant
-#- name: home-assistant
-#  docker_container:
-#    name: home-assistant
-#    image:
-#    ports:
-#    volumes:
-#    restart_policy: unless-stopped
-
 # mosquitto
 - name: mosquitto
   docker_container:
@@ -43,3 +69,12 @@
       PUID: "1000"
       PGID: "1000"
     restart_policy: unless-stopped
+
+# home assistant
+#- name: home-assistant
+#  docker_container:
+#    name: home-assistant
+#    image:
+#    ports:
+#    volumes:
+#    restart_policy: unless-stopped
