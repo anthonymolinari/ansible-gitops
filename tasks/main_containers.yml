@@ -136,6 +136,10 @@
       - "{{ docker_path }}/prometheus:/etc/prometheus"
     restart_policy: unless-stopped
 
+- name: create network for grafana, loki, and promtail
+  docker_network:
+    name: loki
+
 # grafana
 - name: grafana
   docker_container:
