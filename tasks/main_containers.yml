@@ -146,7 +146,9 @@
     restart_policy: unless-stopped
 
 # loki
-# tdarr
+
+
 # vpn
 # prowlarr
 # transmission
+# tdarr
