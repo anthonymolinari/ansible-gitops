@@ -180,7 +180,7 @@
       - "3100:3100"
     networks:
       - name: "loki"
-    restart_policy: never
+    restart_policy: unless-stopped
 
 # promtail
 - name: promtail
@@ -192,7 +192,7 @@
      - "/var/log:/var/log"
     networks:
       - name: "loki"
-    restart_policy: never
+    restart_policy: unless-stopped
 
 # vpn
 # prowlarr
