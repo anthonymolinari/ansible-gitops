@@ -155,7 +155,7 @@
 - name: loki
   docker_container:
     name: loki
-    image: grafana/loki@sha256:bde9416a938f43d5c6e38f68aaea19b878184be79db2a6c0b6ec9a535053f5bf
+    image: grafana/loki:2.4.0
     volumes:
       - "{{ docker_path }}/loki:/etc/loki"
     ports:
@@ -170,7 +170,7 @@
 - name: promtail
   docker_container:
     name: promtail
-    image: grafana/promtail@sha256:7fac20cf7240da82804217ba62821515c22c6097613f23a27b37cfa9338aab48
+    image: grafana/promtail:2.4.0
     volumes:
      - "{{ docker_path }}/promtail:/etc/promtail"
      - "/var/log:/var/log"
