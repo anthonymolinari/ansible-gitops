@@ -29,3 +29,23 @@
   ansible.builtin.copy:
     src: "configs/homer_config.yml"
     dest: "{{ docker_path }}/homer/config.yml"
+
+- name: ensures loki dir exists
+  file:
+    path: "{{ docker_path }}/loki"
+    state: directory
+    
+- name: copy loki configuration
+  ansible.builtin.copy:
+    src: "configs/loki-config.yml"
+    dest: "{{ docker_path }}/loki/loki-config.yml"
+
+- name: ensures promtail dir exists
+  file:
+    path: "{{ docker_path }}/promtail"
+    state: directory
+    
+- name: copy promtail configuration
+  ansible.builtin.copy:
+    src: "configs/promtail-config.yml"
+    dest: "{{ docker_path }}/promtail/promtail-config.yml"
