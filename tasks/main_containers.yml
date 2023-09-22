@@ -164,7 +164,7 @@
     ports:
       - "3100:3100"
     command: 
-      - ["-config.file=/etc/loki/loki-config.yml"]
+      - ["--config.file=/etc/loki/loki-config.yml"]
     networks:
       - name: "loki"
     restart_policy: unless-stopped
