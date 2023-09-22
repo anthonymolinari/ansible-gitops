@@ -4,7 +4,7 @@
 - name: traefik
   docker_container:
     name: traefik
-    image: traefik:v2.10
+    image: traefik:3.0
     volumes:
       - "{{ docker_path }}/traefik/traefik.yml:/traefik.yml"
     ports:
