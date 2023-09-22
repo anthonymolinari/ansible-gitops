@@ -18,6 +18,8 @@
   - openvpn-client
   - prometheus
   - node-exporter
+  - loki
+  - promtail
   - grafana
   - duckdns
   - wireguard
