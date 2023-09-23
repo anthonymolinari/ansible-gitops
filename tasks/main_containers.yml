@@ -18,17 +18,17 @@
       - "9000:9000"
     restart_policy: always
 
-# traefik
-- name: traefik
-  docker_container:
-    name: traefik
-    image: traefik:v2.10
-    volumes:
-      - "{{ docker_path }}/traefik/traefik.yml:/traefik.yml"
-    ports:
-      - "80:80"
-      - "8080:8080"
-    restart_policy: unless-stopped
+# # traefik
+# - name: traefik
+#   docker_container:
+#     name: traefik
+#     image: traefik:v2.10
+#     volumes:
+#       - "{{ docker_path }}/traefik/traefik.yml:/traefik.yml"
+#     ports:
+#       - "80:80"
+#       - "8080:8080"
+#     restart_policy: unless-stopped
 
 # homer
 - name: homer-dashboard
@@ -158,6 +158,10 @@
   docker_network:
     name: loki
 
+- name: create persistent volume for grafana
+  docker_volume:
+    name: grafana_data
+
 # grafana
 - name: grafana
   docker_container:
@@ -167,6 +171,8 @@
       - "3000:3000"
     networks:
       - name: "loki"
+    volumes:
+      - "grafana_data:/var/lib/grafana"
     restart_policy: unless-stopped
 
 # loki
@@ -175,13 +181,13 @@
     name: loki
     image: grafana/loki:2.9.1
     volumes:
-      - "{{ docker_path }}/loki:/etc/loki"
+      - "{{ docker_path }}/loki/loki-config.yml:/etc/loki/loki-config.yml"
     ports:
       - "3100:3100"
     networks:
       - name: "loki"
     command:
-     - ["-config.file=/etc/loki/local-config.yml"]
+     - ["-config.file=/etc/loki/loki-config.yml"]
     restart_policy: unless-stopped
 
 # promtail
@@ -190,14 +196,13 @@
     name: promtail
     image: grafana/promtail:2.9.1
     volumes:
-     - "{{ docker_path }}/promtail:/etc/promtail"
+     - "{{ docker_path }}/promtail/promtail-config.yml:/etc/promtail/promtail-config.yml"
      - "/var/log:/var/log"
     networks:
       - name: "loki"
     command: 
-      - ["-config.file=/etc/promtail/config.yml"]
+      - ["-config.file=/etc/promtail/promtail-config.yml"]
     restart_policy: unless-stopped
-
 
 # vpn
 # prowlarr
