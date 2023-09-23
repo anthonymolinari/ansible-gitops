@@ -38,7 +38,7 @@
 - name: copy loki configuration
   ansible.builtin.copy:
     src: "configs/loki-config.yml"
-    dest: "{{ docker_path }}/loki/local-config.yml"
+    dest: "{{ docker_path }}/loki/loki-config.yml"
 
 - name: ensures promtail dir exists
   file:
@@ -48,4 +48,4 @@
 - name: copy promtail configuration
   ansible.builtin.copy:
     src: "configs/promtail-config.yml"
-    dest: "{{ docker_path }}/promtail/config.yml"
+    dest: "{{ docker_path }}/promtail/promtail-config.yml"
