@@ -22,13 +22,13 @@ scrape_configs:
   
 ## docker logs
 
-- job_name: docker 
-  pipeline_stages:
-   - docker: {}
-  static_configs:
-   - labels:
-       job: docker
-       __path__: /var/lib/docker/containers/*/*-json.log
+#- job_name: docker 
+#  pipeline_stages:
+#    - docker: {}
+#  static_configs:
+#    - labels:
+#        job: docker
+#        __path__: /var/lib/docker/containers/*/*-json.log
 
 # syslog target
 
