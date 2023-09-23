@@ -1,5 +1,27 @@
 ---
 
+- name: create promtail volume
+  docker_volume:
+    name: promtail_data
+
+- name: promtail container
+  docker_container:
+    name: promtail
+    image: grafana/promtail:2.9.1
+    volumes:
+      - "promtail_data:/etc/promtail"
+      - "/var/log:/var/log"
+    restart_policy: unless-stopped
+
+- name: node_exporter container
+  docker_container:
+    name: node_exporter
+    image: prom/node-exporter@sha256:40ba9ef2dc8d7564d76656feca7f679062d2df71653618211d38c0ec51ebc28c
+    command: ["--path.rootfs=/host"]
+    volumes:
+      - "/:/host:ro,rslave"
+    restart_policy: unless-stopped
+
 # duckdns
 # - name: duckdns
 #   docker_container:
