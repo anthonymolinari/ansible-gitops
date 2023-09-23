@@ -1,22 +1,22 @@
 ---
 
 # create portainer volume
-- name: create portainer volume
-  docker_volume:
-    name: portainer_data
+# - name: create portainer volume
+#   docker_volume:
+#     name: portainer_data
 
 # portainer
-- name: portainer
-  docker_container:
-    name: portainer
-    image: portainer/portainer-ce:latest
-    volumes:
-      - "portainer_data:/data"
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    ports:
-      - "8000:8000"
-      - "9000:9000"
-    restart_policy: always
+# - name: portainer
+#   docker_container:
+#     name: portainer
+#     image: portainer/portainer-ce:latest
+#     volumes:
+#       - "portainer_data:/data"
+#       - "/var/run/docker.sock:/var/run/docker.sock"
+#     ports:
+#       - "8000:8000"
+#       - "9000:9000"
+#     restart_policy: always
 
 # # traefik
 # - name: traefik
@@ -78,23 +78,6 @@
       PUID: "1000"
       PGID: "1000"
       VERSION: "docker"
-    restart_policy: unless-stopped
-
-# airsonic
-- name: airsonic
-  docker_container:
-    name: airsonic
-    image: linuxserver/airsonic@sha256:611c05dda8c8c7c86f5116e2343cf38f38fbb8595e90ba964e240f05f2746ef6
-    ports:
-      - "4040:4040"
-    volumes:
-      - "{{ media_dir }}/Media/Music:/media"
-      - "{{ docker_path }}:/airsonic/config"
-      - "{{ docker_path }}:/airsonic/playlists"
-    env:
-      PGID: "1000"
-      PUID: "1000"
-      TZ: "{{ timezone}}"
     restart_policy: unless-stopped
 
 # sonarr
