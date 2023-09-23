@@ -2,7 +2,7 @@
 - hosts: main
   gather_facts: no
   tasks:
-    - import_tasks: tasks/pre.yml
+    - import_tasks: tasks/main_configs.yml
 
 - hosts: main
   gather_facts: no
