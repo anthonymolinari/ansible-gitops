@@ -20,6 +20,8 @@
     command: ["--path.rootfs=/host"]
     volumes:
       - "/:/host:ro,rslave"
+    ports:
+      - "9100:9100"
     restart_policy: unless-stopped
 
 - name: wordle-clone

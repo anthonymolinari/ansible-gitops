@@ -18,6 +18,8 @@
     name: node_exporter
     image: prom/node-exporter@sha256:40ba9ef2dc8d7564d76656feca7f679062d2df71653618211d38c0ec51ebc28c
     command: ["--path.rootfs=/host"]
+    ports:
+      - "9100:9100"
     volumes:
       - "/:/host:ro,rslave"
     restart_policy: unless-stopped
