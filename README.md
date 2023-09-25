@@ -25,3 +25,4 @@
   - wireguard
   - home-assistant
   - mosquitto
+  - bind dns server

@@ -1,0 +1,32 @@
+$TTL 2d
+
+$ORIGIN homelab.lan.
+
+@       IN      SOA     ns.homelab.lan. info.homelab.lan. (
+                        20230925   ; serial
+                        12h        ; refresh
+                        15m        ; retry
+                        3w         ; expire
+                        2h         ; minimum ttl
+)
+
+
+        IN      NS      ns.homelab.lan.
+
+ns      IN      A       10.32.1.7
+
+; -- add dns records below
+; -- Server Hostnames
+
+fragile IN      A       10.32.1.10
+soquel  IN      A       10.32.1.7
+shasta  IN      A       10.32.1.14
+websrv  IN      A       10.32.1.12
+
+; -- web application
+
+plex.lan           IN      A       10.32.1.10
+prowlarr.lan       IN      A       10.32.1.10
+sonarr.lan         IN      A       10.32.1.10
+radarr.lan         IN      A       10.32.1.10
+homer.lan          IN      A       10.32.1.10
