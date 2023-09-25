@@ -22,6 +22,11 @@
 
 - hosts: network
   gather_facts: no
+  tasks:
+    - import_tasks: tasks/network_configs.yml
+
+- hosts: network
+  gather_facts: no
   vars:
     pip_install_packages:
       - name: docker

@@ -1,0 +1,11 @@
+
+- name: ensures bind config dir exists
+  file:
+    path: "/home/anthony/docker-volumes/bind-dns/config"
+    state: directory
+
+- name: copy bind config
+  copy:
+    src: "configs/named.conf"
+    dest: "/home/anthony/docker-volumes/bind-dns/config/named.conf"
+
