@@ -9,3 +9,7 @@
     src: "configs/named.conf"
     dest: "/home/anthony/docker-volumes/bind-dns/config/named.conf"
 
+- name: copy zone config
+  copy:
+    src: "configs/homelab-lan.zone"
+    dest: "/home/anthony/docker-volumes/bind-dns/homelab-land.zone"
