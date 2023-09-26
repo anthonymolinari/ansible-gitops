@@ -12,4 +12,4 @@
 - name: copy zone config
   copy:
     src: "configs/homelab-lan.zone"
-    dest: "/home/anthony/docker-volumes/bind-dns/config/homelab-land.zone"
+    dest: "/home/anthony/docker-volumes/bind-dns/config/homelab-lan.zone"
