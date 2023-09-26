@@ -85,7 +85,7 @@
 - name: homer-dashboard
   docker_container:
     name: homer-dashboard
-    image: b4bz/homer@sha256:23ef711ea0f5681f668930eae7661a8815184afd99885c387b0eef33fe6982b8
+    image: b4bz/homer@sha256:2716c6071ed010a0dc8510ae7896152e645c0a0410f8930340ed0ac11892f49d
     volumes:
       - "{{ docker_path }}/homer:/www/assets"
     ports:
