@@ -25,8 +25,15 @@ websrv  IN      A       10.32.1.12
 
 ; -- web application
 
-plex           IN      A       10.32.1.10
-prowlarr       IN      A       10.32.1.10
-sonarr         IN      A       10.32.1.10
-radarr         IN      A       10.32.1.10
-homer          IN      A       10.32.1.10
+hass                IN      A       10.32.1.10
+homer               IN      A       10.32.1.10
+kanboard            IN      A       10.32.1.10
+omada               IN      A       10.32.1.10
+openbooks           IN      A       10.32.1.10
+plex                IN      A       10.32.1.10
+prowlarr            IN      A       10.32.1.10
+radarr              IN      A       10.32.1.10
+sonarr              IN      A       10.32.1.10
+tautulli            IN      A       10.32.1.10
+transmission        IN      A       10.32.1.10
+
