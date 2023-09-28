@@ -1,16 +1,11 @@
 ---
-# - hosts: main
-#   gather_facts: no
-#   tasks:
-#     - import_tasks: tasks/main_configs.yml
-
-# - hosts: main
-#   gather_facts: no
-#   vars:
-#     pip_install_packages:
-#       - name: docker
-#   tasks:
-#     - import_tasks: tasks/main_containers.yml
+- hosts: fragile
+  gather_facts: no
+  vars:
+    pip_install_packages:
+      - name: docker
+  tasks:
+    - import_tasks: tasks/fragile_containers.yml
 
 - hosts: web
   gather_facts: no

@@ -6,3 +6,6 @@ soquel ansible_host=10.32.1.7 ansible_user=anthony interpreter_python=python3.6
 
 [web]
 web-server ansible_host=10.32.1.12 ansible_user=anthony interpreter_python=python3.10
+
+[fragile]
+fragile ansible_host=10.32.1.10 ansible_user=anthony interpreter_python=python3.6

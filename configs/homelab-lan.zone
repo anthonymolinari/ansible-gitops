@@ -18,10 +18,10 @@ ns      IN      A       10.32.1.7
 ; -- add dns records below
 ; -- Server Hostnames
 
-fragile IN      A       10.32.1.10
-soquel  IN      A       10.32.1.7
-shasta  IN      A       10.32.1.14
-websrv  IN      A       10.32.1.12
+fragile             IN      A       10.32.1.10
+soquel              IN      A       10.32.1.7
+shasta              IN      A       10.32.1.14
+websrv              IN      A       10.32.1.12
 
 ; -- web application
 
