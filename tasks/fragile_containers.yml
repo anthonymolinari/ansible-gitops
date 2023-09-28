@@ -1,0 +1,84 @@
+---
+
+- name: create network for grafana, loki, promtail, node_exporter, and prometheus
+  docker_network:
+    name: metrics
+
+- name: create persistent volume for loki
+  docker_volume:
+    name: loki_data
+
+# loki
+- name: loki
+  docker_container:
+    name: loki
+    image: grafana/loki:2.9.1
+    volumes:
+      - "loki_data:/etc/loki/"
+    ports:
+      - "3100:3100"
+    networks:
+      - name: "metrics"
+    restart_policy: unless-stopped
+
+- name: create persistent volume for loki
+  docker_volume:
+    name: promtail_data
+
+# promtail
+- name: promtail
+  docker_container:
+    name: promtail
+    image: grafana/promtail:2.9.1
+    volumes:
+      - "promtail_data:/etc/promtail"
+      - "/var/log:/var/log"
+    networks:
+      - name: "metrics"
+    restart_policy: unless-stopped
+
+# node exporter
+- name: node-exporter
+  docker_container:
+    name: node-exporter
+    image: prom/node-exporter@sha256:40ba9ef2dc8d7564d76656feca7f679062d2df71653618211d38c0ec51ebc28c
+    command: ["--path.rootfs=/host"]
+    ports:
+      - "9100:9100"
+    volumes:
+      - "/:/host:ro,rslave"
+    networks:
+      - name: "metrics"
+    restart_policy: unless-stopped
+
+# promestheus
+- name: promestheus
+  docker_container:
+    name: prometheus
+    image: prom/prometheus@sha256:c5dd3503828713c4949ae1bccd1d8d69f382c33d441954674a6b78ebe69c3331
+    ports:
+      - "9090:9090"
+    volumes:
+      - "{{ docker_path }}/prometheus:/etc/prometheus"
+    networks:
+      - name: "metrics"
+    restart_policy: unless-stopped
+
+- name: create persistent volume for grafana
+  docker_volume:
+    name: grafana_data
+
+# grafana
+- name: grafana
+  docker_container:
+    name: grafana
+    image: grafana/grafana@sha256:80b7e6a6451036c604fb0cb9294dbb5b63058db80b1a3b838cb5f80cf7c8c362
+    ports:
+      - "3000:3000"
+    networks:
+      - name: "metrics"
+    volumes:
+      - "grafana_data:/var/lib/grafana"
+    restart_policy: unless-stopped
+
+

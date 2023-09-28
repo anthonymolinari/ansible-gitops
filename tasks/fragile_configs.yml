@@ -1,0 +1,13 @@
+
+--- 
+
+- name: ensures prometheus dir exists
+  file:
+    path: "{{ docker_path }}/prometheus"
+    state: directory
+    
+- name: copy prometheus configuration
+  copy:
+    src: "configs/prometheus.yml"
+    dest: "{{ docker_path }}/prometheus/prometheus.yml"
+
