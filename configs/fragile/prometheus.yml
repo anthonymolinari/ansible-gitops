@@ -41,7 +41,7 @@ scrape_configs:
 
   - job_name: 'docker_main'
     static_configs:
-      - targets: ['10.32.1.28:9323']
+      - targets: ['10.32.1.10:9323']
   
   - job_name: 'docker_network'
     static_configs:

@@ -8,6 +8,6 @@
     
 - name: copy prometheus configuration
   copy:
-    src: "configs/prometheus.yml"
+    src: "configs/fragile/prometheus.yml"
     dest: "{{ docker_path }}/prometheus/prometheus.yml"
 

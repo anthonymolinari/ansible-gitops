@@ -81,4 +81,78 @@
       - "grafana_data:/var/lib/grafana"
     restart_policy: unless-stopped
 
+# homer
+- name: homer-dashboard
+  docker_container:
+    name: homer-dashboard
+    image: b4bz/homer@sha256:2716c6071ed010a0dc8510ae7896152e645c0a0410f8930340ed0ac11892f49d
+    volumes:
+      - "{{ docker_path }}/homer:/www/assets"
+    ports:
+      - "8385:8080"
+    restart_policy: unless-stopped
+
+
+# openbooks
+- name: openbooks 
+  docker_container:
+    name: openbooks
+    image: evanbuss/openbooks@sha256:3b3d34d8b77e8261df1f470e1ca8344c035e316a86667dc7c1ab2e768d6359f1
+    volumes:
+      - "{{downloads_dir}}:/books"
+    ports:
+      - "4567:80"
+    command: ["--name", "iker_neptunus", "--persist", "-s", "irc.irchighway.net:9999"]
+    restart_policy: unless-stopped
+
+
+# plex
+- name: plex
+  docker_container:
+    name: plex
+    image: linuxserver/plex@sha256:bf901cb78980447325e8058a1d222a708e3cb84cfde78d805942e149908d52a6
+    volumes:
+      - "{{ media_dir }}:/Media"
+      - "{{ docker_path }}/plex/config:/config"
+    network_mode: "host"
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      VERSION: "docker"
+    restart_policy: unless-stopped
+
+# sonarr
+- name: sonarr
+  docker_container:
+    name: sonarr
+    image: linuxserver/sonarr@sha256:500af79ff1d83daee79143fd82d5d756bf0a33c048312a317a72ce747f62f0a9
+    ports:
+      - "8989:8989"
+    volumes:
+      - "{{ docker_path }}/sonarr/config:/config"
+      - "{{ media_dir }}:/tv"
+      - "{{ downloads_dir }}/torrents:/downloads"
+    env:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: "{{ timezone }}"
+    restart_policy: unless-stopped
+
+# radarr
+- name: radarr
+  docker_container:
+    name: radarr
+    image: linuxserver/radarr@sha256:7870b4619cc96d5510a72528fb49655ab5e131821c6c852a737c05f6a193597e
+    ports:
+      - "7878:7878"
+    volumes:
+      - "{{ docker_path }}/radarr/config:/config"
+      - "{{ media_dir }}:/movies"
+      - "{{ downloads_dir }}/torrents:/downloads"
+    env:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: "{{ timezone }}"
+    restart_policy: unless-stopped
+
 
