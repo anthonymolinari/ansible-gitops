@@ -55,7 +55,7 @@
 - name: promestheus
   docker_container:
     name: prometheus
-    image: prom/prometheus@sha256:c5dd3503828713c4949ae1bccd1d8d69f382c33d441954674a6b78ebe69c3331
+    image: prom/prometheus@sha256:db03207fa305e4232ae907f04e51fac42ea4c7ca8359812562ed5c8bcc8e34e5
     ports:
       - "9090:9090"
     volumes:
