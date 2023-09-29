@@ -1,4 +1,4 @@
-[main]
+[test]
 ansible-test ansible_host=10.32.1.28 ansible_user=anthony interpreter_python=python3.10
 
 [network]
