@@ -36,4 +36,5 @@ radarr              IN      A       10.32.1.10
 sonarr              IN      A       10.32.1.10
 tautulli            IN      A       10.32.1.10
 transmission        IN      A       10.32.1.10
+semaphore           IN      A       10.32.1.10
 
