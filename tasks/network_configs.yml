@@ -13,3 +13,8 @@
   copy:
     src: "configs/homelab-lan.zone"
     dest: "/home/anthony/docker-volumes/bind-dns/config/homelab-lan.zone"
+
+- name: ensures mossquitto dir exists
+  copy:
+    src: "configs/mosquitto_config.conf"
+    dest: "/home/anthony/docker-volumes/mosquitto/config/mosquitto.conf"
