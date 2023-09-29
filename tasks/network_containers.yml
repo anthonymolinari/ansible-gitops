@@ -98,7 +98,7 @@
 - name: mosquitto
   docker_container:
     name: mosquitto
-    image: eclipse-mosquitto@sha256:5b9408e7df29ee3b41e4e5c406b3f0b08bdacaea75db36a6e68d6a3cbebf7ea2
+    image: eclipse-mosquitto@sha256:0e819068f86b3f6857fa563a90df0767e17f3b14dcd1b4fd93ce6d1ad2077471
     ports:
       - "1883:1883"
     volumes:
