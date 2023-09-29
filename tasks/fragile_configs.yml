@@ -15,9 +15,10 @@
   file:
     path: "{{ docker_path }}/homer"
     state: directory
+  become: true
 
 - name: copy homer configuration
   copy:
     src: "configs/homer_config.yml"
     dest: "{{ docker_path }}/homer/config.yml"
-
+  become: true
