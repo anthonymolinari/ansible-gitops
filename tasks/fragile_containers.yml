@@ -72,7 +72,7 @@
 - name: grafana
   docker_container:
     name: grafana
-    image: grafana/grafana@sha256:80b7e6a6451036c604fb0cb9294dbb5b63058db80b1a3b838cb5f80cf7c8c362
+    image: grafana/grafana@sha256:7abe39740ac042f05fcae3c595d8a32ab42c7608d45175fe6229b06f2cb83763
     ports:
       - "3000:3000"
     networks:
