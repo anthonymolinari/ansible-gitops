@@ -51,6 +51,16 @@
       - name: "metrics"
     restart_policy: unless-stopped
 
+- name: sensors-exporter
+  docker_container:
+    name: sensors-exporter
+    image: anthonymolinari/sensors-exporter@sha256:0e8b3f78a25bf66c8464613a7b4a50397a68029ad5e79b3c96963ec743d05ff1
+    ports:
+      - "9200:8282"
+    networks:
+      - name: "metrics"
+    restart_policy: unless-stopped
+
 # promestheus
 - name: promestheus
   docker_container:
