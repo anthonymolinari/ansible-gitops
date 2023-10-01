@@ -7,4 +7,11 @@
     ports:
       - "3210:3000"
     restart_policy: unless-stopped
-    
+
+- name: react-pentago
+  docker_container:
+    name: react-pentago
+    image: anthonymolinari/react-pentago@sha256:5cac89f6fe2905ef3471fb6cbe8925feb166bc4e98f273d39870832aca42d980
+    ports:
+      - "3211:3000"
+    restart_policy: unless-stopped

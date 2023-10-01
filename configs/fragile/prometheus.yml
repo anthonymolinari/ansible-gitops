@@ -26,7 +26,7 @@ scrape_configs:
   - job_name: sensors_main
     metrics_path: /metrics
     static_configs:
-      - targets: ['sensors-exporter:9200']
+      - targets: ['10.32.1.10:9200']
 
   - job_name: node_network
     honor_labels: true
