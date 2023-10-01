@@ -4,7 +4,6 @@
   gather_facts: false
   tasks:
     - import_tasks: tasks/fragile_configs.yml
-  
 
 - hosts: fragile
   gather_facts: false
@@ -13,6 +12,14 @@
       - name: docker
   tasks:
     - import_tasks: tasks/fragile_containers.yml
+
+- hosts: fragile
+  gather_facts: false
+  vars:
+    pip_install_packages:
+      - name: docker
+  tasks:
+    - import_tasks: tasks/web_containers.yml
 
 - hosts: network
   gather_facts: false
