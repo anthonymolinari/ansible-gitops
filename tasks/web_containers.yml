@@ -11,7 +11,7 @@
 - name: react-pentago
   docker_container:
     name: react-pentago
-    image: anthonymolinari/react-pentago@sha256:5cac89f6fe2905ef3471fb6cbe8925feb166bc4e98f273d39870832aca42d980
+    image: anthonymolinari/react-pentago@sha256:f79b8009d85dca2849b4ef2941402e49f16fcbfaee17e619850dac37b7219c9a
     ports:
       - "3211:3000"
     restart_policy: unless-stopped
