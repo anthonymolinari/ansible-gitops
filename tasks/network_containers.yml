@@ -121,8 +121,6 @@
       - "8181:8181"
       - "5007:5007"
     volumes:
-      - "/etc/localtime:/etc/localtime:ro"
-      - "/etc/timezone:/etc/timezone:ro"
       - "/home/anthony/docker-volumes/openhab/addons:/openhab/addons"
       - "/home/anthony/docker-volumes/openhab/conf:/openhab/conf"
       - "/home/anthony/docker-volumes/openhab/userdata:/openhab/userdata"
