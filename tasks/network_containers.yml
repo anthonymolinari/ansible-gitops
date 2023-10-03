@@ -79,21 +79,6 @@
       net.ipv4.conf.all.src_valid_mark: 1
     restart_policy: unless-stopped
 
-# tautulli
-# - name: tautulli
-#   docker_container:
-#     name: tautulli
-#     image: tautulli/tautulli@sha256:fd0b9332fc96cd4e536c026ba0e2e9e76af44baa0755f82621f4972b57e8db1e
-#     ports:
-#       - "8181:8181"
-#     volumes:
-#       - "/home/anthony/docker-volumes/tautulli/config:/config"
-#       - "/home/anthony/docker-volumes/tautulli/logs:/logs"
-#     env:
-#       PUID: "1000"
-#       PGID: "1000"
-#     restart_policy: unless-stopped
-
 # mosquitto
 - name: mosquitto
   docker_container:
@@ -145,3 +130,4 @@
       CRYPTO_POLICY="unlimited"
       EXTRA_JAVA_OPTS="-Duser.timezone="America/Los_Angeles""
     restart_policy: unless-stopped
+    state: started
