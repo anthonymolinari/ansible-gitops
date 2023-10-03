@@ -51,8 +51,8 @@
 #       PUID: "1000"
 #       PGID: "1000"
 #       TZ: "{{ timezone }}"
-#       SUBDOMAINS: ""
-#       TOKEN: ""
+#       SUBDOMAINS: "{{ ddns_subdomains }}"
+#       TOKEN: "{{ ddns_token }}"
 #     restart_policy: unless-stopped
 
 # wireguard
@@ -98,7 +98,7 @@
 - name: mosquitto
   docker_container:
     name: mosquitto
-    image: eclipse-mosquitto@sha256:0e819068f86b3f6857fa563a90df0767e17f3b14dcd1b4fd93ce6d1ad2077471
+    image: eclipse-mosquitto:2.0
     ports:
       - "1883:1883"
     volumes:
@@ -110,3 +110,38 @@
       PGID: "1000"
     restart_policy: unless-stopped
 
+# zigbee2mqtt
+- name: zigbee2mqtt
+  docker_container:
+    name: zigbee2mqtt
+    image: koenkk/zigbee2mqtt:1.33.0
+    ports:
+      - "8383:8080"
+    volumes:
+      - "/home/anthony/docker-volumes/zigbee2mqtt/data:/app/data"
+      - "/run/udev:/run/udev:ro"
+    env:
+      TZ: "America/Los_Angeles"
+    devices:
+      - "/dev/ttyACM0:/dev/ttyACM0"
+    restart_policy: unless-stopped
+    
+# openhab
+- name: openhab
+  docker_container:
+    name: openhab
+    image: openhab/openhab:4.0.3
+    ports:
+      - "8080:8080"
+      - "8181:8181"
+      - "5007:5007"
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/home/anthony/docker-volumes/openhab/addons:/openhab/addons"
+      - "/home/anthony/docker-volumes/openhab/conf:/openhab/conf"
+      - "/home/anthony/docker-volumes/openhab/userdata:/openhab/userdata"
+    env:
+      CRYPTO_POLICY="unlimited"
+      EXTRA_JAVA_OPTS="-Duser.timezone="America/Los_Angeles""
+    restart_policy: unless-stopped
