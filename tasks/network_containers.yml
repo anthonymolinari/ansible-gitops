@@ -16,29 +16,29 @@
       TZ: "{{ timezone }}"
     restart_policy: unless-stopped
 
-- name: create promtail volume
-  docker_volume:
-    name: promtail_data
+# - name: create promtail volume
+#   docker_volume:
+#     name: promtail_data
 
-- name: promtail container
-  docker_container:
-    name: promtail
-    image: grafana/promtail:2.9.1
-    volumes:
-      - "promtail_data:/etc/promtail"
-      - "/var/log:/var/log"
-    restart_policy: unless-stopped
+# - name: promtail container
+#   docker_container:
+#     name: promtail
+#     image: grafana/promtail:2.9.1
+#     volumes:
+#       - "promtail_data:/etc/promtail"
+#       - "/var/log:/var/log"
+#     restart_policy: unless-stopped
 
-- name: node_exporter container
-  docker_container:
-    name: node_exporter
-    image: prom/node-exporter@sha256:40ba9ef2dc8d7564d76656feca7f679062d2df71653618211d38c0ec51ebc28c
-    command: ["--path.rootfs=/host"]
-    ports:
-      - "9100:9100"
-    volumes:
-      - "/:/host:ro,rslave"
-    restart_policy: unless-stopped
+# - name: node_exporter container
+#   docker_container:
+#     name: node_exporter
+#     image: prom/node-exporter@sha256:40ba9ef2dc8d7564d76656feca7f679062d2df71653618211d38c0ec51ebc28c
+#     command: ["--path.rootfs=/host"]
+#     ports:
+#       - "9100:9100"
+#     volumes:
+#       - "/:/host:ro,rslave"
+#     restart_policy: unless-stopped
 
 # duckdns
 # - name: duckdns
@@ -79,53 +79,53 @@
       net.ipv4.conf.all.src_valid_mark: 1
     restart_policy: unless-stopped
 
-# mosquitto
-- name: mosquitto
-  docker_container:
-    name: mosquitto
-    image: eclipse-mosquitto:2.0
-    ports:
-      - "1883:1883"
-    volumes:
-      - "/home/anthony/docker-volumes/mosquitto/data:/data"
-      - "/home/anthony/docker-volumes/mosquitto/config:/config"
-      - "/home/anthony/docker-volumes/mosquitto/logs:/logs"
-    env:
-      PUID: "1000"
-      PGID: "1000"
-    restart_policy: unless-stopped
+# # mosquitto
+# - name: mosquitto
+#   docker_container:
+#     name: mosquitto
+#     image: eclipse-mosquitto:2.0
+#     ports:
+#       - "1883:1883"
+#     volumes:
+#       - "/home/anthony/docker-volumes/mosquitto/data:/data"
+#       - "/home/anthony/docker-volumes/mosquitto/config:/config"
+#       - "/home/anthony/docker-volumes/mosquitto/logs:/logs"
+#     env:
+#       PUID: "1000"
+#       PGID: "1000"
+#     restart_policy: unless-stopped
 
-# zigbee2mqtt
-- name: zigbee2mqtt
-  docker_container:
-    name: zigbee2mqtt
-    image: koenkk/zigbee2mqtt:1.33.0
-    ports:
-      - "8383:8080"
-    volumes:
-      - "/home/anthony/docker-volumes/zigbee2mqtt/data:/app/data"
-      - "/run/udev:/run/udev:ro"
-    env:
-      TZ: "America/Los_Angeles"
-    devices:
-      - "/dev/ttyACM0:/dev/ttyACM0"
-    restart_policy: unless-stopped
+# # zigbee2mqtt
+# - name: zigbee2mqtt
+#   docker_container:
+#     name: zigbee2mqtt
+#     image: koenkk/zigbee2mqtt:1.33.0
+#     ports:
+#       - "8383:8383"
+#     volumes:
+#       - "/home/anthony/docker-volumes/zigbee2mqtt/data:/app/data"
+#       - "/run/udev:/run/udev:ro"
+#     env:
+#       TZ: "America/Los_Angeles"
+#     devices:
+#       - "/dev/serial/by-id/usb-Texas_Instruments_TI_CC2531_USB_CDC___0X00124B000FFB7461-if00:/dev/ttyACM0"
+#     restart_policy: unless-stopped
     
-# openhab
-- name: openhab
-  docker_container:
-    name: openhab
-    image: openhab/openhab:4.0.3
-    ports:
-      - "8080:8080"
-      - "8181:8181"
-      - "5007:5007"
-    volumes:
-      - "/home/anthony/docker-volumes/openhab/addons:/openhab/addons"
-      - "/home/anthony/docker-volumes/openhab/conf:/openhab/conf"
-      - "/home/anthony/docker-volumes/openhab/userdata:/openhab/userdata"
-    env:
-      CRYPTO_POLICY="unlimited"
-      EXTRA_JAVA_OPTS="-Duser.timezone="America/Los_Angeles""
-    restart_policy: unless-stopped
-    state: started
+# # openhab
+# - name: openhab
+#   docker_container:
+#     name: openhab
+#     image: openhab/openhab:4.0.3
+#     ports:
+#       - "8080:8080"
+#       - "8181:8181"
+#       - "5007:5007"
+#     volumes:
+#       - "/home/anthony/docker-volumes/openhab/addons:/openhab/addons"
+#       - "/home/anthony/docker-volumes/openhab/conf:/openhab/conf"
+#       - "/home/anthony/docker-volumes/openhab/userdata:/openhab/userdata"
+#     env:
+#       CRYPTO_POLICY="unlimited"
+#       EXTRA_JAVA_OPTS="-Duser.timezone="America/Los_Angeles""
+#     restart_policy: unless-stopped
+#     state: started
