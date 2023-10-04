@@ -1,0 +1,13 @@
+homeassistant: false
+
+permit_join: false
+
+mqtt:
+  base_topic: zigbee2mqtt
+  server: "mqtt://10.32.1.11:1883"
+
+frontend:
+  port: 8383
+
+serial:
+  port: /dev/ttyACM0

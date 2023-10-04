@@ -13,15 +13,15 @@ $ORIGIN homelab.lan.
 
         IN      NS      ns.homelab.lan.
 
-ns      IN      A       10.32.1.7
+ns      IN      A       10.32.1.11
 
 ; -- add dns records below
 ; -- Server Hostnames
 
 fragile             IN      A       10.32.1.10
-soquel              IN      A       10.32.1.7
+temescal            IN      A       10.32.1.11
 shasta              IN      A       10.32.1.14
-websrv              IN      A       10.32.1.12
+
 
 ; -- web application
 
