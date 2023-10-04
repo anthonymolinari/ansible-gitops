@@ -87,7 +87,7 @@
 - name: mosquitto
   docker_container:
     name: mosquitto
-    image: eclipse-mosquitto:2.0
+    image: eclipse-mosquitto:1.6.12
     ports:
       - "1883:1883"
     volumes:
@@ -99,22 +99,6 @@
       PGID: "1000"
     restart_policy: unless-stopped
 
-# zigbee2mqtt
-- name: zigbee2mqtt
-  docker_container:
-    name: zigbee2mqtt
-    image: koenkk/zigbee2mqtt:1.33.1
-    ports:
-      - "8383:8383"
-    volumes:
-      - "/home/anthony/docker-volumes/zigbee2mqtt/data:/app/data"
-      - "/run/udev:/run/udev:ro"
-    env:
-      TZ: "America/Los_Angeles"
-    devices:
-      - "/dev/serial/by-id/usb-Texas_Instruments_TI_CC2531_USB_CDC___0X00124B000FFB7461-if00:/dev/ttyACM0"
-    restart_policy: unless-stopped
-    
 # openhab
 - name: openhab
   docker_container:
@@ -128,8 +112,11 @@
       - "/home/anthony/docker-volumes/openhab/addons:/openhab/addons"
       - "/home/anthony/docker-volumes/openhab/conf:/openhab/conf"
       - "/home/anthony/docker-volumes/openhab/userdata:/openhab/userdata"
+      - "/run/udev:/run/udev:ro"
     env:
       CRYPTO_POLICY="unlimited"
       EXTRA_JAVA_OPTS="-Duser.timezone="America/Los_Angeles""
+    devices:
+      - "/dev/serial/by-id/usb-Texas_Instruments_TI_CC2531_USB_CDC___0X00124B000FFB7461-if00:/dev/ttyACM0"
     restart_policy: unless-stopped
     state: started
