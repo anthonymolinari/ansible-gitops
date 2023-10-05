@@ -20,7 +20,7 @@
 - name: copy homer configuration
   copy:
     src: "configs/main/homer_config.yml"
-    dest: "{{ docker_path }}/main/config.yml"
+    dest: "{{ docker_path }}/homer/config.yml"
   become: true
 
 - name: ensures traefik dir exists
