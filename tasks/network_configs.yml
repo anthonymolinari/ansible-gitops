@@ -25,13 +25,3 @@
     src: "configs/mosquitto_config.conf"
     dest: "/home/anthony/docker-volumes/mosquitto/config/mosquitto.conf"
   become: true
-
-- name: ensure zigbee2mqtt dir exists
-  file:
-    path: "/home/anthony/docker-volumes/zigbee2mqtt"
-    state: directory
-
-- name: copy zigbee2mqtt config
-  copy:
-    src: "configs/zigbee2mqtt.yml"
-    dest: "/home/anthony/docker-volumes/zigbee2mqtt/configuration.yaml"

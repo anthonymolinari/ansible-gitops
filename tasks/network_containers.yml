@@ -1,25 +1,5 @@
 ---
 
-- name: create default network
-  docker_network:
-    name: containers
-
-# - name: bind docker container
-#   docker_container:
-#     name: bind-dns
-#     image: ubuntu/bind9:latest
-#     volumes:
-#       - "/home/anthony/docker-volumes/bind-dns/config:/etc/bind"
-#       - "/home/anthony/docker-volumes/bind-dns/cache:/var/cache/bind"
-#       - "/home/anthony/docker-volumes/bind-dns/records:/var/lib/bind"
-#     ports:
-#       - "53:53/udp"
-#       - "53:53/tcp"
-#     env:
-#       BIND9_USER: 'root'
-#       TZ: "{{ timezone }}"
-#     restart_policy: unless-stopped
-
 - name: create promtail volume
   docker_volume:
     name: promtail_data
@@ -44,6 +24,22 @@
       - "/:/host:ro,rslave"
     restart_policy: unless-stopped
 
+- name: bind docker container
+  docker_container:
+    name: bind-dns
+    image: ubuntu/bind9:latest
+    volumes:
+      - "/home/anthony/docker-volumes/bind-dns/config:/etc/bind"
+      - "/home/anthony/docker-volumes/bind-dns/cache:/var/cache/bind"
+      - "/home/anthony/docker-volumes/bind-dns/records:/var/lib/bind"
+     ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+     env:
+      BIND9_USER: 'root'
+      TZ: "{{ timezone }}"
+    restart_policy: unless-stopped
+
 # duckdns
 # - name: duckdns
 #   docker_container:
@@ -60,28 +56,28 @@
 #     restart_policy: unless-stopped
 
 # wireguard
-# - name: wireguard
-#   docker_container:
-#     name: wireguard
-#     image: linuxserver/wireguard@sha256:7d988bd6ea65230b98f2c52310bffa6bf2ac6a195b60601645ea36a5b7afd604
-#     ports:
-#       - "51820:51820/udp"
-#     volumes:
-#       - "/home/anthony/docker-volumes/wireguard/config:/config"
-#       - "/lib/modules:/lib/modules"
-#     env:
-#       PUID: "1000"
-#       PGID: "1000"
-#       SERVERURL: "mole-homelab.duckdns.org"
-#       PEERS: "desktop,laptop,phone,tablet"
-#       INTERNAL_SUBNET: 10.13.13.0/24
-#       TZ: "{{ timezone }}"
-#     capabilities:
-#       - net_admin
-#       - sys_module
-#     sysctls:
-#       net.ipv4.conf.all.src_valid_mark: 1
-#     restart_policy: unless-stopped
+ - name: wireguard
+   docker_container:
+     name: wireguard
+     image: linuxserver/wireguard@sha256:7d988bd6ea65230b98f2c52310bffa6bf2ac6a195b60601645ea36a5b7afd604
+     ports:
+       - "51820:51820/udp"
+     volumes:
+       - "/home/anthony/docker-volumes/wireguard/config:/config"
+       - "/lib/modules:/lib/modules"
+     env:
+       PUID: "1000"
+       PGID: "1000"
+       SERVERURL: "mole-homelab.duckdns.org"
+       PEERS: "desktop,laptop,phone,tablet"
+       INTERNAL_SUBNET: 10.13.13.0/24
+       TZ: "{{ timezone }}"
+     capabilities:
+       - net_admin
+       - sys_module
+     sysctls:
+       net.ipv4.conf.all.src_valid_mark: 1
+     restart_policy: unless-stopped
 
 # mosquitto
 - name: mosquitto
@@ -99,24 +95,15 @@
       PGID: "1000"
     restart_policy: unless-stopped
 
-# openhab
-- name: openhab
+# home assistant
+- name: home-assistant
   docker_container:
-    name: openhab
-    image: openhab/openhab:4.0.3
-    ports:
-      - "8080:8080"
-      - "8181:8181"
-      - "5007:5007"
+    name: home-assistant
+    image: ghcr.io/home-assistant/home-assistant:2023.10
+    network_mode: 'host'
     volumes:
-      - "/home/anthony/docker-volumes/openhab/addons:/openhab/addons"
-      - "/home/anthony/docker-volumes/openhab/conf:/openhab/conf"
-      - "/home/anthony/docker-volumes/openhab/userdata:/openhab/userdata"
-      - "/run/udev:/run/udev:ro"
+      - "/home/anthony/docker-volumes/hass/config:/config"
     env:
-      CRYPTO_POLICY="unlimited"
-      EXTRA_JAVA_OPTS="-Duser.timezone="America/Los_Angeles""
     devices:
       - "/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20230525115147-if00:/dev/ttyACM0"
     restart_policy: unless-stopped
-    state: started
