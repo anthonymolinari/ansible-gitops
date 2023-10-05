@@ -87,7 +87,7 @@
 - name: mosquitto
   docker_container:
     name: mosquitto
-    image: eclipse-mosquitto:1.6.12
+    image: eclipse-mosquitto:2.0.18
     ports:
       - "1883:1883"
     volumes:
