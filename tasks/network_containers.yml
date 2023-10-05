@@ -32,12 +32,12 @@
       - "/home/anthony/docker-volumes/bind-dns/config:/etc/bind"
       - "/home/anthony/docker-volumes/bind-dns/cache:/var/cache/bind"
       - "/home/anthony/docker-volumes/bind-dns/records:/var/lib/bind"
-     ports:
+    ports:
       - "53:53/udp"
       - "53:53/tcp"
-     env:
-      BIND9_USER: 'root'
-      TZ: "{{ timezone }}"
+    env:
+     BIND9_USER: 'root'
+     TZ: "{{ timezone }}"
     restart_policy: unless-stopped
 
 # duckdns
@@ -104,6 +104,7 @@
     volumes:
       - "/home/anthony/docker-volumes/hass/config:/config"
     env:
+      TZ: "{{ timezone }}"
     devices:
       - "/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20230525115147-if00:/dev/ttyACM0"
     restart_policy: unless-stopped
