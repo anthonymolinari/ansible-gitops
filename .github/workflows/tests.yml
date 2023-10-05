@@ -12,3 +12,6 @@ jobs:
       - uses: actions/checkout@v4
       - name: ansible syntax validation
         run: ansible-playbook run.yml --syntax-check
+
+      - name: dry-run
+        run: ansible-playbook run.yml --check
