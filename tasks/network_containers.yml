@@ -23,22 +23,22 @@
     volumes:
       - "/:/host:ro,rslave"
     restart_policy: unless-stopped
-
-- name: bind docker container
-  docker_container:
-    name: bind-dns
-    image: ubuntu/bind9:latest
-    volumes:
-      - "/home/anthony/docker-volumes/bind-dns/config:/etc/bind"
-      - "/home/anthony/docker-volumes/bind-dns/cache:/var/cache/bind"
-      - "/home/anthony/docker-volumes/bind-dns/records:/var/lib/bind"
-    ports:
-      - "53:53/udp"
-      - "53:53/tcp"
-    env:
-     BIND9_USER: 'root'
-     TZ: "{{ timezone }}"
-    restart_policy: unless-stopped
+#
+#- name: bind docker container
+#  docker_container:
+#    name: bind-dns
+#    image: ubuntu/bind9:latest
+#    volumes:
+#      - "/home/anthony/docker-volumes/bind-dns/config:/etc/bind"
+#      - "/home/anthony/docker-volumes/bind-dns/cache:/var/cache/bind"
+#      - "/home/anthony/docker-volumes/bind-dns/records:/var/lib/bind"
+#    ports:
+#      - "53:53/udp"
+#      - "53:53/tcp"
+#    env:
+#     BIND9_USER: 'root'
+#     TZ: "{{ timezone }}"
+#    restart_policy: unless-stopped
 
 # duckdns
 # - name: duckdns
