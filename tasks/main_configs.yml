@@ -19,7 +19,7 @@
 
 - name: copy homer configuration
   copy:
-    src: "configs/homer_config.yml"
+    src: "configs/main/homer_config.yml"
     dest: "{{ docker_path }}/main/config.yml"
   become: true
 
@@ -28,3 +28,8 @@
     path: "{{ docker_path }}/traefik"
     state: directory
   become: true
+
+- name: copy traefik configuration
+  copy:
+    src: "/configs/shared/traefik.yml"
+    dest: "{{ docker_path }}/traefik/traefik.yml"
