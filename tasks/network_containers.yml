@@ -117,6 +117,6 @@
       CRYPTO_POLICY="unlimited"
       EXTRA_JAVA_OPTS="-Duser.timezone="America/Los_Angeles""
     devices:
-      - "/dev/serial/by-id/usb-Texas_Instruments_TI_CC2531_USB_CDC___0X00124B000FFB7461-if00:/dev/ttyACM0"
+      - "/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20230525115147-if00:/dev/ttyACM0"
     restart_policy: unless-stopped
     state: started
