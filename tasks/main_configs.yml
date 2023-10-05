@@ -1,4 +1,3 @@
-
 --- 
 
 - name: ensures prometheus dir exists
@@ -33,3 +32,4 @@
   copy:
     src: "configs/shared/traefik.yml"
     dest: "{{ docker_path }}/traefik/traefik.yml"
+  become: true
