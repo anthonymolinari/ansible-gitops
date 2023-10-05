@@ -31,5 +31,5 @@
 
 - name: copy traefik configuration
   copy:
-    src: "/configs/shared/traefik.yml"
+    src: "configs/shared/traefik.yml"
     dest: "{{ docker_path }}/traefik/traefik.yml"
