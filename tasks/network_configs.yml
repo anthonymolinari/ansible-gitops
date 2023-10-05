@@ -7,12 +7,12 @@
 
 - name: copy bind config
   copy:
-    src: "configs/named.conf"
+    src: "configs/network/named.conf"
     dest: "/home/anthony/docker-volumes/bind-dns/config/named.conf"
 
 - name: copy zone config
   copy:
-    src: "configs/homelab-lan.zone"
+    src: "configs/network/homelab-lan.zone"
     dest: "/home/anthony/docker-volumes/bind-dns/config/homelab-lan.zone"
 
 - name: ensure mosquitto dir exists
@@ -22,6 +22,6 @@
 
 - name: copy mosquitto config
   copy:
-    src: "configs/mosquitto_config.conf"
+    src: "configs/network/mosquitto_config.conf"
     dest: "/home/anthony/docker-volumes/mosquitto/config/mosquitto.conf"
   become: true

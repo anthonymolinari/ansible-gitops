@@ -1,4 +1,5 @@
----
+
+--- 
 
 - name: ensures prometheus dir exists
   file:
@@ -6,46 +7,29 @@
     state: directory
     
 - name: copy prometheus configuration
-  ansible.builtin.copy:
-    src: "configs/prometheus.yml"
+  copy:
+    src: "configs/main/prometheus.yml"
     dest: "{{ docker_path }}/prometheus/prometheus.yml"
-
-- name: ensures traefik dir exists
-  file:
-    path: "{{ docker_path }}/traefik"
-    state: directory
-
-- name: copy traefik configuration
-  ansible.builtin.copy:
-    src: "configs/traefik.yml"
-    dest: "{{ docker_path }}/traefik/traefik.yml"
 
 - name: ensures homer dir exists
   file:
     path: "{{ docker_path }}/homer"
     state: directory
+  become: true
 
 - name: copy homer configuration
-  ansible.builtin.copy:
-    src: "configs/homer_config.yml"
-    dest: "{{ docker_path }}/homer/config.yml"
+  copy:
+    src: "configs/main/homer_config.yml"
+    dest: "{{ docker_path }}/main/config.yml"
+  become: true
 
-- name: ensures loki dir exists
+- name: ensures traefik dir exists
   file:
-    path: "{{ docker_path }}/loki"
+    path: "{{ docker_path }}/traefik"
     state: directory
-    
-- name: copy loki configuration
-  ansible.builtin.copy:
-    src: "configs/loki-config.yml"
-    dest: "{{ docker_path }}/loki/loki-config.yml"
+  become: true
 
-- name: ensures promtail dir exists
-  file:
-    path: "{{ docker_path }}/promtail"
-    state: directory
-    
-- name: copy promtail configuration
-  ansible.builtin.copy:
-    src: "configs/promtail-config.yml"
-    dest: "{{ docker_path }}/promtail/promtail-config.yml"
+- name: copy traefik configuration
+  copy:
+    src: "configs/shared/traefik.yml"
+    dest: "{{ docker_path }}/traefik/traefik.yml"
