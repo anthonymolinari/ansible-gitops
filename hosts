@@ -1,5 +1,5 @@
 [network]
 temescal ansible_host=10.32.1.11 ansible_user=anthony
 
-[fragile]
+[main]
 fragile ansible_host=10.32.1.10 ansible_user=anthony

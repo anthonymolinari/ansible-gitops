@@ -56,28 +56,28 @@
 #     restart_policy: unless-stopped
 
 # wireguard
- - name: wireguard
-   docker_container:
-     name: wireguard
-     image: linuxserver/wireguard@sha256:7d988bd6ea65230b98f2c52310bffa6bf2ac6a195b60601645ea36a5b7afd604
-     ports:
-       - "51820:51820/udp"
-     volumes:
-       - "/home/anthony/docker-volumes/wireguard/config:/config"
-       - "/lib/modules:/lib/modules"
-     env:
-       PUID: "1000"
-       PGID: "1000"
-       SERVERURL: "mole-homelab.duckdns.org"
-       PEERS: "desktop,laptop,phone,tablet"
-       INTERNAL_SUBNET: 10.13.13.0/24
-       TZ: "{{ timezone }}"
-     capabilities:
-       - net_admin
-       - sys_module
-     sysctls:
-       net.ipv4.conf.all.src_valid_mark: 1
-     restart_policy: unless-stopped
+- name: wireguard
+  docker_container:
+    name: wireguard
+    image: linuxserver/wireguard@sha256:7d988bd6ea65230b98f2c52310bffa6bf2ac6a195b60601645ea36a5b7afd604
+    ports:
+      - "51820:51820/udp"
+    volumes:
+      - "/home/anthony/docker-volumes/wireguard/config:/config"
+      - "/lib/modules:/lib/modules"
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      SERVERURL: "mole-homelab.duckdns.org"
+      PEERS: "desktop,laptop,phone,tablet"
+      INTERNAL_SUBNET: 10.13.13.0/24
+      TZ: "{{ timezone }}"
+    capabilities:
+      - net_admin
+      - sys_module
+    sysctls:
+      net.ipv4.conf.all.src_valid_mark: 1
+    restart_policy: unless-stopped
 
 # mosquitto
 - name: mosquitto

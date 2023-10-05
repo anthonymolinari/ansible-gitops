@@ -1,17 +1,17 @@
 ---
 
-- hosts: fragile
+- hosts: main
   tasks:
     - import_tasks: tasks/fragile_configs.yml
 
-- hosts: fragile
+- hosts: main
   vars:
     pip_install_packages:
       - name: docker
   tasks:
     - import_tasks: tasks/fragile_containers.yml
 
-- hosts: fragile
+- hosts: main
   vars:
     pip_install_packages:
       - name: docker
