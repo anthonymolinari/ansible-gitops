@@ -54,7 +54,7 @@
 - name: sensors-exporter
   docker_container:
     name: sensors-exporter
-    image: anthonymolinari/sensors-exporter@sha256:06aaab0370a7c34a11d6219a23bb54ef4aa9dd498d8b180af09a8ba927f0b25c
+    image: anthonymolinari/sensors-exporter@sha256:f67df48cd9fc0e2a2261b96d214e0e1d2720eb287b3e29c7d2f1c043ce0176b0
     ports:
       - "9200:8282"
     networks:
