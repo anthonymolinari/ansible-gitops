@@ -80,6 +80,11 @@ services:
   - name: "Applications"
     icon: "fas fa-cloud"
     items:
+      - name: "Nextcloud"
+        logo: "assets/tools/nextcloud.png"
+        url: "http://nextcloud.homelab.lan"
+        tag: ""
+        subtitle: "personal cloud"
       - name: "Grafana"
         logo: "assets/tools/grafana.png"
         url: "http://grafana.homelab.lan"
