@@ -54,7 +54,7 @@
 - name: sensors-exporter
   docker_container:
     name: sensors-exporter
-    image: anthonymolinari/sensors-exporter@sha256:06aaab0370a7c34a11d6219a23bb54ef4aa9dd498d8b180af09a8ba927f0b25c
+    image: anthonymolinari/sensors-exporter@sha256:a71fc71454ecd72def7184f04f2869065557de8fbcacb02e12200933bfed3c1f
     ports:
       - "9200:8282"
     networks:
@@ -120,7 +120,7 @@
 - name: plex
   docker_container:
     name: plex
-    image: linuxserver/plex@sha256:bf901cb78980447325e8058a1d222a708e3cb84cfde78d805942e149908d52a6
+    image: linuxserver/plex@sha256:e1fcd3798b2125e51e20c23ade505ebd900009b1f0064fbf97bccf7ad4fd0dd4
     volumes:
       - "{{ media_dir }}:/Media"
       - "{{ docker_path }}/plex/config:/config"
@@ -135,7 +135,7 @@
 - name: sonarr
   docker_container:
     name: sonarr
-    image: linuxserver/sonarr@sha256:500af79ff1d83daee79143fd82d5d756bf0a33c048312a317a72ce747f62f0a9
+    image: linuxserver/sonarr@sha256:99fa4d2b68092d0ccad0e133bcbed96f36cff19fa24f0592340f005aa0971da0
     ports:
       - "8989:8989"
     volumes:
@@ -152,7 +152,7 @@
 - name: radarr
   docker_container:
     name: radarr
-    image: linuxserver/radarr@sha256:35430de5a11b189cb81a3db9a63f8ca59c32fc83dca133f57247c698717a9e32
+    image: linuxserver/radarr@sha256:ba539d5ea0c4c0230e28b2ad0c4861d8a1c1c03c4444d6c9f6bca8bab85e063f
     ports:
       - "7878:7878"
     volumes:
