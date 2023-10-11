@@ -30,3 +30,5 @@
 #### Misc
 - homer dashbaord
 - mosquitto
+- nextcloud
+- paperless-ngx
