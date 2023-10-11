@@ -59,7 +59,7 @@
 - name: wireguard
   docker_container:
     name: wireguard
-    image: linuxserver/wireguard@sha256:3e22b4667589decf9f8f29f138691990b8177159568bb39ce907a801b363d32d
+    image: linuxserver/wireguard@sha256:bc30bb2d36fbc70745c6cbf0eff1a54015929d94b3177fca621fa548d133864c
     ports:
       - "51820:51820/udp"
     volumes:
