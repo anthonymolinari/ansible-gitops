@@ -27,7 +27,6 @@ shasta              IN      A       10.32.1.14
 
 hass                IN      A       10.32.1.10
 homer               IN      A       10.32.1.10
-kanboard            IN      A       10.32.1.10
 omada               IN      A       10.32.1.10
 openbooks           IN      A       10.32.1.10
 plex                IN      A       10.32.1.10
@@ -38,3 +37,7 @@ tautulli            IN      A       10.32.1.10
 transmission        IN      A       10.32.1.10
 semaphore           IN      A       10.32.1.10
 grafana             IN      A       10.32.1.10
+nextcloud           IN      A       10.32.1.10
+paperless           IN      A       10.32.1.10
+prometheus          IN      A       10.32.1.10
+tdarr               IN      A       10.32.1.10
