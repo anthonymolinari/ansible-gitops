@@ -15,5 +15,5 @@ jobs:
 
       - name: dry-run
         run: ansible-playbook run.yml --check
-        with:
+        env:
           ANSIBLE_VAULT_PASSWORD: ${{ secrets.VAULT_PASS }}
