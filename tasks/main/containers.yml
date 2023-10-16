@@ -21,7 +21,7 @@
       - name: "metrics"
     restart_policy: unless-stopped
 
-- name: create persistent volume for loki
+- name: create persistent volume for promtail
   docker_volume:
     name: promtail_data
 
@@ -55,7 +55,7 @@
 - name: sensors-exporter
   docker_container:
     name: sensors-exporter
-    image: "{{ sensors_export_image }}"
+    image: "{{ sensors_exporter_image }}"
     ports:
       - "9200:8282"
     networks:
@@ -103,19 +103,17 @@
       - "8385:8080"
     restart_policy: unless-stopped
 
-
 # openbooks
 - name: openbooks 
   docker_container:
     name: openbooks
-    image: "{{ openbooks }}"
+    image: "{{ openbooks_image }}"
     volumes:
       - "{{downloads_dir}}:/books"
     ports:
       - "4567:80"
     command: ["--name", "iker_neptunus", "--persist", "-s", "irc.irchighway.net:9999"]
     restart_policy: unless-stopped
-
 
 # plex
 - name: plex
@@ -153,7 +151,6 @@
 - name: radarr
   docker_container:
     name: radarr
-    image: linuxserver/radarr@sha256:ba539d5ea0c4c0230e28b2ad0c4861d8a1c1c03c4444d6c9f6bca8bab85e063f
     image: "{{ radarr_image }}"
     ports:
       - "7878:7878"
@@ -206,7 +203,7 @@
     image: "{{ transmission_image }}"
     volumes:
       - "{{ docker_path }}/transmission/config:/config"
-      - "{{ download_dir }}:/downloads"
+      - "{{ downloads_dir }}:/downloads"
     env:
       PUID: "1000"
       PGID: "1000"
@@ -214,4 +211,41 @@
     network_mode: container:vpn
     restart_policy: unless-stopped
 
+# onlyoffice
+# - name: onlyoffice
+#   docker_container:
+#     name: onlyoffice
+#     image: "{{ onlyoffice_image }}"
+#     volumes:
+#       - "{{ docker_path }}/onlyoffice/logs:/var/log/onlyoffice"
+#       - "{{ docker_path }}/onlyoffice/data:/www/onlyoffice/Data"
+#       - "{{ docker_path }}/onlyoffice/lib:/lib/onlyoffice"
+#       - "{{ docker_path }}/onlyoffice/db:/var/lib/db"
+#     environment:
+#       - JWT_SECRET: "{{ onlyoffice_secret }}"
+#     restart_policy: unless-stopped
 
+# - name: create network for nextcloud
+#   docker_network:
+#     name: nextcloud
+
+# nextcloud-db
+# - name: nextcloud mariadb database
+#   docker_container:
+#     name: mariadb-nextcloud 
+#     image: "{{ mariadb_image }}"
+    
+
+# nextcloud
+# - name: nextcloud server
+#   docker_container:
+#     name: nextcloud
+#     image: "{{ nextcloud_image }}"
+
+# - name: create network for paperless-ngx
+#   docker_network:
+#     name: paperless
+
+# paperless-ngx-db
+
+# paperless-ngx
