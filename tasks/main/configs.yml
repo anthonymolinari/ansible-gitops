@@ -33,3 +33,19 @@
     src: "configs/shared/traefik.yml"
     dest: "{{ docker_path }}/traefik/traefik.yml"
   become: true
+
+# - name: create directory for vpn files
+#   file:
+#     path: "{{ docker_path }}/vpn-client"
+#     state: directory
+
+# - name: copy vpn files cert
+#   copy:
+#     src: configs/vpn/vpn-ca.crt
+#     dest: "{{ docker_path }}/vpn-client/vpn-ca.crt"
+
+# - name: copy vpn files pem
+#   copy:
+#     src: configs/vpn/crl-verify.pem
+#     dest: "{{ docker_path }}/vpn-client/crl-verify.pem"
+

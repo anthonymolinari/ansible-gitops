@@ -3,7 +3,7 @@
 - name: wordle-clone
   docker_container:
     name: wordle-clone
-    image: anthonymolinari/word-guess@sha256:b6cf2e2cda05764553ba8be3f9d25ed95645f936c808e255169232fc16174be0
+    image: "{{ word_guess_image }}"
     ports:
       - "3210:3000"
     restart_policy: unless-stopped
@@ -11,7 +11,7 @@
 - name: react-pentago
   docker_container:
     name: react-pentago
-    image: anthonymolinari/react-pentago@sha256:f79b8009d85dca2849b4ef2941402e49f16fcbfaee17e619850dac37b7219c9a
+    image: "{{ pentago_image }}"
     ports:
       - "3211:3000"
     restart_policy: unless-stopped

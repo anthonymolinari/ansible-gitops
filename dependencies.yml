@@ -1,0 +1,32 @@
+---
+# this file contains all the image tags used in this playbook. since renovate only scans to a depth of 1, this allows 
+# the playbook to be better structured without loosing the automated depedency management of renovate. 
+# thus this should be the only file renovate makes changes to.
+
+## image tags ##
+# shared
+promtail_image: grafana/promtail:2.9.1
+node_exporter_image: prom/node-exporter@sha256:40ba9ef2dc8d7564d76656feca7f679062d2df71653618211d38c0ec51ebc28c
+
+# main
+loki_image: grafana/loki:2.9.1
+prometheus_image: prom/prometheus@sha256:01226a3d35f024d806c206e8d10e0bdfb6225c2366e4f8313362b4ae828f72f9
+sensors_exporter_image: anthonymolinari/sensors-exporter@sha256:a71fc71454ecd72def7184f04f2869065557de8fbcacb02e12200933bfed3c1f
+grafana_image: grafana/grafana@sha256:44021e67e80adb3e7dcd71520e58de59dbbfcf0af44c65fe0f0f0d750e80cbb7
+homer_image: b4bz/homer@sha256:2716c6071ed010a0dc8510ae7896152e645c0a0410f8930340ed0ac11892f49d
+openbooks_image: evanbuss/openbooks@sha256:3b3d34d8b77e8261df1f470e1ca8344c035e316a86667dc7c1ab2e768d6359f1
+plex_image: linuxserver/plex@sha256:d125d36cc26129936e429b4c9d0964a729a9a9d21ee5f9a03ac73dd6b7137981
+sonarr_image: linuxserver/sonarr@sha256:6c960666882d256b7477838b3c153435e348c0b99b9ec34acf0c5ec23e0b6304
+radarr_image: linuxserver/radarr@sha256:d72310ac43f8083fed801629afaa6b14c18446d66f6aa272a2216a6133fcb3a7
+transmission_image: linuxserver/transmission:4.0.4
+openvpn_client_image: dperson/openvpn-client@sha256:2defe3062e65ad0ecf43bc747d60d1274ebbf7a45100c5cf5448fd7114caac80
+prowlarr_image: linuxserver/prowlarr@sha256:589ffaf04fcd4b74f7ebedfadfea2c7eadb357a7d16b04d7b1c5e554b0c43119
+# network
+bind_dns_image: ubuntu/bind9@sha256:860d79712c73fb668c6d0d6060cef71933eccf2d4573ba2673fd5ab1c94b9bed
+duck_dns_image: linuxserver/duckdns@sha256:15437356505cf8a7bf4633a4899d8e9b6c5a4b42604f0ca2f0e9948f0ffa0111
+wireguard_image: linuxserver/wireguard@sha256:bc30bb2d36fbc70745c6cbf0eff1a54015929d94b3177fca621fa548d133864c
+mosquitto_image: eclipse-mosquitto:1.6.12
+home_assistant_image: ghcr.io/home-assistant/home-assistant:2023.10
+# web
+word_guess_image: anthonymolinari/word-guess@sha256:b6cf2e2cda05764553ba8be3f9d25ed95645f936c808e255169232fc16174be0
+pentago_image: anthonymolinari/react-pentago@sha256:f79b8009d85dca2849b4ef2941402e49f16fcbfaee17e619850dac37b7219c9a

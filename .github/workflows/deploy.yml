@@ -10,5 +10,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
       - name: run playbook
         run: ansible-playbook run.yml
+        with:
+          ANSIBLE_VAULT_PASSWORD: S{{ secrets.VAULT_PASS }}

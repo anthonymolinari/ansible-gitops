@@ -12,7 +12,7 @@
 - name: loki
   docker_container:
     name: loki
-    image: grafana/loki:2.9.1
+    image: "{{ loki_image }}"
     volumes:
       - "loki_data:/etc/loki/"
     ports:
@@ -29,7 +29,7 @@
 - name: promtail
   docker_container:
     name: promtail
-    image: grafana/promtail:2.9.1
+    image: "{{ promtail_image }}"
     volumes:
       - "promtail_data:/etc/promtail"
       - "/var/log:/var/log"
@@ -41,7 +41,7 @@
 - name: node-exporter
   docker_container:
     name: node-exporter
-    image: prom/node-exporter@sha256:40ba9ef2dc8d7564d76656feca7f679062d2df71653618211d38c0ec51ebc28c
+    image: "{{ node_exporter_image }}"
     command: ["--path.rootfs=/host"]
     ports:
       - "9100:9100"
@@ -51,10 +51,11 @@
       - name: "metrics"
     restart_policy: unless-stopped
 
+# sensors exporter
 - name: sensors-exporter
   docker_container:
     name: sensors-exporter
-    image: anthonymolinari/sensors-exporter@sha256:a71fc71454ecd72def7184f04f2869065557de8fbcacb02e12200933bfed3c1f
+    image: "{{ sensors_export_image }}"
     ports:
       - "9200:8282"
     networks:
@@ -62,10 +63,10 @@
     restart_policy: unless-stopped
 
 # promestheus
-- name: promestheus
+- name: prometheus
   docker_container:
     name: prometheus
-    image: prom/prometheus@sha256:845e4e8f4951d85b45c08fb341aaf4ad16cb9919f4b80024166a075aaa6636ef
+    image: "{{ prometheus_image }}"
     ports:
       - "9090:9090"
     volumes:
@@ -82,7 +83,7 @@
 - name: grafana
   docker_container:
     name: grafana
-    image: grafana/grafana@sha256:7abe39740ac042f05fcae3c595d8a32ab42c7608d45175fe6229b06f2cb83763
+    image: "{{ grafana_image }}"
     ports:
       - "3000:3000"
     networks:
@@ -95,7 +96,7 @@
 - name: homer-dashboard
   docker_container:
     name: homer-dashboard
-    image: b4bz/homer@sha256:2716c6071ed010a0dc8510ae7896152e645c0a0410f8930340ed0ac11892f49d
+    image: "{{ homer_image }}"
     volumes:
       - "{{ docker_path }}/homer:/www/assets"
     ports:
@@ -107,7 +108,7 @@
 - name: openbooks 
   docker_container:
     name: openbooks
-    image: evanbuss/openbooks@sha256:3b3d34d8b77e8261df1f470e1ca8344c035e316a86667dc7c1ab2e768d6359f1
+    image: "{{ openbooks }}"
     volumes:
       - "{{downloads_dir}}:/books"
     ports:
@@ -120,7 +121,7 @@
 - name: plex
   docker_container:
     name: plex
-    image: linuxserver/plex@sha256:d125d36cc26129936e429b4c9d0964a729a9a9d21ee5f9a03ac73dd6b7137981
+    image: "{{ plex_image }}"
     volumes:
       - "{{ media_dir }}:/Media"
       - "{{ docker_path }}/plex/config:/config"
@@ -135,7 +136,7 @@
 - name: sonarr
   docker_container:
     name: sonarr
-    image: linuxserver/sonarr@sha256:99fa4d2b68092d0ccad0e133bcbed96f36cff19fa24f0592340f005aa0971da0
+    image: "{{ sonarr_image }}"
     ports:
       - "8989:8989"
     volumes:
@@ -153,6 +154,7 @@
   docker_container:
     name: radarr
     image: linuxserver/radarr@sha256:ba539d5ea0c4c0230e28b2ad0c4861d8a1c1c03c4444d6c9f6bca8bab85e063f
+    image: "{{ radarr_image }}"
     ports:
       - "7878:7878"
     volumes:
@@ -165,9 +167,51 @@
       TZ: "{{ timezone }}"
     restart_policy: unless-stopped
 
+# pia-vpn-container
+- name: deploy vpn-client container
+  docker_container:
+    name: vpn
+    image: "{{ openvpn_client_image }}"
+    volumes:
+      - "{{ docker_path }}/vpn-client:/vpn"
+    ports:
+      - "9696:9696" # prowlarr webui
+      - "9091:9091" # transmission webui
+    restart_policy: unless-stopped
+    capabilities:
+      - "NET_ADMIN"
+    devices:
+      - "/dev/net/tun"
+    env:
+      VPN: "{{ vpn_arg }}"
+      ROUTE: 10.32.0.0/24
 
-# vpn
 # prowlarr
+- name: deploy prowlarr behind vpn
+  docker_container:
+    name: prowlarr
+    image: "{{ prowlarr_image }}"
+    volumes:
+      - "{{ docker_path }}/prowlarr/config:/config"
+    env:
+      PUID: "1000"
+      PGID: "1000"
+    network_mode: container:vpn
+    restart_policy: unless-stopped
+
 # transmission
-# tdarr
+- name: deploy transmission behind vpn
+  docker_container:
+    name: transmission
+    image: "{{ transmission_image }}"
+    volumes:
+      - "{{ docker_path }}/transmission/config:/config"
+      - "{{ download_dir }}:/downloads"
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "{{ timezone }}"
+    network_mode: container:vpn
+    restart_policy: unless-stopped
+
 

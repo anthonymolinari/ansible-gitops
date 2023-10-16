@@ -25,3 +25,4 @@
     src: "configs/network/mosquitto_config.conf"
     dest: "/home/anthony/docker-volumes/mosquitto/config/mosquitto.conf"
   become: true
+

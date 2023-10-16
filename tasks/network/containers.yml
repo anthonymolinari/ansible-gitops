@@ -7,7 +7,7 @@
 - name: promtail container
   docker_container:
     name: promtail
-    image: grafana/promtail:2.9.1
+    image: "{{ promtail_image }}" 
     volumes:
       - "promtail_data:/etc/promtail"
       - "/var/log:/var/log"
@@ -16,7 +16,7 @@
 - name: node_exporter container
   docker_container:
     name: node_exporter
-    image: prom/node-exporter@sha256:40ba9ef2dc8d7564d76656feca7f679062d2df71653618211d38c0ec51ebc28c
+    image: "{{ node_export_image }}"
     command: ["--path.rootfs=/host"]
     ports:
       - "9100:9100"
@@ -28,7 +28,7 @@
 - name: bind docker container
   docker_container:
     name: bind-dns
-    image: ubuntu/bind9:latest
+    image: "{{ bind_dns_image }}"
     volumes:
       - "/home/anthony/docker-volumes/bind-dns/config:/etc/bind"
       - "/home/anthony/docker-volumes/bind-dns/cache:/var/cache/bind"
@@ -42,25 +42,25 @@
     restart_policy: unless-stopped
 
 # duckdns
-# - name: duckdns
-#   docker_container:
-#     name: duckdns
-#     image: linuxserver/duckdns@sha256:15437356505cf8a7bf4633a4899d8e9b6c5a4b42604f0ca2f0e9948f0ffa0111
-#     volumes:
-#       - "/home/anthony/docker-volumes/duckdns/config:/config"
-#     env:
-#       PUID: "1000"
-#       PGID: "1000"
-#       TZ: "{{ timezone }}"
-#       SUBDOMAINS: "{{ ddns_subdomains }}"
-#       TOKEN: "{{ ddns_token }}"
-#     restart_policy: unless-stopped
+- name: duckdns
+  docker_container:
+    name: duckdns
+    image: "{{ duck_dns_image }}"
+    volumes:
+      - "/home/anthony/docker-volumes/duckdns/config:/config"
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "{{ timezone }}"
+      SUBDOMAINS: "{{ ddns_subdomains }}"
+      TOKEN: "{{ ddns_token }}"
+    restart_policy: unless-stopped
 
 # wireguard
 - name: wireguard
   docker_container:
     name: wireguard
-    image: linuxserver/wireguard@sha256:bc30bb2d36fbc70745c6cbf0eff1a54015929d94b3177fca621fa548d133864c
+    image: "{{ wireguard_image }}"
     ports:
       - "51820:51820/udp"
     volumes:
@@ -84,7 +84,7 @@
 - name: mosquitto
   docker_container:
     name: mosquitto
-    image: eclipse-mosquitto:1.6.12
+    image: "{{ mosquitto_image }}"
     ports:
       - "1883:1883"
     volumes:
@@ -100,7 +100,7 @@
 - name: home-assistant
   docker_container:
     name: home-assistant
-    image: ghcr.io/home-assistant/home-assistant:2023.10
+    image: "{{ home_assistant_image }}" 
     network_mode: 'host'
     volumes:
       - "/home/anthony/docker-volumes/hass/config:/config"

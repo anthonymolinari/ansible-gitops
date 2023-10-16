@@ -1,30 +1,19 @@
 ---
 
 - hosts: main
-  tasks:
-    - import_tasks: tasks/main_configs.yml
-
-- hosts: main
   vars:
     pip_install_packages:
       - name: docker
-  tasks:
-    - import_tasks: tasks/main_containers.yml
 
-- hosts: main
-  vars:
-    pip_install_packages:
-      - name: docker
   tasks:
-    - import_tasks: tasks/web_containers.yml
-
-- hosts: network
-  tasks:
-    - import_tasks: tasks/network_configs.yml
+    - include_vars: dependencies.yml
+    - import_tasks: tasks/main/main.yml
 
 - hosts: network
   vars:
     pip_install_packages:
       - name: docker
   tasks:
-    - import_tasks: tasks/network_containers.yml
+    - include_vars: dependencies.yml
+    - import_tasks: tasks/network/main.yml
+
