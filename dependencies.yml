@@ -21,6 +21,7 @@ radarr_image: linuxserver/radarr@sha256:d72310ac43f8083fed801629afaa6b14c18446d6
 transmission_image: linuxserver/transmission:4.0.4
 openvpn_client_image: dperson/openvpn-client@sha256:2defe3062e65ad0ecf43bc747d60d1274ebbf7a45100c5cf5448fd7114caac80
 prowlarr_image: linuxserver/prowlarr@sha256:589ffaf04fcd4b74f7ebedfadfea2c7eadb357a7d16b04d7b1c5e554b0c43119
+onlyoffice_image: onlyoffice/documentserver:7.5
 # network
 bind_dns_image: ubuntu/bind9@sha256:860d79712c73fb668c6d0d6060cef71933eccf2d4573ba2673fd5ab1c94b9bed
 duck_dns_image: linuxserver/duckdns@sha256:15437356505cf8a7bf4633a4899d8e9b6c5a4b42604f0ca2f0e9948f0ffa0111
