@@ -4,7 +4,6 @@
   vars:
     pip_install_packages:
       - name: docker
-
   tasks:
     - include_vars: dependencies.yml
     - import_tasks: tasks/main/main.yml

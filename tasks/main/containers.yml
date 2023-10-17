@@ -216,6 +216,8 @@
   docker_container:
     name: onlyoffice
     image: "{{ onlyoffice_image }}"
+    ports:
+      - "9393:80"
     volumes:
       - "{{ docker_path }}/onlyoffice/logs:/var/log/onlyoffice"
       - "{{ docker_path }}/onlyoffice/data:/www/onlyoffice/Data"
