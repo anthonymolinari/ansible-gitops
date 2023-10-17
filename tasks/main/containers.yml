@@ -222,7 +222,7 @@
       - "{{ docker_path }}/onlyoffice/lib:/lib/onlyoffice"
       - "{{ docker_path }}/onlyoffice/db:/var/lib/db"
     env:
-      - JWT_SECRET: "{{ onlyoffice_secret }}"
+      JWT_SECRET: "{{ onlyoffice_secret }}"
     restart_policy: unless-stopped
 
 - name: create network for nextcloud
