@@ -203,7 +203,7 @@
     image: "{{ transmission_image }}"
     volumes:
       - "{{ docker_path }}/transmission/config:/config"
-      - "{{ downloads_dir }}:/downloads"
+      - "{{ downloads_dir }}/torrents:/downloads"
     env:
       PUID: "1000"
       PGID: "1000"
@@ -212,40 +212,57 @@
     restart_policy: unless-stopped
 
 # onlyoffice
-# - name: onlyoffice
-#   docker_container:
-#     name: onlyoffice
-#     image: "{{ onlyoffice_image }}"
-#     volumes:
-#       - "{{ docker_path }}/onlyoffice/logs:/var/log/onlyoffice"
-#       - "{{ docker_path }}/onlyoffice/data:/www/onlyoffice/Data"
-#       - "{{ docker_path }}/onlyoffice/lib:/lib/onlyoffice"
-#       - "{{ docker_path }}/onlyoffice/db:/var/lib/db"
-#     environment:
-#       - JWT_SECRET: "{{ onlyoffice_secret }}"
-#     restart_policy: unless-stopped
+- name: onlyoffice
+  docker_container:
+    name: onlyoffice
+    image: "{{ onlyoffice_image }}"
+    volumes:
+      - "{{ docker_path }}/onlyoffice/logs:/var/log/onlyoffice"
+      - "{{ docker_path }}/onlyoffice/data:/www/onlyoffice/Data"
+      - "{{ docker_path }}/onlyoffice/lib:/lib/onlyoffice"
+      - "{{ docker_path }}/onlyoffice/db:/var/lib/db"
+    env:
+      - JWT_SECRET: "{{ onlyoffice_secret }}"
+    restart_policy: unless-stopped
 
-# - name: create network for nextcloud
-#   docker_network:
-#     name: nextcloud
+- name: create network for nextcloud
+  docker_network:
+    name: nextcloud
 
-# nextcloud-db
+# # nextcloud-db
 # - name: nextcloud mariadb database
 #   docker_container:
 #     name: mariadb-nextcloud 
 #     image: "{{ mariadb_image }}"
-    
+#     command: ["--transaction-isolation=READ-COMMITTED", "--log-bin=binlog", "--binlog-format=ROW"]
+#     ports:
+#       - 3306:3306
+#     volumes:
+#       - "{{ docker_path }}/mariadb-nextcloud/data:/var/lib/mysql"
+#     env:
+#       MYSQL_ROOT_PASSWORD: '{{ NC_ROOT_PASS }}'
+#       MYSQL_PASSWORD: '{{ NC_DB_PASS }}'
+#       MYSQL_DATABASE: '{{ NC_DB_NAME }}'
+#       MYSQL_USER: '{{ NC_DB_USER }}'
+#     networks:
+#       - name: "nextcloud"
+#     restart_policy: always
 
-# nextcloud
+# # nextcloud
 # - name: nextcloud server
 #   docker_container:
 #     name: nextcloud
 #     image: "{{ nextcloud_image }}"
-
-# - name: create network for paperless-ngx
-#   docker_network:
-#     name: paperless
-
-# paperless-ngx-db
-
-# paperless-ngx
+#     ports:
+#       - "8080:80"
+#     links: 
+#       - mariadb-nextcloud
+#     networks:
+#       - nextcloud
+#     volumes:
+#       - "{{ nextcloud_volume }}:/var/www/html"
+#     env:
+#       MYSQL_ROOT_PASSWORD: '{{ NC_ROOT_PASS }}'
+#       MYSQL_PASSWORD: '{{ NC_DB_PASS }}'
+#       MYSQL_DATABASE: '{{ NC_DB_NAME }}'
+#       MYSQL_USER: '{{ NC_DB_USER }}'
