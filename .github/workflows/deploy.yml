@@ -13,5 +13,5 @@ jobs:
 
       - name: run playbook
         run: ansible-playbook run.yml
-        with:
+        env:
           ANSIBLE_VAULT_PASSWORD: S{{ secrets.VAULT_PASS }}
