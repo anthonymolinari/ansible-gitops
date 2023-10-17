@@ -10,10 +10,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      
       - name: ansible syntax validation
         run: ansible-playbook run.yml --syntax-check
 
       - name: dry-run
-        run: ansible-playbook run.yml --check
-        env:
-          ANSIBLE_VAULT_PASSWORD: ${{ secrets.VAULT_PASS }}
+        run: ansible-playbook run.yml --check --vault-password-file='${{ secrets.VAULT_PASS_FILE }}'
+

@@ -12,6 +12,4 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: run playbook
-        run: ansible-playbook run.yml
-        env:
-          ANSIBLE_VAULT_PASSWORD: S{{ secrets.VAULT_PASS }}
+        run: ansible-playbook run.yml --vault-password-file='${{ secrets.VAULT_PASS_FILE }}'
