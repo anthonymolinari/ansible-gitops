@@ -5,12 +5,12 @@
   ],
   "packageRules": [
     {
-        "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
         "automerge": true,
+        "matchDatasources": ["docker"],
     },
   ],
   "ansible": {
-    "fileMatch": ["dependencies.yml$"]
+    "fileMatch": ["dependencies.yml"]
   },
   "timezone": "America/Los_Angeles",
 }
