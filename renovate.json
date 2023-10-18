@@ -9,5 +9,8 @@
         "automerge": true,
     },
   ],
+  "ansible": {
+    "fileMatch": ["dependencies.yaml$"]
+  }
   "timezone": "America/Los_Angeles",
 }
