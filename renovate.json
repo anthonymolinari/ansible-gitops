@@ -10,7 +10,7 @@
     },
   ],
   "ansible": {
-    "fileMatch": ["dependencies.yaml$"]
-  }
+    "fileMatch": ["dependencies.yml$"]
+  },
   "timezone": "America/Los_Angeles",
 }

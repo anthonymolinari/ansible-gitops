@@ -3,6 +3,14 @@ name: deploy
 on:
   push: 
     branches: ['main']
+    paths: 
+      - 'tasks/**'
+      - 'configs/**'
+      - 'group_vars/**'
+      - 'templates/**'
+      - 'run.yml'
+      - 'dependencies.yml'
+      - 'hosts'
   
 jobs:
   deploy:
