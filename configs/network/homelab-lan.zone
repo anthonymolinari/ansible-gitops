@@ -33,11 +33,9 @@ plex                IN      A       10.32.1.10
 prowlarr            IN      A       10.32.1.10
 radarr              IN      A       10.32.1.10
 sonarr              IN      A       10.32.1.10
-tautulli            IN      A       10.32.1.10
 transmission        IN      A       10.32.1.10
 semaphore           IN      A       10.32.1.10
 grafana             IN      A       10.32.1.10
 nextcloud           IN      A       10.32.1.10
-paperless           IN      A       10.32.1.10
 prometheus          IN      A       10.32.1.10
 tdarr               IN      A       10.32.1.10
