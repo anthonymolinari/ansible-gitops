@@ -1,8 +1,4 @@
 ---
-# this file contains all the image tags used in this playbook. since renovate only scans to a depth of 1, this allows 
-# the playbook to be better structured without loosing the automated depedency management of renovate. 
-# thus this should be the only file renovate makes changes to.
-
 ## image tags ##
 # shared
 promtail_image: grafana/promtail:2.9.1
