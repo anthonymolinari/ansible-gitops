@@ -23,7 +23,7 @@ temescal            IN      A       10.32.1.11
 shasta              IN      A       10.32.1.14
 
 
-; -- web application
+; -- web applications
 
 hass                IN      A       10.32.1.10
 homer               IN      A       10.32.1.10
@@ -39,3 +39,5 @@ grafana             IN      A       10.32.1.10
 nextcloud           IN      A       10.32.1.10
 prometheus          IN      A       10.32.1.10
 tdarr               IN      A       10.32.1.10
+wordguess           IN      A       10.32.1.10
+pentago             IN      A       10.32.1.10
