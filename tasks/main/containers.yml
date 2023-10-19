@@ -211,6 +211,17 @@
     network_mode: container:vpn
     restart_policy: unless-stopped
 
+# beehive 
+- name: beehive
+  docker_container:
+    name: behive
+    image: fibbledom/beehive@sha256:50e84d8574c6a7614b3f98120c5a948fd25403a29512db6406fcbb62a8343472
+    ports: 
+      - "8181:8181"
+    volumes:
+      - "{{ docker_path }}/beehive/conf:/conf"
+    restart_policy: unless-stopped
+
 # onlyoffice
 - name: onlyoffice
   docker_container:
