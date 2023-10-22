@@ -12,7 +12,7 @@
 - name: loki
   docker_container:
     name: loki
-    image: "{{ loki_image }}"
+    image: grafana/loki:2.9.1
     volumes:
       - "loki_data:/etc/loki/"
     ports:
@@ -29,7 +29,7 @@
 - name: promtail
   docker_container:
     name: promtail
-    image: "{{ promtail_image }}"
+    image: grafana/promtail:2.9.1
     volumes:
       - "promtail_data:/etc/promtail"
       - "/var/log:/var/log"
@@ -40,7 +40,7 @@
 # node exporter
 - name: node-exporter
   docker_container:
-    name: node-exporter
+    name: prom/node-exporter@sha256:40ba9ef2dc8d7564d76656feca7f679062d2df71653618211d38c0ec51ebc28c
     image: "{{ node_exporter_image }}"
     command: ["--path.rootfs=/host"]
     ports:
@@ -55,7 +55,7 @@
 - name: sensors-exporter
   docker_container:
     name: sensors-exporter
-    image: "{{ sensors_exporter_image }}"
+    image: anthonymolinari/sensors-exporter@sha256:a71fc71454ecd72def7184f04f2869065557de8fbcacb02e12200933bfed3c1f
     ports:
       - "9200:8282"
     networks:
