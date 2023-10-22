@@ -40,8 +40,8 @@
 # node exporter
 - name: node-exporter
   docker_container:
-    name: prom/node-exporter@sha256:40ba9ef2dc8d7564d76656feca7f679062d2df71653618211d38c0ec51ebc28c
-    image: "{{ node_exporter_image }}"
+    name: node-exporter
+    image: prom/node-exporter:v1.6.1
     command: ["--path.rootfs=/host"]
     ports:
       - "9100:9100"
@@ -214,7 +214,7 @@
 # beehive 
 - name: beehive
   docker_container:
-    name: behive
+    name: beehive
     image: fribbledom/beehive@sha256:50e84d8574c6a7614b3f98120c5a948fd25403a29512db6406fcbb62a8343472
     ports: 
       - "8181:8181"
