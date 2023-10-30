@@ -10,7 +10,7 @@
     },
   ],
   "ansible": {
-    "fileMatch": ["(^|/)tasks/*/[^/]+\.ya?ml$"]    
+    "fileMatch": ["(^|/)tasks/([a-z]|[A-Z])+/[^/]+\.ya?ml$"]    
   },
   "timezone": "America/Los_Angeles",
 }
