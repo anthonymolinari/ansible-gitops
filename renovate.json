@@ -9,5 +9,8 @@
         "automerge": true
     },
   ],
+  "ansible": {
+    "fileMatch": ["(^|/)tasks/*/[^/]+\.ya?ml$"]    
+  },
   "timezone": "America/Los_Angeles",
 }
