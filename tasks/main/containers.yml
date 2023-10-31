@@ -200,7 +200,7 @@
 - name: deploy transmission behind vpn
   docker_container:
     name: transmission
-    image: linuxserver/transmission:4.0.4
+    image: linuxserver/transmission:2021.11.18
     volumes:
       - "{{ docker_path }}/transmission/config:/config"
       - "{{ downloads_dir }}/torrents:/downloads"
