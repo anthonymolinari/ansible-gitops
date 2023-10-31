@@ -29,7 +29,7 @@
 - name: promtail
   docker_container:
     name: promtail
-    image: grafana/promtail:2.9.1
+    image: grafana/promtail:2.9.2
     volumes:
       - "promtail_data:/etc/promtail"
       - "/var/log:/var/log"
