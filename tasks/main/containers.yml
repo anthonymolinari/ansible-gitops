@@ -227,15 +227,22 @@
     network_mode: container:vpn
     restart_policy: unless-stopped
 
-# beehive 
-- name: beehive
+# netboot-xyz
+- name: netboot server
   docker_container:
-    name: beehive
-    image: fribbledom/beehive@sha256:50e84d8574c6a7614b3f98120c5a948fd25403a29512db6406fcbb62a8343472
-    ports: 
-      - "8181:8181"
+    name: netboot-xyz
+    image: linuxserver/netbootxyz:0.6.9
+    ports:
+      - "3110:3000"
+      - "69:69"
+      - "8383:80"
     volumes:
-      - "{{ docker_path }}/beehive/conf:/conf"
+      - "{{ docker_path }}/netboot-xyz/config:/config"
+      - "{{ docker_path }}/netboot-xyz/assets:/assets"
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "{{ timezone }}"
     restart_policy: unless-stopped
 
 # onlyoffice
