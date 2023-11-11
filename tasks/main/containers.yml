@@ -134,7 +134,7 @@
 - name: sonarr
   docker_container:
     name: sonarr
-    image: linuxserver/sonarr@sha256:9772a01bf2adce3937469398e1ada037abd1045f83cd2d0a1d9c7fc1b12b8160    
+    image: linuxserver/sonarr@sha256:2aa13988ae5c4ed357d0343967aaf623278c10d8728eee0f73ae1dee655ff4dc    
     ports:
       - "8989:8989"
     volumes:
