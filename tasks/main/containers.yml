@@ -245,6 +245,17 @@
       TZ: "{{ timezone }}"
     restart_policy: unless-stopped
 
+# Task Server
+- name: taskwarrior-server
+  docker_container:
+    name: taskwarrior-server
+    image: ghcr.io/connectical/taskd:1.1.0-alpine3.18.4
+    ports:
+      - "53589:53589"
+    volumes:
+      - "{{ docker_path }}/taskwarrior/taskd:/var/taskd"
+    restart_policy: unless-stopped
+
 # onlyoffice
 - name: onlyoffice
   docker_container:
