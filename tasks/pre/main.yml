@@ -1,0 +1,13 @@
+// non-container related stuff will run from here
+
+
+// sync cron scripts from github
+
+
+// sync nvim config from github
+
+
+// sync ranger config from github
+
+
+// update contents of cron job
