@@ -28,7 +28,7 @@
 - name: bind docker container
   docker_container:
     name: bind-dns
-    image: ubuntu/bind9@sha256:9769a04c280792443d4918dabf20d2917ac5f68d0c3873835765834b94c30e0a
+    image: ubuntu/bind9@sha256:55a785e3c502b470361171f7e7b4849c5d848e51a9cc0d05d9fe34e0504295ec
     volumes:
       - "/home/anthony/docker-volumes/bind-dns/config:/etc/bind"
       - "/home/anthony/docker-volumes/bind-dns/cache:/var/cache/bind"
@@ -45,7 +45,7 @@
 - name: duckdns
   docker_container:
     name: duckdns
-    image: linuxserver/duckdns@sha256:7a1848bb268bfcd304872fe92999626484cd0f175cb41624318187937c19ef26
+    image: linuxserver/duckdns@sha256:ce56e25a8f21304acf300ac0b0e1937bfda5ee68628fca41b3651cc116efa098
     volumes:
       - "/home/anthony/docker-volumes/duckdns/config:/config"
     env:
@@ -100,7 +100,7 @@
 - name: home-assistant
   docker_container:
     name: home-assistant
-    image: ghcr.io/home-assistant/home-assistant:2023.11 
+    image: ghcr.io/home-assistant/home-assistant:2023.12 
     network_mode: 'host'
     volumes:
       - "/home/anthony/docker-volumes/hass/config:/config"
