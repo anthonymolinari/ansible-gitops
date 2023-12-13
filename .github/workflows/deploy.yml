@@ -9,7 +9,6 @@ on:
       - 'group_vars/**'
       - 'templates/**'
       - 'run.yml'
-      - 'dependencies.yml'
       - 'hosts'
   
 jobs:
