@@ -134,7 +134,6 @@
 - name: jellyfin
   docker_container:
     name: jellyfin
-    user: "1000:1000"
     image: linuxserver/jellyfin:10.8.13
     volumes:
       - "{{ media_dir }}:/media"
