@@ -138,7 +138,11 @@
     volumes:
       - "{{ media_dir }}:/media"
       - "{{ docker_path }}:/jellyfin/config"
-    network_mode: "host"
+    ports: 
+      - "8096:8096"
+      - "8920:8020"
+      - "1900:1900"
+      - "7359:7359"
     restart_policy: unless-stopped
 
 # sonarr
