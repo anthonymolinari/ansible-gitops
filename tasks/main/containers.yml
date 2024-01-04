@@ -130,6 +130,18 @@
       VERSION: "docker"
     restart_policy: unless-stopped
 
+# jellyfin
+- name: jellyfin
+  docker_container:
+    name: jellyfin
+    user: "1000:1000"
+    image: linuxserver/jellyfin:10.8.13
+    volumes:
+      - "{{ media_dir }}:/media"
+      - "{{ docker_path }}:/jellyfin/config:/config"
+    network_mode: "host"
+    restart_policy: unless-stopped
+
 # sonarr
 - name: sonarr
   docker_container:
