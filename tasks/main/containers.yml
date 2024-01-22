@@ -130,21 +130,6 @@
       VERSION: "docker"
     restart_policy: unless-stopped
 
-# jellyfin
-- name: jellyfin
-  docker_container:
-    name: jellyfin
-    image: jellyfin/jellyfin@sha256:095e6d410d1d27b17cc4a961a9bab9fab5ffce6e49389d8ec685f65ab5538525
-    volumes:
-      - "{{ media_dir }}:/media"
-      - "{{ docker_path }}/jellyfin/config:/config"
-    ports: 
-      - "8096:8096"
-      - "8920:8020"
-      - "1900:1900"
-      - "7359:7359"
-    restart_policy: unless-stopped
-
 # sonarr
 - name: sonarr
   docker_container:
