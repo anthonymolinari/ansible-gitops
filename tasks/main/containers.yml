@@ -66,7 +66,7 @@
 - name: prometheus
   docker_container:
     name: prometheus
-    image: prom/prometheus:v2.48.1
+    image: prom/prometheus:v2.49.1
     ports:
       - "9090:9090"
     volumes:
@@ -149,7 +149,7 @@
 - name: sonarr
   docker_container:
     name: sonarr
-    image: linuxserver/sonarr:4.0.0-develop   
+    image: linuxserver/sonarr:4.0.1-develop   
     ports:
       - "8989:8989"
     volumes:
@@ -166,7 +166,7 @@
 - name: radarr
   docker_container:
     name: radarr
-    image: linuxserver/radarr@sha256:ad3be565fe7be1e2dbcff85f3b6caa6fe13f104889fb0ccd6663eb7fa8de0735    
+    image: linuxserver/radarr@sha256:39b9d30e81b12da741b875965edfa08d6b3bd157d9012ebe072c4c3f08211174    
     ports:
       - "7878:7878"
     volumes:
@@ -218,7 +218,7 @@
 - name: deploy prowlarr behind vpn
   docker_container:
     name: prowlarr
-    image: linuxserver/prowlarr@sha256:db04d00b21da982269ec27575a51915d6e4b9e53097981e7e6d5d1943d84f79c
+    image: linuxserver/prowlarr@sha256:2fe513645d0c13f4675e8c5af4c94c05b72fd8a18dde79088c6f49e3aa456414
     volumes:
       - "{{ docker_path }}/prowlarr/config:/config"
     env:
@@ -264,7 +264,7 @@
 - name: minecraft-server
   docker_container:
     name: minecraft
-    image: itzg/minecraft-server@sha256:c820ad277d6a1b23d3a6adc317401e62f7098804f27336cd67c99a6a910c5f38
+    image: itzg/minecraft-server@sha256:9293063e98776a0ed5f11742197143fbb9ab87a45e3908df8eeb1c7b7f42b8a1
     ports:
       - "25565:25565"
     volumes:
