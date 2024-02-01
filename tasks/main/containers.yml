@@ -112,7 +112,7 @@
       - "{{downloads_dir}}:/books"
     ports:
       - "4567:80"
-    command: ["--name", "iker_neptunus", "--persist", "-s", "irc.irchighway.net:9999"]
+    command: ["--name", "iker_neptunis", "--persist", "-s", "irc.irchighway.net:9999"]
     restart_policy: unless-stopped
 
 # plex
