@@ -119,7 +119,7 @@
 - name: plex
   docker_container:
     name: plex
-    image: linuxserver/plex:1.32.8
+    image: linuxserver/plex:1.40.0
     volumes:
       - "{{ media_dir }}:/Media"
       - "{{ docker_path }}/plex/config:/config"
