@@ -249,7 +249,7 @@
 - name: minecraft-server
   docker_container:
     name: minecraft
-    image: itzg/minecraft-server@sha256:1e67614ab29a3188b247e70634f1bbb747e64e0bc34376c086be7e635b992d80
+    image: itzg/minecraft-server@sha256:5b3f4f130ce643bbdf08d03029fca03a77a23a02edef7d588f94d3166f5d1a65
     ports:
       - "25565:25565"
     volumes:
