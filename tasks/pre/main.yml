@@ -1,6 +1,9 @@
 // non-container related stuff will run from here
 
 
+// setup files shares
+
+
 // sync cron scripts from github
 
 
@@ -10,4 +13,4 @@
 // sync ranger config from github
 
 
-// update contents of cron job
+// update contents of cron schedule 
