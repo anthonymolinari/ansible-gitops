@@ -68,7 +68,7 @@
     name: prometheus
     image: prom/prometheus:v2.50.1
     ports:
-      - "9090:9090"
+      - "9191:9090"
     volumes:
       - "{{ docker_path }}/prometheus:/etc/prometheus"
     networks:
@@ -124,11 +124,53 @@
       - "{{ media_dir }}:/Media"
       - "{{ docker_path }}/plex/config:/config"
     network_mode: "host"
+    device_requests:
+      - device_ids: 0
+        driver: nvidia
+        capabilities:
+          - gpu
+          - compute
+          - utility
     env:
       PUID: "1000"
       PGID: "1000"
       VERSION: "docker"
     restart_policy: unless-stopped
+
+# tdarr 
+- name: tdarr
+  docker_container:
+    name: tdarr
+    image: haveagitgat/tdarr:2.16.01 
+    ports:
+      - "8265:8265"
+      - "8266:8266"
+    volumes:
+      - "{{ docker_path }}/tdarr/server:/app/server"
+      - "{{ docker_path }}/tdarr/configs:/app/config"
+      - "{{ docker_path }}/tdarr/logs:/app/logs"
+      - "{{ media_dir }}:/media"
+      - "/transcode_cache:/temp"
+    device_requests:
+      - device_ids: 0
+        driver: nvidia
+        capabilities:
+          - gpu
+          - compute
+          - utility
+    env:
+      serverIP: "0.0.0.0"
+      serverPort: "8266"
+      webUIPort: "8265"
+      internalNode: "true"
+      inContainer: "true"
+      ffmpegVersion: "6"
+      nodeName: "MyInternalNode"
+      TZ: "{{ timezone }}"
+      PUID: "1000"
+      PGID: "1000"
+      NVIDIA_DRIVER_CAPABILITIES: "all"
+      NVIDIA_VISIBLE_DEVICES: "all"
 
 # sonarr
 - name: sonarr
@@ -256,5 +298,4 @@
       - "{{ docker_path }}/minecraft/data:/data"
     env:
       EULA: "TRUE"
-    restart_policy: unless-stopped
 
