@@ -220,7 +220,7 @@
       PGID: "1000"
       PUID: "1000"
       TZ: "{{ timezone }}"
-      restart_policy: unless-stopped
+    restart_policy: unless-stopped
 
 # homarr
 - name: deploy homarr
@@ -234,7 +234,7 @@
       - "{{ docker_path }}/homarr/configs:/app/data/configs"
       - "{{ docker_path }}/homarr/icons:/app/public/icons"
       - "{{ docker_path }}/homarr:/data"
-    restart: unless-stopped
+    restart_policy: unless-stopped
 
 # pia-vpn-container
 - name: deploy vpn-client container
