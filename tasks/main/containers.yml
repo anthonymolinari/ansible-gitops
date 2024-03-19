@@ -141,7 +141,7 @@
 - name: tdarr
   docker_container:
     name: tdarr
-    image: haveagitgat/tdarr:2.16.01 
+    image: haveagitgat/tdarr:2.17.01 
     ports:
       - "8265:8265"
       - "8266:8266"
@@ -193,7 +193,7 @@
 - name: radarr
   docker_container:
     name: radarr
-    image: linuxserver/radarr@sha256:cb4883c2f5c27785cbb40ca79b0e70d74599286012c67395a8c795bf7d2392de    
+    image: linuxserver/radarr@sha256:47b1ce446b8ca7595686c7bf84d31a45486b31d98804877700d4d50796b7498c    
     ports:
       - "7878:7878"
     volumes:
@@ -270,7 +270,7 @@
 - name: deploy prowlarr behind vpn
   docker_container:
     name: prowlarr
-    image: linuxserver/prowlarr@sha256:4f65023ea7df23162220c8b88be235b30d30430acdcf9a0acfb9e7fa89385ed7
+    image: linuxserver/prowlarr@sha256:6766246ba813ce0a51b3feab6b87cdbd880adf5951700702ede62ff3d0ce699e
     volumes:
       - "{{ docker_path }}/prowlarr/config:/config"
     env:
@@ -316,7 +316,7 @@
 - name: minecraft-server
   docker_container:
     name: minecraft
-    image: itzg/minecraft-server@sha256:3226fa36ded2f361d3d1777a9d806b2a146726ed16baea09fb7b6d64748ca0ab
+    image: itzg/minecraft-server@sha256:9d3d3d2bf46c7dcbb31001078407b4555f7759869f3d35eda4cfe36d660899ce
     ports:
       - "25565:25565"
     volumes:
