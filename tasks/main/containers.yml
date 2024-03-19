@@ -240,7 +240,7 @@
 - name: deploy overseerr
   docker_container:
     name: overseerr
-    image: linuxserver/overseerr:1.33.2
+    image: sctx/overseerr:1.33.2
     ports:
       - "5055:5055"
     volumes:
@@ -248,8 +248,6 @@
     env:
       LOG_LEVEL: "debug"
       TZ: "{{ timezone }}"
-    user:
-      "1000:1000"
     restart_policy: unless-stopped
 
 # pia-vpn-container
