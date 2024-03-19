@@ -248,6 +248,8 @@
     env:
       LOG_LEVEL: "debug"
       TZ: "{{ timezone }}"
+    user:
+      "1000:1000"
     restart_policy: unless-stopped
 
 # pia-vpn-container
