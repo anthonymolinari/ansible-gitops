@@ -245,6 +245,9 @@
       - "5055:5055"
     volumes:
       - "{{ docker_path }}/overseerr/config:/app/config"
+    env:
+      LOG_LEVEL: "debug"
+      TZ: "{{ timezone }}"
     restart_policy: unless-stopped
 
 # pia-vpn-container
