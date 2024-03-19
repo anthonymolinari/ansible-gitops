@@ -236,6 +236,17 @@
       - "{{ docker_path }}/homarr:/data"
     restart_policy: unless-stopped
 
+# overseerr
+- name: deploy overseerr
+  docker_container:
+    name: overseerr
+    image: linuxserver/overseerr:1.33.2
+    ports:
+      - "5055:5055"
+    volumes:
+      - "{{ docker_path }}/overseerr/config:/app/config"
+    restart_policy: unless-stopped
+
 # pia-vpn-container
 - name: deploy vpn-client container
   docker_container:
