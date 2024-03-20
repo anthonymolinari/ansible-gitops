@@ -168,11 +168,11 @@
       PUID: "1000"
       PGID: "1000"
       VERSION: "docker"
-    networks:
-      - name: "traefik"
-    labels:
-      traefik.http.routers.plex.rule: "Host(`plex.homelab.lan`)"
     restart_policy: unless-stopped
+#   networks:
+#     - name: "traefik"
+#   labels:
+#     traefik.http.routers.plex.rule: "Host(`plex.homelab.lan`)"
 
 # tdarr 
 - name: tdarr
