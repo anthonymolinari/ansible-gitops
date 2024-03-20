@@ -105,7 +105,7 @@
       - "grafana_data:/var/lib/grafana"
     restart_policy: unless-stopped
     labels:
-      traefik.http.routers.grafana.rule: "Host(`grafana.local`)"
+      traefik.http.routers.grafana.rule: "Host(`grafana.homelab.lan`)"
 
 # homer
 - name: homer-dashboard
