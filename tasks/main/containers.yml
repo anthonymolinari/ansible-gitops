@@ -23,6 +23,7 @@
       - "3100:3100"
     networks:
       - name: "metrics"
+      - name: "traefik"
     restart_policy: unless-stopped
 
 - name: create persistent volume for promtail
@@ -39,6 +40,7 @@
       - "/var/log:/var/log"
     networks:
       - name: "metrics"
+      - name: "traefik"
     restart_policy: unless-stopped
 
 # traefik 
@@ -68,6 +70,7 @@
       - "/:/host:ro,rslave"
     networks:
       - name: "metrics"
+      - name: "traefik"
     restart_policy: unless-stopped
 
 # sensors exporter
@@ -79,6 +82,7 @@
       - "9200:8282"
     networks:
       - name: "metrics"
+      - name: "traefik"
     restart_policy: unless-stopped
 
 # promestheus
@@ -92,6 +96,9 @@
       - "{{ docker_path }}/prometheus:/etc/prometheus"
     networks:
       - name: "metrics"
+      - name: "traefik"
+    labels:
+      traefik.http.routers.prometheus.rule: "Host(`prometheus.homelab.lan`)"
     restart_policy: unless-stopped
 
 - name: create persistent volume for grafana
@@ -107,22 +114,23 @@
       - "3000:3000"
     networks:
       - name: "metrics"
+      - name: "traefik"
     volumes:
       - "grafana_data:/var/lib/grafana"
-    restart_policy: unless-stopped
     labels:
       traefik.http.routers.grafana.rule: "Host(`grafana.homelab.lan`)"
+    restart_policy: unless-stopped
 
 # homer
-- name: homer-dashboard
-  docker_container:
-    name: homer-dashboard
-    image: b4bz/homer:v23.10.1
-    volumes:
-      - "{{ docker_path }}/homer:/www/assets"
-    ports:
-      - "8385:8080"
-    restart_policy: unless-stopped
+#- name: homer-dashboard
+# docker_container:
+#   name: homer-dashboard
+#   image: b4bz/homer:v23.10.1
+#   volumes:
+#     - "{{ docker_path }}/homer:/www/assets"
+#   ports:
+#     - "8385:8080"
+#   restart_policy: unless-stopped
 
 # openbooks
 - name: openbooks 
@@ -134,6 +142,10 @@
     ports:
       - "4567:80"
     command: ["--name", "iker_neptunis", "--persist", "-s", "irc.irchighway.net:9999"]
+    networks:
+      - name: "traefik"
+    labels:
+      traefik.http.routers.openbooks.rule: "Host(`openbooks.homelab.lan`)"
     restart_policy: unless-stopped
 
 # plex
@@ -156,6 +168,10 @@
       PUID: "1000"
       PGID: "1000"
       VERSION: "docker"
+    networks:
+      - name: "traefik"
+    labels:
+      traefik.http.routers.plex.rule: "Host(`plex.homelab.lan`)"
     restart_policy: unless-stopped
 
 # tdarr 
@@ -192,6 +208,11 @@
       PGID: "1000"
       NVIDIA_DRIVER_CAPABILITIES: "all"
       NVIDIA_VISIBLE_DEVICES: "all"
+    networks:
+      - name: "traefik"
+    labels:
+      traefik.http.routers.tdarr.rule: "Host(`tdarr.homelab.lan`)"
+    restart_policy: unless-stopped
 
 # sonarr
 - name: sonarr
@@ -211,7 +232,7 @@
     networks:
       - name: "traefik"
     labels:
-      traefik.http.routers.sonarr.rule: "Host(`sonarr.local`)"
+      traefik.http.routers.sonarr.rule: "Host(`sonarr.homelab.lan`)"
     restart_policy: unless-stopped
 
 # radarr
@@ -229,6 +250,10 @@
       PGID: "1000"
       PUID: "1000"
       TZ: "{{ timezone }}"
+    networks:
+      - name: "traefik"
+    labels:
+      traefik.http.routers.radarr.rule: "Host(`radarr.homelab.lan`)"
     restart_policy: unless-stopped
 
 # bazarr
@@ -245,6 +270,10 @@
       PGID: "1000"
       PUID: "1000"
       TZ: "{{ timezone }}"
+    networks:
+      - name: "traefik"
+    labels:
+      traefik.http.routers.bazarr.rule: "Host(`bazarr.homelab.lan`)"
     restart_policy: unless-stopped
 
 # homarr
@@ -259,6 +288,10 @@
       - "{{ docker_path }}/homarr/configs:/app/data/configs"
       - "{{ docker_path }}/homarr/icons:/app/public/icons"
       - "{{ docker_path }}/homarr:/data"
+    networks:
+      - name: "traefik"
+    labels:
+      traefik.http.routers.homarr.rule: "Host(`homarr.homelab.lan`)"
     restart_policy: unless-stopped
 
 # overseerr
@@ -273,6 +306,10 @@
     env:
       LOG_LEVEL: "debug"
       TZ: "{{ timezone }}"
+    networks:
+      - name: "traefik"
+    labels:
+      traefik.http.routers.overseerr.rule: "Host(`overseerr.homelab.lan`)"
     restart_policy: unless-stopped
 
 # pia-vpn-container
@@ -323,32 +360,34 @@
     restart_policy: unless-stopped
 
 # netboot-xyz
-- name: netboot server
-  docker_container:
-    name: netboot-xyz
-    image: linuxserver/netbootxyz:2.0.53
-    ports:
-      - "3110:3000"
-      - "69:69"
-      - "8383:80"
-    volumes:
-      - "{{ docker_path }}/netboot-xyz/config:/config"
-      - "{{ docker_path }}/netboot-xyz/assets:/assets"
-    env:
-      PUID: "1000"
-      PGID: "1000"
-      TZ: "{{ timezone }}"
-    restart_policy: unless-stopped
+#- name: netboot server
+# docker_container:
+#   name: netboot-xyz
+#   image: linuxserver/netbootxyz:2.0.53
+#   ports:
+#     - "3110:3000"
+#     - "69:69"
+#     - "8383:80"
+#   volumes:
+#     - "{{ docker_path }}/netboot-xyz/config:/config"
+#     - "{{ docker_path }}/netboot-xyz/assets:/assets"
+#   env:
+#     PUID: "1000"
+#     PGID: "1000"
+#     TZ: "{{ timezone }}"
+#   networks:
+#     - name: "traefik"
+#   restart_policy: unless-stopped
 
 # minecraft-server
-- name: minecraft-server
-  docker_container:
-    name: minecraft
-    image: itzg/minecraft-server@sha256:9d3d3d2bf46c7dcbb31001078407b4555f7759869f3d35eda4cfe36d660899ce
-    ports:
-      - "25565:25565"
-    volumes:
-      - "{{ docker_path }}/minecraft/data:/data"
-    env:
-      EULA: "TRUE"
+#- name: minecraft-server
+# docker_container:
+#   name: minecraft
+#   image: itzg/minecraft-server@sha256:9d3d3d2bf46c7dcbb31001078407b4555f7759869f3d35eda4cfe36d660899ce
+#   ports:
+#     - "25565:25565"
+#   volumes:
+#     - "{{ docker_path }}/minecraft/data:/data"
+#   env:
+#     EULA: "TRUE"
 
