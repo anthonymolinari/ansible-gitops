@@ -1,5 +1,9 @@
 ---
 
+- name: create network for all services
+  docker_network:
+    name: traefik
+
 - name: create network for grafana, loki, promtail, node_exporter, and prometheus
   docker_network:
     name: metrics
@@ -48,6 +52,8 @@
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     command: ["--api.insecure=true", "--providers.docker"]
+    networks:
+      - name: "traefik"
     restart_policy: unless-stopped
 
 # node exporter
@@ -202,6 +208,8 @@
       PGID: "1000"
       PUID: "1000"
       TZ: "{{ timezone }}"
+    networks:
+      - name: "traefik"
     restart_policy: unless-stopped
 
 # radarr
