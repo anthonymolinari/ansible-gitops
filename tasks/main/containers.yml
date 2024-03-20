@@ -104,6 +104,8 @@
     volumes:
       - "grafana_data:/var/lib/grafana"
     restart_policy: unless-stopped
+    labels:
+      traefik.http.routers.grafana.rule: "Host('grafana.local')"
 
 # homer
 - name: homer-dashboard
