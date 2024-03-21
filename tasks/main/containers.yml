@@ -140,17 +140,6 @@
       traefik.http.routers.grafana.rule: "Host(`grafana.homelab.lan`)"
     restart_policy: unless-stopped
 
-# homer
-#- name: homer-dashboard
-# docker_container:
-#   name: homer-dashboard
-#   image: b4bz/homer:v23.10.1
-#   volumes:
-#     - "{{ docker_path }}/homer:/www/assets"
-#   ports:
-#     - "8385:8080"
-#   restart_policy: unless-stopped
-
 # openbooks
 - name: openbooks 
   docker_container:
@@ -175,7 +164,16 @@
     volumes:
       - "{{ media_dir }}:/Media"
       - "{{ docker_path }}/plex/config:/config"
-    network_mode: "host"
+    ports:
+      - "32400:32400/tcp"
+      - "5353:5353/udp"
+      - "8324:8324/tcp"
+      - "32410:32410/udp"
+      - "32412:32412/udp"
+      - "32413:32413/udp"
+      - "32469:32469/tcp"
+    networks:
+      - name: "traefik"
     device_requests:
       - device_ids: 0
         driver: nvidia
@@ -187,11 +185,9 @@
       PUID: "1000"
       PGID: "1000"
       VERSION: "docker"
+    labels:
+      traefik.http.routers.plex.rule: "Host(`plex.homelab.lan`)"
     restart_policy: unless-stopped
-#   networks:
-#     - name: "traefik"
-#   labels:
-#     traefik.http.routers.plex.rule: "Host(`plex.homelab.lan`)"
 
 # tdarr 
 - name: tdarr
