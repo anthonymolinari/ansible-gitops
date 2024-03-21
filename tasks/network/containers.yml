@@ -1,5 +1,24 @@
 ---
 
+- name: create network for all services
+  docker_network:
+    name: traefik
+
+# traefik 
+- name: traefik reverse proxy
+  docker_container:
+    name: traefik
+    image: traefik:v2.11
+    ports:
+      - "80:80"
+      - "81:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    command: ["--api.insecure=true", "--providers.docker"]
+    networks:
+      - name: "traefik"
+    restart_policy: unless-stopped
+
 - name: create promtail volume
   docker_volume:
     name: promtail_data
@@ -11,6 +30,8 @@
     volumes:
       - "promtail_data:/etc/promtail"
       - "/var/log:/var/log"
+    networks:
+      - name: "traefik"
     restart_policy: unless-stopped
 
 - name: node_exporter container
@@ -22,6 +43,8 @@
       - "9100:9100"
     volumes:
       - "/:/host:ro,rslave"
+    networks:
+      - name: "traefik"
     restart_policy: unless-stopped
 
 # Bind DNS
@@ -94,6 +117,8 @@
     env:
       PUID: "1000"
       PGID: "1000"
+    networks:
+      - name: "traefik"
     restart_policy: unless-stopped
 
 # home assistant
@@ -110,4 +135,3 @@
       - "/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20230525115147-if00:/dev/ttyACM0"
     restart_policy: unless-stopped
 
-# omada SDN
