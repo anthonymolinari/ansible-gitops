@@ -186,7 +186,7 @@
       PGID: "1000"
       VERSION: "docker"
     labels:
-      traefik.http.routers.plex.rule: "Host(`plex.homelab.lan`)"
+      traefik.https.routers.plex.rule: "Host(`plex.homelab.lan`)"
     restart_policy: unless-stopped
 
 # tdarr 
