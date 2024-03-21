@@ -165,7 +165,7 @@
       - "{{ media_dir }}:/Media"
       - "{{ docker_path }}/plex/config:/config"
     ports:
-      - "32400:32400/tcp"
+      - "32400:32400"
       - "5353:5353/udp"
       - "8324:8324/tcp"
       - "32410:32410/udp"
