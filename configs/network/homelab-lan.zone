@@ -33,6 +33,7 @@ prowlarr            IN      A       10.32.1.10
 radarr              IN      A       10.32.1.10
 sonarr              IN      A       10.32.1.10
 overseerr           IN      A       10.32.1.10
+homarr              IN      A       10.32.1.10
 transmission        IN      A       10.32.1.10
 grafana             IN      A       10.32.1.10
 prometheus          IN      A       10.32.1.10
