@@ -83,14 +83,17 @@
     networks:
       - name: "metrics"
       - name: "traefik"
-    device_requests:
-      - device_ids: 0
-        driver: nvidia
-        capabilities:
-          - gpu
-          - compute
-          - utility
+    restart_policy: unless-stopped
 
+- name: gpu-exporter
+  docker_container:
+    name: gpu-exporter
+    image: nvcr.io/nvidia/k8s/dcgm-exporter:3.3.5-3.4.0-ubuntu22.04
+    ports:
+      - "9400:9400"
+    networks:
+      - name: "metrics"
+      - name: "traefik"
     restart_policy: unless-stopped
 
 # promestheus
