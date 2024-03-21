@@ -83,6 +83,14 @@
     networks:
       - name: "metrics"
       - name: "traefik"
+    device_requests:
+      - device_ids: 0
+        driver: nvidia
+        capabilities:
+          - gpu
+          - compute
+          - utility
+
     restart_policy: unless-stopped
 
 # promestheus
