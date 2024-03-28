@@ -16,7 +16,7 @@
 - name: loki
   docker_container:
     name: loki
-    image: grafana/loki:2.9.5
+    image: grafana/loki:2.9.6
     volumes:
       - "loki_data:/etc/loki/"
     ports:
@@ -34,7 +34,7 @@
 - name: promtail
   docker_container:
     name: promtail
-    image: grafana/promtail:2.9.5
+    image: grafana/promtail:2.9.6
     volumes:
       - "promtail_data:/etc/promtail"
       - "/var/log:/var/log"
@@ -108,7 +108,7 @@
 - name: prometheus
   docker_container:
     name: prometheus
-    image: prom/prometheus:v2.51.0
+    image: prom/prometheus:v2.51.1
     ports:
       - "9191:9090"
     volumes:
@@ -255,7 +255,7 @@
 - name: radarr
   docker_container:
     name: radarr
-    image: linuxserver/radarr@sha256:e9475aabe5b684f40eccf9c63d5162a2a54f499d50c3623a67f67d191508a637    
+    image: linuxserver/radarr@sha256:f2903d06e335c9179f25ff93e3468e9d95407a280420b91ede7cb44575a21e5c    
     ports:
       - "7878:7878"
     volumes:
@@ -351,7 +351,7 @@
 - name: deploy prowlarr behind vpn
   docker_container:
     name: prowlarr
-    image: linuxserver/prowlarr@sha256:79d86cd631095c6bcb658f7b7535fe751719e1f803461f56778c91379bb15e62
+    image: linuxserver/prowlarr@sha256:575327a71a9f00284246623a237d5079f3dc53db05805373938dd7534987bf26
     volumes:
       - "{{ docker_path }}/prowlarr/config:/config"
     env:
