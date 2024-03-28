@@ -187,6 +187,7 @@
       VERSION: "docker"
     labels:
       traefik.http.routers.plex.rule: "Host(`plex.homelab.lan`)"
+      traefik.http.routers.plex.middlewares: "plex-https-redirect"
     restart_policy: unless-stopped
 
 # tdarr 
