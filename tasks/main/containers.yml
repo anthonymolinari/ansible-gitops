@@ -50,6 +50,7 @@
     image: traefik:v2.11
     ports:
       - "80:80"
+      - "443:443"
       - "81:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
@@ -187,7 +188,6 @@
       VERSION: "docker"
     labels:
       traefik.http.routers.plex.rule: "Host(`plex.homelab.lan`)"
-      traefik.http.routers.plex.middlewares: "plex-https-redirect"
     restart_policy: unless-stopped
 
 # tdarr 
