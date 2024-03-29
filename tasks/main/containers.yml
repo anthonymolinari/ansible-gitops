@@ -376,24 +376,24 @@
     restart_policy: unless-stopped
 
 # netboot-xyz
-#- name: netboot server
-# docker_container:
-#   name: netboot-xyz
-#   image: linuxserver/netbootxyz:2.0.53
-#   ports:
-#     - "3110:3000"
-#     - "69:69"
-#     - "8383:80"
-#   volumes:
-#     - "{{ docker_path }}/netboot-xyz/config:/config"
-#     - "{{ docker_path }}/netboot-xyz/assets:/assets"
-#   env:
-#     PUID: "1000"
-#     PGID: "1000"
-#     TZ: "{{ timezone }}"
-#   networks:
-#     - name: "traefik"
-#   restart_policy: unless-stopped
+- name: netboot server
+  docker_container:
+    name: netboot-xyz
+    image: linuxserver/netbootxyz:0.7.1
+    ports:
+      - "3110:3000"
+      - "69:69/udp"
+      - "8383:80"
+    volumes:
+      - "{{ docker_path }}/netboot-xyz/config:/config"
+      - "{{ docker_path }}/netboot-xyz/assets:/assets"
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "{{ timezone }}"
+    networks:
+      - name: "traefik"
+    restart_policy: unless-stopped
 
 # minecraft-server
 #- name: minecraft-server
