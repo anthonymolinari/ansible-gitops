@@ -139,6 +139,7 @@
       - "grafana_data:/var/lib/grafana"
     labels:
       traefik.http.routers.grafana.rule: "Host(`grafana.homelab.lan`)"
+      traefik.http.services.grafana.loadbalancer.server.port: "3000"
     restart_policy: unless-stopped
 
 # openbooks
