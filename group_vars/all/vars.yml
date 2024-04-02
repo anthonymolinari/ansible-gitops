@@ -2,7 +2,7 @@ username: anthony
 
 # storage paths
 docker_path: /mnt/ssd-500GB/docker
-downloads_dir: /mnt/media-pool-8TB/Downloads
-media_dir: /mnt/media-pool-8TB/Media
+downloads_dir: /mnt/media-10TB/Downloads
+media_dir: /mnt/media-10TB/Media
 
 timezone: America/Los_Angeles
