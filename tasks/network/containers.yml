@@ -51,7 +51,7 @@
 - name: bind docker container
   docker_container:
     name: bind-dns
-    image: ubuntu/bind9@sha256:e387afcbd7bc5db2fd5fbe554726b7537578007314830955e1579b4bb2ec4f7b
+    image: ubuntu/bind9@sha256:057cdd0629f34faf9889dcb084b149fb6b685d08d64ef10b1461e0f9a467afab
     volumes:
       - "/home/anthony/docker-volumes/bind-dns/config:/etc/bind"
       - "/home/anthony/docker-volumes/bind-dns/cache:/var/cache/bind"
