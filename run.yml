@@ -4,6 +4,7 @@
   vars:
     pip_install_packages:
       - name: docker
+    ansible_command_timeout: 120
   tasks:
     - import_tasks: tasks/main/main.yml
 
@@ -11,6 +12,7 @@
   vars:
     pip_install_packages:
       - name: docker
+    ansible_command_timeout: 120
   tasks:
     - import_tasks: tasks/network/main.yml
 
