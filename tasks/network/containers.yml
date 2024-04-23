@@ -144,7 +144,17 @@
       - "6610:6610"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "/home/anthony/docker-volumes/onedev:/opt/onedev"
+      - "{{ docker_path }}/onedev:/opt/onedev"
     networks:
       - name: "traefik"
     restart_policy: unless-stopped
+
+# renovate
+- name: renovate
+  docker_container:
+    name: renovate-bot
+    image: renovate/renovate:37-full
+    networks:
+      - name: "traefik"
+    restart_policy: unless-stopped
+
