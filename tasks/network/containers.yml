@@ -147,6 +147,8 @@
       - "{{ docker_path }}/onedev:/opt/onedev"
     networks:
       - name: "traefik"
+    labels:
+      traefik.http.routers.onedev.rule: "Host(`onedev.homelab.lan`)"
     restart_policy: unless-stopped
 
 # renovate
