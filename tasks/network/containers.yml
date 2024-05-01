@@ -125,7 +125,7 @@
 - name: home-assistant
   docker_container:
     name: home-assistant
-    image: ghcr.io/home-assistant/home-assistant@sha256:321386d6592cf5a67042f9fa44c3cb5f1af08ad0efb4e7c4ba3ffe852bae4715
+    image: ghcr.io/home-assistant/home-assistant@sha256:abcfa6df6c1be8ed945548cf93a82318bd9f875060c50e99d0aef432e18dbd68
     network_mode: 'host'
     volumes:
       - "/home/anthony/docker-volumes/hass/config:/config"
