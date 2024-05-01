@@ -171,12 +171,12 @@
     restart_policy: unless-stopped
 
 # renovate
-- name: renovate
-  docker_container:
-    name: renovate-bot
-    image: renovate/renovate:37-full
-    networks:
-      - name: "traefik"
-    restart_policy: unless-stopped
+#- name: renovate
+# docker_container:
+#   name: renovate-bot
+#   image: renovate/renovate:37-full
+#   networks:
+#     - name: "traefik"
+#   restart_policy: unless-stopped
 
 
