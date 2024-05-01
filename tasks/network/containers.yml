@@ -151,6 +151,25 @@
       traefik.http.routers.onedev.rule: "Host(`onedev.homelab.lan`)"
     restart_policy: unless-stopped
 
+- name: omada-controller
+  docker_container:
+    name: omada
+    image: omada_controller:5.13
+    ports:
+      - "8088:8088"
+      - "8043:8043"
+      - "27001:27001/udp"
+      - "29810:29810/udp"
+      - "29811-29816:29811-29816"
+    volumes:
+      - "{{ docker_path }}/omada/logs:/opt/tplink/EAPController/data"
+      - "{{ docker_path }}/omada/data:/opt/tplink/EAPController/logs"
+    env:
+      - TZ: "{{ timezone }}"
+    networks:
+      - name: "traefik"
+    restart_policy: unless-stopped
+
 # renovate
 - name: renovate
   docker_container:
@@ -159,4 +178,5 @@
     networks:
       - name: "traefik"
     restart_policy: unless-stopped
+
 
