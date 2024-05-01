@@ -165,9 +165,7 @@
       - "{{ docker_path }}/omada/logs:/opt/tplink/EAPController/data"
       - "{{ docker_path }}/omada/data:/opt/tplink/EAPController/logs"
     env:
-      - TZ: "{{ timezone }}"
-    networks:
-      - name: "traefik"
+      TZ: "{{ timezone }}"
     restart_policy: unless-stopped
 
 # renovate
