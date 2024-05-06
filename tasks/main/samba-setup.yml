@@ -1,0 +1,7 @@
+---
+
+- name: install samba
+
+- name: copy samba config
+
+- name: create samba user
