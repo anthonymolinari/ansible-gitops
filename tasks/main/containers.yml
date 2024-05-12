@@ -346,7 +346,7 @@
       - "/dev/net/tun"
     env:
       VPN: "{{ vpn_arg }}"
-      ROUTE: 10.32.0.0/24
+      ROUTE: 172.24.10.0/24
 
 # prowlarr
 - name: deploy prowlarr behind vpn
