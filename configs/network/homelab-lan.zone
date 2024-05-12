@@ -13,29 +13,29 @@ $ORIGIN homelab.lan.
 
         IN      NS      ns.homelab.lan.
 
-ns      IN      A       10.32.1.11
+ns      IN      A       172.24.10.11
 
 ; -- add dns records below
 ; -- Server Hostnames
 
-fragile             IN      A       10.32.1.10
-temescal            IN      A       10.32.1.11
-shasta              IN      A       10.32.1.14
+fragile             IN      A       172.24.10.10
+temescal            IN      A       172.24.10.11
+shasta              IN      A       172.24.10.14
 
 ; -- web applications
 
-hass                IN      A       10.32.1.11
-homer               IN      A       10.32.1.10
-omada               IN      A       10.32.1.11
-openbooks           IN      A       10.32.1.10
-plex                IN      A       10.32.1.10
-prowlarr            IN      A       10.32.1.10
-radarr              IN      A       10.32.1.10
-sonarr              IN      A       10.32.1.10
-overseerr           IN      A       10.32.1.10
-homarr              IN      A       10.32.1.10
-transmission        IN      A       10.32.1.10
-grafana             IN      A       10.32.1.10
-prometheus          IN      A       10.32.1.10
-tdarr               IN      A       10.32.1.10
-onedev              IN      A       10.32.1.11
+hass                IN      A       172.24.10.11
+homer               IN      A       172.24.10.10
+omada               IN      A       172.24.10.11
+openbooks           IN      A       172.24.10.10
+plex                IN      A       172.24.10.10
+prowlarr            IN      A       172.24.10.10
+radarr              IN      A       172.24.10.10
+sonarr              IN      A       172.24.10.10
+overseerr           IN      A       172.24.10.10
+homarr              IN      A       172.24.10.10
+transmission        IN      A       172.24.10.10
+grafana             IN      A       172.24.10.10
+prometheus          IN      A       172.24.10.10
+tdarr               IN      A       172.24.10.10
+onedev              IN      A       172.24.10.11
