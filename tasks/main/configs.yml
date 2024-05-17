@@ -22,7 +22,12 @@
     dest: "{{ docker_path }}/homer/config.yml"
   become: true
 
-- name: copy homer configuration
+- name: ensures loki dir exists
+  file:
+    path: "{{ docker_path }}/loki"
+    state: directory
+
+- name: copy loki configuration
   copy:
     src: "configs/main/loki-config.yml"
     dest: "{{ docker_path }}/loki/loki-config.yml"
