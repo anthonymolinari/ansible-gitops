@@ -17,9 +17,9 @@
   docker_container:
     name: loki
     image: grafana/loki:3.0.0
-    command: ["-target=all"]
+    command: ["-config=/etc/loki/loki-config.yml", "-target=all"]
     volumes:
-      - "loki_data:/etc/loki"
+      - "{{ docker_path }}/loki/loki-config.yml:/etc/loki/loki-config.yml"
     ports:
       - "3100:3100"
     networks:
