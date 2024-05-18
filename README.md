@@ -16,8 +16,9 @@
 - [prowlarr]()
 - [tdarr]()
 - [transmission]()
+- [overseerr]()
 ### Automation
-- semaphore UI
+- kestra
 - home-assistant
 - mosquitto
 ### Networking
@@ -28,9 +29,11 @@
 ### Metrics & Logging
 - prometheus
 - node-exporter
+- sensors-exporter
+- proxmox-experter
+- gpu-exporter
 - loki
 - promtail
 - grafana
 ### Util
-- homer dashbaord
-- nextcloud
+- homarr dashbaord

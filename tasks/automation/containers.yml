@@ -1,0 +1,61 @@
+---
+
+- name: create network for all services
+  docker_network:
+    name: kestra
+
+- name: postgres-kestra
+  docker_container:
+    name: postgres-kestra
+    image: postgres
+    ports:
+    volumes:
+      - "{{ docker_path }}/postgres-kestra/data:/var/lib/postgressql/data"
+    networks:
+      - name: "kestra"
+    env:
+      POSTGRES_DB: "kestra"
+      POSTGRES_USER: "{{ kestra_db_user }}"
+      POSTGRES_PASSWORD: "{{ kestra_db_pass }}"
+    restart_policy: unless-stopped
+
+- name: kestra-server
+  docker_container:
+    name: kestra-server
+    image: kestra/kestra:latest-full
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    volumes:
+      - "{{ docker_path }}/kestra/"
+    networks:
+      - name: "kestra"
+    command: ["server", "standalone", "--worker-thread=128"]
+    env:
+      KESTRA_CONFIGURATION: |
+        datasources:
+          postgres:
+            url: jdbc:postgres-kestra://postgres-kestra:5432/kestra
+            driverClassName: org.postgresql.Driver
+            username: {{ kestra_db_user }}
+            password: {{ kestra_db_pass }}
+        kestra:
+          server:
+            basic-auth:
+              enabled: false
+              username: "admin@kestra.io"
+              password: kestra
+            repositry: 
+              type: postgres
+            storage:
+              type: local
+              local:
+                base-path: "/app/storage"
+              queue:
+                type: postgres
+              tasks:
+                tmp-dir:
+                  path: /tmp/kestra-wd/tmp
+              url: http://localhost:8080/
+    restart_policy: unless-stopped
+

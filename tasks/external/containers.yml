@@ -1,5 +1,25 @@
 ---
 
+- name: create traefik network
+  docker_network:
+    name: "traefik"
+
+# traefik 
+- name: traefik reverse proxy
+  docker_container:
+    name: traefik
+    image: traefik:v2.11
+    ports:
+      - "80:80"
+      - "443:443"
+      - "81:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    command: ["--api.insecure=true", "--providers.docker"]
+    networks:
+      - name: "traefik"
+    restart_policy: unless-stopped
+
 - name: wordle-clone
   docker_container:
     name: wordle-clone
@@ -15,3 +35,4 @@
     ports:
       - "3211:3000"
     restart_policy: unless-stopped
+

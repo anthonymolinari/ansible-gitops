@@ -1,0 +1,22 @@
+---
+
+- name: ensures loki dir exists
+  file:
+    path: "{{ docker_path }}/loki"
+    state: directory
+    
+- name: copy loki configuration
+  copy:
+    src: "configs/metrics/loki-config.yml"
+    dest: "{{ docker_path }}/loki/loki-config.yml"
+
+- name: ensures prometheus dir exists
+  file:
+    path: "{{ docker_path }}/prometheus"
+    state: directory
+    
+- name: copy prometheus configuration
+  copy:
+    src: "configs/metrics/prometheus.yml"
+    dest: "{{ docker_path }}/prometheus/promethus.yml"
+

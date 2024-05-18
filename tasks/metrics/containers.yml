@@ -1,0 +1,84 @@
+
+- name: create network for grafana, loki, promtail, prometheus
+  docker_network:
+    name: metrics
+
+# minio
+- name: minio
+  docker_container:
+    name: minio-loki
+    image: minio/minio
+    volumes:
+      - "{{ docker_path }}/minio/data:/data"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    env:
+      MINIO_ROOT_USER: "loki"
+      MINIO_ROOT_PASSWORD: "{{minio_secret}}"
+      MINIO_PROMETHEUS_AUTH_TYPE: "public"
+      MINIO_UPDATE: "off"
+    networks:
+      - name: "metrics"
+    restart_policy: unless-stopped
+
+# loki
+- name: loki
+  docker_container:
+    name: loki
+    image: grafana/loki:3.0.0
+    command: ["-config.file=/etc/loki/loki-config.yml", "-target=all"]
+    volumes:
+      - "{{ docker_path }}/loki/loki-config.yml:/etc/loki/loki-config.yml"
+    ports:
+      - "3100:3100"
+    networks:
+      - name: "metrics"
+    restart_policy: unless-stopped
+
+# promtail
+- name: promtail
+  docker_container:
+    name: promtail
+    image: grafana/promtail:3.0.0
+    command: ["config.file=/etc/promtail/promtail-config.yml"]
+    volumes:
+      - "{{ docker_path }}:/etc/promtail/promtail-config.yml"
+      - "/var/log:/var/log"
+    networks:
+      - name: "metrics"
+    restart_policy: unless-stopped
+
+# prometheus
+- name: prometheus
+  docker_container:
+    name: prometheus
+    image: prom/prometheus:v2.52.0
+    ports:
+      - "9090:9090"
+    volumes:
+      - "{{ docker_path }}/prometheus:/etc/prometheus"
+    networks:
+      - name: "metrics"
+    restart_policy: unless-stopped
+
+# snmp exporter
+- name: snmp-exporter
+  docker_container:
+    name: snmp-exporter
+    image: prom/snmp-exporter
+    ports:
+      - "9116:9116"
+    networks:
+      - name: "metrics"
+    restart_policy: unless-stopped
+
+# proxmox exporter
+#- name: proxmox exporter
+# docker_container:
+#   name: proxmox-exporter
+#   image:
+#   volumes:
+#   ports:
+#   restart_policy: unless-stopped
+
