@@ -5,7 +5,7 @@ temescal ansible_host=172.24.10.11 ansible_user=anthony
 fragile ansible_host=172.24.10.10 ansible_user=anthony
 
 [metrics]
-metrics ansible_host=172.24.10.10 ansible_user=anthony
+metrics1 ansible_host=172.24.10.10 ansible_user=anthony
 
 [automation]
-automation ansible_host=172.24.10.16 ansible_user=anthony
+automation1 ansible_host=172.24.10.16 ansible_user=anthony
