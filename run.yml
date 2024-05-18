@@ -4,6 +4,7 @@
   vars:
     pip_install_packages:
       - name: docker
+      - name: requests
   tasks:
     - import_tasks: tasks/main/main.yml
 
@@ -11,6 +12,7 @@
   vars:
     pip_install_packages:
       - name: docker
+      - name: requests
   tasks:
     - import_tasks: tasks/network/main.yml
 
@@ -18,6 +20,7 @@
 # vars:
 #   pip_install_packages:
 #     - name: docker
+#     - name: requests
 # tasks:
 #   - import_tasks: tasks/metrics/main.yml
 
@@ -25,6 +28,7 @@
   vars:
     pip_install_packages:
       - name: docker
+      - name: requests
   tasks:
     - import_tasks: tasks/automation/main.yml
 
