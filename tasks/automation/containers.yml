@@ -6,9 +6,8 @@
 
 - name: postgres-kestra
   docker_container:
-    name: postgres-kestra
-    image: postgres
-    ports:
+    name: postgres
+    image: postgres:latest # add version tag
     volumes:
       - "{{ docker_path }}/postgres-kestra/data:/var/lib/postgressql/data"
     networks:
@@ -22,7 +21,7 @@
 - name: kestra-server
   docker_container:
     name: kestra-server
-    image: kestra/kestra:latest-full
+    image: kestra/kestra:latest-full # add version tag
     ports:
       - "8080:8080"
       - "8081:8081"
@@ -35,7 +34,7 @@
       KESTRA_CONFIGURATION: |
         datasources:
           postgres:
-            url: jdbc:postgres-kestra://postgres-kestra:5432/kestra
+            url: jdbc:postgres://postgres:5432/kestra
             driverClassName: org.postgresql.Driver
             username: {{ kestra_db_user }}
             password: {{ kestra_db_pass }}
