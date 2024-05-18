@@ -106,22 +106,6 @@
           - utility
     restart_policy: unless-stopped
 
-# promestheus
-- name: prometheus
-  docker_container:
-    name: prometheus
-    image: prom/prometheus:v2.52.0
-    ports:
-      - "9191:9090"
-    volumes:
-      - "{{ docker_path }}/prometheus:/etc/prometheus"
-    networks:
-      - name: "metrics"
-      - name: "traefik"
-    labels:
-      traefik.http.routers.prometheus.rule: "Host(`prometheus.homelab.lan`)"
-    restart_policy: unless-stopped
-
 - name: create persistent volume for grafana
   docker_volume:
     name: grafana_data
@@ -376,16 +360,4 @@
       TZ: "{{ timezone }}"
     network_mode: container:vpn
     restart_policy: unless-stopped
-
-# minecraft-server
-#- name: minecraft-server
-# docker_container:
-#   name: minecraft
-#   image: itzg/minecraft-server@sha256:9d3d3d2bf46c7dcbb31001078407b4555f7759869f3d35eda4cfe36d660899ce
-#   ports:
-#     - "25565:25565"
-#   volumes:
-#     - "{{ docker_path }}/minecraft/data:/data"
-#   env:
-#     EULA: "TRUE"
 
