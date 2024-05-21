@@ -21,6 +21,8 @@ ns      IN      A       172.24.10.11
 fragile             IN      A       172.24.10.10
 temescal            IN      A       172.24.10.11
 shasta              IN      A       172.24.10.14
+metrics             IN      A       172.24.10.16
+automation          IN      A       172.24.10.17
 
 ; -- web applications
 
@@ -39,3 +41,5 @@ grafana             IN      A       172.24.10.10
 prometheus          IN      A       172.24.10.10
 tdarr               IN      A       172.24.10.10
 onedev              IN      A       172.24.10.11
+kestra              IN      A       172.24.10.17
+secrets             IN      A       172.24.10.17
