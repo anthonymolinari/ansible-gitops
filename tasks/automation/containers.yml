@@ -49,6 +49,7 @@
       - "{{ docker_path }}/secrets-api/data:/data"
     env:
       TOKEN: "{{ secrets_api_token }}"
+      DB_PATH: "/data/db"
     networks:
       - name: "automation"
     labels:
