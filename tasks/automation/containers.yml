@@ -32,7 +32,7 @@
       - "{{ docker_path }}/kestra/data:/app/data"
       - "{{ docker_path }}/kestra/tasks:/tmp"
     command: ["server", "local"]
-    network:
+    networks:
       - name: "automation"
     labels:
       traefik.http.routers.kestra.rule: "Host(`kestra.homelab.lan`)"
@@ -49,7 +49,7 @@
       - "{{ docker_path }}/secrets-api/data:/data"
     env:
       TOKEN: "{{ secrets_api_token }}"
-    network:
+    networks:
       - name: "automation"
     labels:
       traefik.http.routers.secrets-api.rule: "Host(`api.secrets.homelab.lan`)"
