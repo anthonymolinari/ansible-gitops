@@ -2,72 +2,55 @@
 
 - name: create network for all services
   docker_network:
-    name: kestra
+    name: automation
 
-- name: postgres-kestra
+# traefik 
+- name: traefik reverse proxy
   docker_container:
-    name: postgres
-    image: postgres:latest # add version tag
-    volumes:
-      - "{{ docker_path }}/postgres-kestra/data:/var/lib/postgressql/data"
-    networks:
-      - name: "kestra"
-    env:
-      POSTGRES_DB: "kestra"
-      POSTGRES_USER: "{{ kestra_db_user }}"
-      POSTGRES_PASSWORD: "{{ kestra_db_pass }}"
-    restart_policy: unless-stopped
-
-- name: kestra-server
-  docker_container:
-    name: kestra-server
-    image: kestra/kestra:latest-full # add version tag
+    name: traefik
+    image: traefik:v2.11
     ports:
-      - "8080:8080"
-      - "8081:8081"
+      - "80:80"
+      - "443:443"
+      - "81:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "/tmp:/tmp"
-    command: ["server", "local"]
+    command: ["--api.insecure=true", "--providers.docker"]
+    networks:
+      - name: "traefik"
     restart_policy: unless-stopped
 
-#- name: kestra-server
-# docker_container:
-#   name: kestra-server
-#   image: kestra/kestra:latest-full # add version tag
-#   ports:
-#     - "8080:8080"
-#     - "8081:8081"
-#   volumes:
-#     - "{{ docker_path }}/kestra/"
-#   networks:
-#     - name: "kestra"
-#   command: ["server", "standalone", "--worker-thread=128"]
-#   env:
-#     KESTRA_CONFIGURATION: |
-#       datasources:
-#         postgres:
-#           url: jdbc:postgres://postgres:5432/kestra
-#           driverClassName: org.postgresql.Driver
-#           username: {{ kestra_db_user }}
-#           password: {{ kestra_db_pass }}
-#       kestra:
-#         server:
-#           basic-auth:
-#             enabled: false
-#             username: "admin@kestra.io"
-#             password: kestra
-#           repositry: 
-#             type: postgres
-#           storage:
-#             type: local
-#             local:
-#               base-path: "/app/storage"
-#             queue:
-#               type: postgres
-#             tasks:
-#               tmp-dir:
-#                 path: /tmp/kestra-wd/tmp
-#             url: http://localhost:8080/
-#   restart_policy: unless-stopped
+# kestra standalone
+- name: kestra-server
+  docker_container:
+    name: kestra
+    image: kestra/kestra:0.16.7-full # add version tag
+    ports:
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "{{ docker_path }}/kestra/data:/app/data"
+      - "{{ docker_path }}/kestra/tasks:/tmp"
+    command: ["server", "local"]
+    network:
+      - name: "automation"
+      - name: "traefik"
+    labels:
+      traefik.http.routers.kestra.rule: "Host(`kestra.homelab.lan`)"
+    restart_policy: unless-stopped
 
+# secrets-api
+- name: secrets-api
+  docker_container:
+    name: secrets-api
+    image: anthonymolinari/secrets-api:v0.2.0
+    ports:
+      - "3210:3210"
+    volumes:
+      - "{{ docker_path }}/secrets-api/data:/data"
+    network:
+      - name: "automation"
+      - name: "traefik"
+    labels:
+      traefik.http.routers.secrets-api.rule: "Host(`api.secrets.homelab.lan`)"
+    restart_policy: unless-stopped
