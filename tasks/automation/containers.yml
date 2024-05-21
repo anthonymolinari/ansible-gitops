@@ -48,7 +48,7 @@
     volumes:
       - "{{ docker_path }}/secrets-api/data:/data"
     env:
-      TOKEN: "{{ secrets_api_token }}
+      TOKEN: "{{ secrets_api_token }}"
     network:
       - name: "automation"
     labels:
