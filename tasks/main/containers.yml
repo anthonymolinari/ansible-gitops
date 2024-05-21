@@ -180,7 +180,7 @@
 - name: tdarr
   docker_container:
     name: tdarr
-    image: haveagitgat/tdarr:2.18.01 
+    image: haveagitgat/tdarr:2.18.02 
     ports:
       - "8265:8265"
       - "8266:8266"
@@ -241,7 +241,7 @@
 - name: radarr
   docker_container:
     name: radarr
-    image: linuxserver/radarr@sha256:5a8a3d1773d41c93d1c64a9777a56d669b44466526a55aed826419b95061e067    
+    image: linuxserver/radarr@sha256:edb07dc716531a10a9ba5d229ecea0478a62074313395ec0366ebf77c3798b59    
     ports:
       - "7878:7878"
     volumes:
