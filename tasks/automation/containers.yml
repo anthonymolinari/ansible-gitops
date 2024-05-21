@@ -17,7 +17,7 @@
       - "/var/run/docker.sock:/var/run/docker.sock"
     command: ["--api.insecure=true", "--providers.docker"]
     networks:
-      - name: "traefik"
+      - name: "automation"
     restart_policy: unless-stopped
 
 # kestra standalone
@@ -34,7 +34,6 @@
     command: ["server", "local"]
     network:
       - name: "automation"
-      - name: "traefik"
     labels:
       traefik.http.routers.kestra.rule: "Host(`kestra.homelab.lan`)"
     restart_policy: unless-stopped
@@ -48,9 +47,10 @@
       - "3210:3210"
     volumes:
       - "{{ docker_path }}/secrets-api/data:/data"
+    env:
+      - ""
     network:
       - name: "automation"
-      - name: "traefik"
     labels:
       traefik.http.routers.secrets-api.rule: "Host(`api.secrets.homelab.lan`)"
     restart_policy: unless-stopped
