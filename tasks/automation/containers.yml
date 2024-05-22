@@ -24,7 +24,7 @@
 - name: kestra-server
   docker_container:
     name: kestra
-    image: kestra/kestra:0.16.7-full # add version tag
+    image: kestra/kestra:v0.16.7-full # add version tag
     ports:
       - "8080:8080"
     volumes:
