@@ -12,7 +12,7 @@
     ports:
       - "80:80"
       - "443:443"
-      - "81:8080"
+      - "81:81"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     command: ["--api.insecure=true", "--providers.docker"]
