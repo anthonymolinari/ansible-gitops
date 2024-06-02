@@ -262,7 +262,7 @@
 - name: deploy bazarr
   docker_container:
     name: bazarr
-    image: linuxserver/bazarr:1.4.2
+    image: linuxserver/bazarr:1.4.3
     ports:
       - "6767:6767"
     volumes:
