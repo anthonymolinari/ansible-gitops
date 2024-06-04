@@ -135,6 +135,11 @@
       - "/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20230525115147-if00:/dev/ttyACM0"
     restart_policy: unless-stopped
 
+# node-red data
+- name: create node-red volume
+  docker_volume:
+    name: nodered_data
+
 # node-red
 - name: node-red
   docker_container:
@@ -143,12 +148,9 @@
     ports:
       - "1880:1880"
     volumes:
-      - "{{ docker_path }}/node-red/data:/data"
+      - "nodered_data:/data"
     networks:
       - name: "traefik"
-    env:
-      PUID: "1000"
-      PGID: "1000"
     restart_policy: unless-stopped
 
 # netboot-xyz
