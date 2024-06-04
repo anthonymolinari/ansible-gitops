@@ -147,8 +147,8 @@
     networks:
       - name: "traefik"
     env:
-      PUID: 1000
-      PGID: 1000
+      PUID: "1000"
+      PGID: "1000"
     restart_policy: unless-stopped
 
 # netboot-xyz
