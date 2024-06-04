@@ -146,6 +146,9 @@
       - "{{ docker_path }}/node-red/data:/data"
     networks:
       - name: "traefik"
+    env:
+      PUID: 1000
+      PGID: 1000
     restart_policy: unless-stopped
 
 # netboot-xyz
