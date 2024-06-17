@@ -68,7 +68,7 @@
 - name: duckdns
   docker_container:
     name: duckdns
-    image: linuxserver/duckdns@sha256:9f838dd5c1f1d4b4e356ff04a7eb4427dd0b6826cec60783e5321dfa7e4a74af
+    image: linuxserver/duckdns@sha256:2a91a93d9d57286af9848f5483162a8d43b364d99a5ad657e3f6a6a109f6e243
     volumes:
       - "/home/anthony/docker-volumes/duckdns/config:/config"
     env:
