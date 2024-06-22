@@ -177,7 +177,7 @@
 - name: onedev
   docker_container:
     name: onedev
-    image: 1dev/server:10.8.0
+    image: 1dev/server:10.9.0
     ports:
       - "6610:6610"
     volumes:
