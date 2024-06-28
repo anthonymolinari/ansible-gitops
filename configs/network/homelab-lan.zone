@@ -43,3 +43,4 @@ tdarr               IN      A       172.24.10.10
 onedev              IN      A       172.24.10.11
 kestra              IN      A       172.24.10.17
 secrets             IN      A       172.24.10.17
+octoprint           IN      A       172.24.10.5

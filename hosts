@@ -1,5 +1,6 @@
 [network]
 temescal ansible_host=172.24.10.11 ansible_user=anthony
+temescal2 ansible_host=172.24.10.113 ansible_user=anthony
 
 [main]
 fragile ansible_host=172.24.10.10 ansible_user=anthony
@@ -9,3 +10,4 @@ metrics1 ansible_host=172.24.10.16 ansible_user=anthony
 
 [automation]
 automation1 ansible_host=172.24.10.17 ansible_user=anthony
+
