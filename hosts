@@ -8,6 +8,3 @@ fragile ansible_host=172.24.10.10 ansible_user=anthony
 [metrics]
 metrics1 ansible_host=172.24.10.16 ansible_user=anthony
 
-[automation]
-automation1 ansible_host=172.24.10.17 ansible_user=anthony
-
