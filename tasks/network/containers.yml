@@ -48,27 +48,27 @@
     restart_policy: unless-stopped
 
 # Bind DNS
-- name: bind docker container
-  docker_container:
-    name: bind-dns
-    image: ubuntu/bind9@sha256:53d1951a13f9311d6e340d8edaae75db3b47c2b65e8a14308fff4fdd17720e01
-    volumes:
-      - "/home/anthony/docker-volumes/bind-dns/config:/etc/bind"
-      - "/home/anthony/docker-volumes/bind-dns/cache:/var/cache/bind"
-      - "/home/anthony/docker-volumes/bind-dns/records:/var/lib/bind"
-    ports:
-      - "53:53/udp"
-      - "53:53/tcp"
-    env:
-      BIND9_USER: 'root'
-      TZ: "{{ timezone }}"
-    restart_policy: unless-stopped
+#- name: bind docker container
+# docker_container:
+#   name: bind-dns
+#   image: ubuntu/bind9@sha256:53d1951a13f9311d6e340d8edaae75db3b47c2b65e8a14308fff4fdd17720e01
+#   volumes:
+#     - "/home/anthony/docker-volumes/bind-dns/config:/etc/bind"
+#     - "/home/anthony/docker-volumes/bind-dns/cache:/var/cache/bind"
+#     - "/home/anthony/docker-volumes/bind-dns/records:/var/lib/bind"
+#   ports:
+#     - "53:53/udp"
+#     - "53:53/tcp"
+#   env:
+#     BIND9_USER: 'root'
+#     TZ: "{{ timezone }}"
+#   restart_policy: unless-stopped
 
 # duckdns
 - name: duckdns
   docker_container:
     name: duckdns
-    image: linuxserver/duckdns@sha256:cf1aaca375227f2c7f5d19cbab0099894756a97b0b404671ad4e51ed76e548b6
+    image: linuxserver/duckdns@sha256:103f023a79a7d118d75570c54630783021cdc8cc8ca76948eeb7b11e5b511d09
     volumes:
       - "/home/anthony/docker-volumes/duckdns/config:/config"
     env:
