@@ -173,22 +173,6 @@
       - name: "traefik"
     restart_policy: unless-stopped
 
-# one dev
-- name: onedev
-  docker_container:
-    name: onedev
-    image: 1dev/server:10.9.1
-    ports:
-      - "6610:6610"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-      - "{{ docker_path }}/onedev:/opt/onedev"
-    networks:
-      - name: "traefik"
-    labels:
-      traefik.http.routers.onedev.rule: "Host(`onedev.homelab.lan`)"
-    restart_policy: unless-stopped
-
 - name: omada-controller
   docker_container:
     name: omada
