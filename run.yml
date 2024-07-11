@@ -16,13 +16,13 @@
   tasks:
     - import_tasks: tasks/network/main.yml
 
-#- hosts: metrics
-# vars:
-#   pip_install_packages:
-#     - name: docker
-#     - name: requests
-# tasks:
-#   - import_tasks: tasks/metrics/main.yml
+- hosts: metrics
+  vars:
+    pip_install_packages:
+      - name: docker
+      - name: requests
+  tasks:
+    - import_tasks: tasks/metrics/main.yml
 
 #- hosts: automation
 # vars:
