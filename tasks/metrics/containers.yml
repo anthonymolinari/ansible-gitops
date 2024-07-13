@@ -1,3 +1,4 @@
+---
 
 - name: create network for grafana, loki, promtail, prometheus
   docker_network:
@@ -71,6 +72,30 @@
       - "9116:9116"
     networks:
       - name: "metrics"
+    restart_policy: unless-stopped
+
+# netdata
+- name: netdata
+  docker_container:
+    name: netdata-server
+    image: netdata/netdata:v1.46
+    network_mode: host
+    volumes:
+      - "{{ docker_path }}/netdata/config:/etc/netdata"
+      - "{{ docker_path }}/netdata/lib:/var/lib/netdata"
+      - "{{ docker_path }}/netdata/cache:/var/cache/netdata"
+      - "/:/host/root:ro,rslave"
+      - "/etc/passwd:/host/etc/passed:ro"
+      - "/etc/group:/host/etc/group:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/proc:/host/proc:ro"
+      - "/sys:/host/sys:ro"
+      - "/etc/os-release:/host/etc/os-release:ro"
+      - "/var/log:/host/var/log:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    capabilities:
+      - sys_ptrace
+      - sys_admin
     restart_policy: unless-stopped
 
 # proxmox exporter
