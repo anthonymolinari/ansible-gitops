@@ -20,7 +20,6 @@
   vars:
     pip_install_packages:
       - name: docker
-      - name: requests
   tasks:
     - import_tasks: tasks/metrics/main.yml
 
