@@ -4,25 +4,6 @@
   docker_network:
     name: metrics
 
-# minio
-- name: minio
-  docker_container:
-    name: minio-loki
-    image: minio/minio
-    volumes:
-      - "{{ docker_path }}/minio/data:/data"
-    ports:
-      - "9000:9000"
-      - "9001:9001"
-    env:
-      MINIO_ROOT_USER: "loki"
-      MINIO_ROOT_PASSWORD: "{{minio_secret}}"
-      MINIO_PROMETHEUS_AUTH_TYPE: "public"
-      MINIO_UPDATE: "off"
-    networks:
-      - name: "metrics"
-    restart_policy: unless-stopped
-
 # loki
 - name: loki
   docker_container:
