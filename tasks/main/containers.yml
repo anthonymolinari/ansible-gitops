@@ -365,7 +365,7 @@
 
 # aria2 w/ webui
 - name: deploy aria2 behind vpn
-  docker_contianer:
+  docker_container:
     name: aria2
     image: abcminiuser/docker-aria2-with-webui@sha256:795c409384b54dc44261ef3731b1245097021ff57ce0e57bac8b796a9a814a83 
     volumes:
