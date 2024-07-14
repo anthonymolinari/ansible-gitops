@@ -364,7 +364,7 @@
 
 # aria2
 - name: deploy aria2 behind vpn
-  docker_contiainer:
+  docker_container:
     name: aria2
     image: p3terx/aria2-pro@sha256:086d1a37c586edb07ec0fb956bf9edd89d1d38d138ad5309ff96d510c8c9a011 
     volumes:
