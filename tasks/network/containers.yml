@@ -37,7 +37,7 @@
 - name: node_exporter container
   docker_container:
     name: node_exporter
-    image: prom/node-exporter:v1.8.1
+    image: prom/node-exporter:v1.8.2
     command: ["--path.rootfs=/host"]
     ports:
       - "9100:9100"
