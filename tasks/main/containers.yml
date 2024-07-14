@@ -385,7 +385,7 @@
 - name: aria2-ng-web
   docker_container:
     name: aria2-ng
-    image: hurlenko/aria2-ariang@1.3.7
+    image: hurlenko/aria2-ariang:1.3.7
     volumes:
       - "{{ docker_path }}/aria2/config:/aria2/conf"
       - "{{ downloads_dir }}/aria2:/aria2/data"
