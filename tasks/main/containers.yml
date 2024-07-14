@@ -325,6 +325,7 @@
       - "9696:9696" # prowlarr webui
       - "9091:9091" # transmission webui
       - "6800:6800" # aria2 rpc
+      - "6880:6880" # aria2 webui
     restart_policy: unless-stopped
     capabilities:
       - "NET_ADMIN"
@@ -362,42 +363,17 @@
     network_mode: container:vpn
     restart_policy: unless-stopped
 
-# aria2
+# aria2 w/ webui
 - name: deploy aria2 behind vpn
-  docker_container:
+  docker_contianer:
     name: aria2
-    image: p3terx/aria2-pro@sha256:086d1a37c586edb07ec0fb956bf9edd89d1d38d138ad5309ff96d510c8c9a011 
+    image: abcminiuser/docker-aria2-with-webui@sha256:795c409384b54dc44261ef3731b1245097021ff57ce0e57bac8b796a9a814a83 
     volumes:
-      - "{{ docker_path }}/aria2/config:/config"
       - "{{ downloads_dir }}/aria2:/downloads"
     env:
       PUID: "1000"
       PGID: "1000"
-      UMASK_SET: "022"
-      RPC_SECRET: "{{ aria2_rpc_secret }}"
-      RPC_PORT: "6800"
-      LISTEN_PORT: "6888"
+      SECRET: "{{ aria2_rpc_secret }}"
     network_mode: container:vpn
     restart_policy: unless-stopped
 
-
-# aria2 web ui
-- name: aria2-ng-web
-  docker_container:
-    name: aria2ng
-    image: hurlenko/aria2-ariang:1.3.7
-    ports:
-      - "8080:6888"
-    volumes:
-      - "{{ docker_path }}/aria2/config:/aria2/conf"
-      - "{{ downloads_dir }}/aria2:/aria2/data"
-    env:
-      PUID: "1000"
-      PGID: "1000"
-      RPC_SECRET: "{{ aria2_rpc_secret }}"
-      ARIA2RPCPORT: "6800"
-    networks:
-      - name: "traefik"
-    labels:
-      traefik.http.routers.aria2ng.rule: "Host(`aria2ng.homelab.lan`)"
-    restart_policy: unless-stopped
