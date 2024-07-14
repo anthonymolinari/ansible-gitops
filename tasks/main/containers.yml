@@ -64,7 +64,7 @@
 - name: node-exporter
   docker_container:
     name: node-exporter
-    image: prom/node-exporter:v1.8.1
+    image: prom/node-exporter:v1.8.2
     command: ["--path.rootfs=/host"]
     ports:
       - "9100:9100"
@@ -220,7 +220,7 @@
 - name: sonarr
   docker_container:
     name: sonarr
-    image: linuxserver/sonarr:4.0.5-develop   
+    image: linuxserver/sonarr:4.0.6-develop   
     ports:
       - "8989:8989"
     volumes:
@@ -241,7 +241,7 @@
 - name: radarr
   docker_container:
     name: radarr
-    image: linuxserver/radarr@sha256:4033748c1b787a47bbd4f244fdf8a5ec2cd51fa96e6d623266bae0424faa349b    
+    image: linuxserver/radarr@sha256:bff9793291488bca8f04839a53de70bd498bdcf7b7bce8a73255cf68ccd4b17c    
     ports:
       - "7878:7878"
     volumes:
@@ -338,7 +338,7 @@
 - name: deploy prowlarr behind vpn
   docker_container:
     name: prowlarr
-    image: linuxserver/prowlarr@sha256:5e591696b82e9f18b608d8e66229c6976dbe7d7fbf3b366c6398a43003fb8fe5
+    image: linuxserver/prowlarr@sha256:7b3408b3110c95231e7543a8b099be1e5f519be6f3fd0aebbed9ff1c061f2c3e
     volumes:
       - "{{ docker_path }}/prowlarr/config:/config"
     env:
