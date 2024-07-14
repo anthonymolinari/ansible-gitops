@@ -377,9 +377,8 @@
       RPC_SECRET: "{{ aria2_rpc_secret }}"
       RPC_PORT: "6800"
       LISTEN_PORT: "6888"
-    log_opts:
-      max_size: 1m
     network_mode: container:vpn
+    restart_policy: unless-stopped
 
 
 # aria2 web ui
@@ -396,3 +395,4 @@
       RPC_SECRET: "{{ aria2_rpc_secret }}"
       ARIA2RPCPORT: "6800"
     network_mode: container:vpn
+    restart_policy: unless-stopped
