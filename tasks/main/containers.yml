@@ -367,7 +367,7 @@
 - name: deploy aria2 behind vpn
   docker_container:
     name: aria2
-    image: abcminiuser/docker-aria2-with-webui@sha256:91e043b63e0da1fdff5d9e50ef8770e2b86dbbfff3124eda48e1c6a198e13ad3
+    image: abcminiuser/docker-aria2-with-webui@sha256:795c409384b54dc44261ef3731b1245097021ff57ce0e57bac8b796a9a814a83
     volumes:
       - "{{ downloads_dir }}/aria2:/downloads"
     env:
