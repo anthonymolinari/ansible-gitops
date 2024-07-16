@@ -180,7 +180,7 @@
 - name: tdarr
   docker_container:
     name: tdarr
-    image: haveagitgat/tdarr:2.22.01 
+    image: haveagitgat/tdarr:2.23.01 
     ports:
       - "8265:8265"
       - "8266:8266"
