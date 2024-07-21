@@ -8,25 +8,6 @@
   docker_network:
     name: metrics
 
-- name: create persistent volume for loki
-  docker_volume:
-    name: loki_data
-
-# loki
-- name: loki
-  docker_container:
-    name: loki
-    image: grafana/loki:3.1.0
-    command: ["-config.file=/etc/loki/loki-config.yml", "-target=all"]
-    volumes:
-      - "{{ docker_path }}/loki/loki-config.yml:/etc/loki/loki-config.yml"
-    ports:
-      - "3100:3100"
-    networks:
-      - name: "metrics"
-      - name: "traefik"
-    restart_policy: unless-stopped
-
 - name: create persistent volume for promtail
   docker_volume:
     name: promtail_data
@@ -104,27 +85,6 @@
           - gpu
           - compute
           - utility
-    restart_policy: unless-stopped
-
-- name: create persistent volume for grafana
-  docker_volume:
-    name: grafana_data
-
-# grafana
-- name: grafana
-  docker_container:
-    name: grafana
-    image: grafana/grafana:11.1.0
-    ports:
-      - "3000:3000"
-    networks:
-      - name: "metrics"
-      - name: "traefik"
-    volumes:
-      - "grafana_data:/var/lib/grafana"
-    labels:
-      traefik.http.routers.grafana.rule: "Host(`grafana.homelab.lan`)"
-      traefik.http.services.grafana.loadbalancer.server.port: "3000"
     restart_policy: unless-stopped
 
 # openbooks

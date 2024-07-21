@@ -1,8 +1,48 @@
 ---
+- name: create network for all services
+  docker_network:
+    name: traefik
 
 - name: create network for grafana, loki, promtail, prometheus
   docker_network:
     name: metrics
+
+# traefik 
+- name: traefik reverse proxy
+  docker_container:
+    name: traefik
+    image: traefik:v2.11
+    ports:
+      - "80:80"
+      - "443:443"
+      - "81:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    command: ["--api.insecure=true", "--providers.docker"]
+    networks:
+      - name: "traefik"
+    restart_policy: unless-stopped
+
+- name: create persistent volume for grafana
+  docker_volume:
+    name: grafana_data
+
+# grafana
+- name: grafana
+  docker_container:
+    name: grafana
+    image: grafana/grafana:11.1.0
+    ports:
+      - "3000:3000"
+    networks:
+      - name: "metrics"
+      - name: "traefik"
+    volumes:
+      - "grafana_data:/var/lib/grafana"
+    labels:
+      traefik.http.routers.grafana.rule: "Host(`grafana.homelab.lan`)"
+      traefik.http.services.grafana.loadbalancer.server.port: "3000"
+    restart_policy: unless-stopped
 
 # loki
 - name: loki
@@ -16,6 +56,7 @@
       - "3100:3100"
     networks:
       - name: "metrics"
+      - name: "traefik"
     restart_policy: unless-stopped
 
 # promtail
@@ -53,6 +94,21 @@
       - "9116:9116"
     networks:
       - name: "metrics"
+    restart_policy: unless-stopped
+
+# minio
+- name: minio
+  docker_container:
+    name: minio
+    image: minio/minio@sha256:77ff9f7e12549d269990b167fa21da010fa8b0beb40d6064569b8887e37c456b 
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - "{{ docker_path }}/minio/data:/data"
+    networks:
+      - name: "metrics"
+      - name: "traefik"
     restart_policy: unless-stopped
 
 # proxmox exporter
