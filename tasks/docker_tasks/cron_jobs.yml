@@ -1,0 +1,10 @@
+---
+
+# add docker image prune cron job
+- name: docker image prune cron job
+  cron:
+    name: prune unused docker images
+    minute: "0"
+    hour: "6"
+    weekday: "0"
+    job: "docker image prune --all"
