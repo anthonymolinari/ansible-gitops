@@ -18,5 +18,5 @@
 - name: copy prometheus configuration
   copy:
     src: "configs/metrics/prometheus.yml"
-    dest: "{{ docker_path }}/prometheus/promethus.yml"
+    dest: "{{ docker_path }}/prometheus/prometheus.yml"
 
