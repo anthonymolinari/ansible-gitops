@@ -1,9 +1,17 @@
 temescal ansible_host=172.24.10.11 ansible_user=anthony
 fragile ansible_host=172.24.10.10 ansible_user=anthony
-metrics ansible_host=172.24.10.16 ansible_user=anthony
+belvedere ansible_host=172.24.10.16 ansible_user=anthony
 
 [docker]
 fragile
 temescal
 metrics
 
+[main]
+fragile
+
+[network]
+temescal
+
+[metrics]
+belvedere
