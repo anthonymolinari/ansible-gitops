@@ -45,6 +45,16 @@
     dest: "{{ docker_path }}/traefik/traefik.yml"
   become: true
 
+- name: ensures promtail dir exists
+  file:
+    path: "{{ docker_path }}/promtail"
+    state: directory
+    
+- name: copy promtail configuration
+  copy:
+    src: "configs/shared/promtail-config.yml"
+    dest: "{{ docker_path }}/promtail/promtail-config.yml"
+
 # - name: create directory for vpn files
 #   file:
 #     path: "{{ docker_path }}/vpn-client"
