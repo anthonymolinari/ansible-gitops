@@ -5,7 +5,7 @@ belvedere ansible_host=172.24.10.16 ansible_user=anthony
 [docker]
 fragile
 temescal
-metrics
+belvedere
 
 [main]
 fragile
