@@ -326,8 +326,8 @@
 # scrutiny disk metrics
 - name: deploy scrutiny disk metrics
   docker_container:
-    name:
-      image: ghcr.io/analogj/scrutiny:master-omnibus
+    name: scrutiny
+    image: ghcr.io/analogj/scrutiny:master-omnibus
     ports:
       - "8080:8181" # webapp
       - "8086:8086" # influxdb admin
