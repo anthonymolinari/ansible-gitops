@@ -125,7 +125,7 @@
 - name: home-assistant
   docker_container:
     name: home-assistant
-    image: ghcr.io/home-assistant/home-assistant@sha256:0b72d824f2e5d6ee7a68d4ec10b0950a18dffb6c9aa9c0985b0afdbe928613e2
+    image: ghcr.io/home-assistant/home-assistant@sha256:d818e1a15cf79332c7d49e5504a6b7a5e386b934540dab25a9b5fb99a66b9601
     network_mode: 'host'
     volumes:
       - "/home/anthony/docker-volumes/hass/config:/config"
@@ -157,7 +157,7 @@
 - name: netboot server
   docker_container:
     name: netboot-xyz
-    image: linuxserver/netbootxyz:0.7.1
+    image: linuxserver/netbootxyz:0.7.3
     ports:
       - "3110:3000"
       - "69:69/udp"
