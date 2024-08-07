@@ -157,7 +157,7 @@
 - name: netboot server
   docker_container:
     name: netboot-xyz
-    image: linuxserver/netbootxyz:0.7.1
+    image: linuxserver/netbootxyz:0.7.3
     ports:
       - "3110:3000"
       - "69:69/udp"
