@@ -329,7 +329,7 @@
     name: scrutiny
     image: ghcr.io/analogj/scrutiny:master-omnibus
     ports:
-      - "8080:8181" # webapp
+      - "8181:8080" # webapp
       - "8086:8086" # influxdb admin
     volumes:
       - "{{ docker_path }}/scrutiny/config:/opt/scrutiny/config"
