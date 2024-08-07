@@ -323,17 +323,24 @@
     network_mode: container:vpn
     restart_policy: unless-stopped
 
-# aria2 w/ webui
-- name: deploy aria2 behind vpn
+# scrutiny disk metrics
+- name: deploy scrutiny disk metrics
   docker_container:
-    name: aria2
-    image: abcminiuser/docker-aria2-with-webui@sha256:795c409384b54dc44261ef3731b1245097021ff57ce0e57bac8b796a9a814a83
+    name:
+      image: ghcr.io/analogj/scrutiny:master-omnibus
+    ports:
+      - "8080:8080" # webapp
+      - "8086:8086" # influxdb admin
     volumes:
-      - "{{ downloads_dir }}/aria2:/downloads"
-    env:
-      PUID: "1000"
-      PGID: "1000"
-      SECRET: "{{ aria2_rpc_secret }}"
-    network_mode: container:vpn
+      - "{{ docker_path }}/scrutiny/config:/opt/scrutiny/config"
+      - "{{ docker_path }}/scrutiny/influxdb:/opt/scrutiny/influxdb"
+      - "/run/udev:/run/udev:ro"
+    capabilities:
+      - "SYS_RAWIO"
+    devices:
+      - "/dev/sda"
+      - "/dev/sdb"
+      - "/dev/sdc"
+      - "/dev/sdd"
+      - "/dev/sde"
     restart_policy: unless-stopped
-
