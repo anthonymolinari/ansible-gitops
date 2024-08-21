@@ -284,8 +284,6 @@
     ports:
       - "9696:9696" # prowlarr webui
       - "9091:9091" # transmission webui
-      - "6800:6800" # aria2 rpc
-      - "6880:80" # aria2 webui
     restart_policy: unless-stopped
     capabilities:
       - "NET_ADMIN"
