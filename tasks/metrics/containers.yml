@@ -48,7 +48,7 @@
 - name: loki
   docker_container:
     name: loki
-    image: grafana/loki:3.1.0
+    image: grafana/loki:3.1.1
     command: ["-config.file=/etc/loki/loki-config.yml", "-target=all"]
     volumes:
       - "{{ docker_path }}/loki/loki-config.yml:/etc/loki/loki-config.yml"
@@ -63,7 +63,7 @@
 - name: promtail
   docker_container:
     name: promtail
-    image: grafana/promtail:3.1.0
+    image: grafana/promtail:3.1.1
     #    command: ["config.file=/etc/promtail/promtail-config.yml"]
     volumes:
       - "{{ docker_path }}/promtail/promtail-config.yml:/etc/promtail/promtail-config.yml"
@@ -76,7 +76,7 @@
 - name: prometheus
   docker_container:
     name: prometheus
-    image: prom/prometheus:v2.53.1
+    image: prom/prometheus:v2.54.0
     ports:
       - "9090:9090"
     volumes:
