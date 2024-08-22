@@ -1,5 +1,5 @@
 # storage path
-docker_path: /mnt/ssd-500GB/docker
+docker_path: /mnt/data-500GB/docker
 downloads_dir: /mnt/media-10TB/Downloads
 media_dir: /mnt/media-10TB/Media
 
