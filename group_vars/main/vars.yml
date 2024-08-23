@@ -2,4 +2,4 @@
 docker_path: /mnt/data-500GB/docker
 downloads_dir: /mnt/media-10TB/Downloads
 media_dir: /mnt/media-10TB/Media
-
+frigate_video: /mnt/ssd-500GB/frigate_video
