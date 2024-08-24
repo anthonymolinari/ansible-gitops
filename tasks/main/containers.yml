@@ -348,7 +348,6 @@
   docker_container:
     name: frigate
     image: ghcr.io/blackshear/frigate:stable # update to version tag
-    shm_size: "64mb"
     ports:
       - "8971:8971"
       - "8554:8554"
