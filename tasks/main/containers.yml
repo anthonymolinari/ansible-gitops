@@ -70,7 +70,7 @@
 
 # nvidia exporter
 - name: gpu-exporter
-  docker_container:
+  community.docker.docker_container:
     name: nvidia-smi-exporter
     image: nvcr.io/nvidia/k8s/dcgm-exporter:3.3.5-3.4.0-ubuntu22.04
     ports:
@@ -105,7 +105,7 @@
 
 # plex
 - name: plex
-  docker_container:
+  community.docker.docker_container:
     name: plex
     image: linuxserver/plex:1.40.5
     volumes:
@@ -138,7 +138,7 @@
 
 # tdarr 
 - name: tdarr
-  docker_container:
+  community.docker.docker_container:
     name: tdarr
     image: haveagitgat/tdarr:2.24.05 
     ports:
