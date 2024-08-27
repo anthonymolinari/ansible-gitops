@@ -13,17 +13,17 @@
     name: promtail_data
 
 # promtail
-- name: promtail
-  docker_container:
-    name: promtail
-    image: grafana/promtail:3.1.1
-    volumes:
-      - "promtail_data:/etc/promtail"
-      - "/var/log:/var/log"
-    networks:
-      - name: "metrics"
-      - name: "traefik"
-    restart_policy: unless-stopped
+#- name: promtail
+# docker_container:
+#   name: promtail
+#   image: grafana/promtail:3.1.1
+#   volumes:
+#     - "promtail_data:/etc/promtail"
+#     - "/var/log:/var/log"
+#   networks:
+#     - name: "metrics"
+#     - name: "traefik"
+#   restart_policy: unless-stopped
 
 # traefik 
 - name: traefik reverse proxy
@@ -85,23 +85,23 @@
     restart_policy: unless-stopped
 
 # nvidia exporter
-- name: gpu-exporter
-  docker_container:
-    name: nvidia-smi-exporter
-    image: nvcr.io/nvidia/k8s/dcgm-exporter:3.3.5-3.4.0-ubuntu22.04
-    ports:
-      - "9400:9400"
-    networks:
-      - name: "metrics"
-      - name: "traefik"
-    device_requests:
-      - device_ids: 0
-        driver: nvidia
-        capabilities:
-          - gpu
-          - compute
-          - utility
-    restart_policy: unless-stopped
+#- name: gpu-exporter
+# docker_container:
+#   name: nvidia-smi-exporter
+#   image: nvcr.io/nvidia/k8s/dcgm-exporter:3.3.5-3.4.0-ubuntu22.04
+#   ports:
+#     - "9400:9400"
+#   networks:
+#     - name: "metrics"
+#     - name: "traefik"
+#   device_requests:
+#     - device_ids: 0
+#       driver: nvidia
+#       capabilities:
+#         - gpu
+#         - compute
+#         - utility
+#   restart_policy: unless-stopped
 
 # plex
 - name: plex
@@ -218,26 +218,6 @@
       traefik.http.routers.radarr.rule: "Host(`radarr.homelab.lan`)"
     restart_policy: unless-stopped
 
-# bazarr
-- name: deploy bazarr
-  docker_container:
-    name: bazarr
-    image: linuxserver/bazarr:1.4.3
-    ports:
-      - "6767:6767"
-    volumes:
-      - "{{ docker_path }}/bazarr/config:/config"
-      - "{{ media_dir }}:/media"
-    env:
-      PGID: "1000"
-      PUID: "1000"
-      TZ: "{{ timezone }}"
-    networks:
-      - name: "traefik"
-    labels:
-      traefik.http.routers.bazarr.rule: "Host(`bazarr.homelab.lan`)"
-    restart_policy: unless-stopped
-
 # homarr
 - name: deploy homarr
   docker_container:
@@ -347,7 +327,7 @@
 - name: deploy frigate nvr
   docker_container:
     name: frigate
-    image: ghcr.io/blackshear/frigate:stable # update to version tag
+    image: ghcr.io/blakeblackshear/frigate:stable
     ports:
       - "8971:8971"
       - "8554:8554"
