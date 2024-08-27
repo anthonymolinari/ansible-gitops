@@ -4,7 +4,7 @@
   docker_network:
     name: traefik
 
-- name: create network for grafana, loki, promtail, node_exporter, and prometheus
+- name: create network for loki, promtail, node_exporter, and prometheus
   docker_network:
     name: metrics
 
@@ -96,6 +96,11 @@
       - name: "traefik"
     devices:
       - "/dev/nvidia0:/dev/nvidia0"
+      - "/dev/nvidia-caps:/dev/nvidia-caps"
+      - "/dev/nvidiactl:/dev/nvidiactl"
+      - "/dev/nvidia-modeset:/dev/nvidia-modeset"
+      - "/dev/nvidia-uvm:/dev/nvidia-uvm"
+      - "/dev/nvidia-uvm-tools:/dev/nvidia-uvm-tools"
     restart_policy: unless-stopped
 
 # plex
