@@ -68,25 +68,6 @@
       - name: "traefik"
     restart_policy: unless-stopped
 
-# nvidia exporter
-- name: gpu-exporter
-  community.docker.docker_container:
-    name: nvidia-smi-exporter
-    image: nvcr.io/nvidia/k8s/dcgm-exporter:3.3.5-3.4.0-ubuntu22.04
-    ports:
-      - "9400:9400"
-    networks:
-      - name: "metrics"
-      - name: "traefik"
-    device_requests:
-      - device_ids: 0
-        driver: nvidia
-        capabilities:
-          - gpu
-          - compute
-          - utility
-    restart_policy: unless-stopped
-
 # openbooks
 - name: openbooks 
   docker_container:
@@ -101,6 +82,20 @@
       - name: "traefik"
     labels:
       traefik.http.routers.openbooks.rule: "Host(`openbooks.homelab.lan`)"
+    restart_policy: unless-stopped
+
+# nvidia exporter
+- name: gpu-exporter
+  docker_container:
+    name: nvidia-smi-exporter
+    image: nvcr.io/nvidia/k8s/dcgm-exporter:3.3.5-3.4.0-ubuntu22.04
+    ports:
+      - "9400:9400"
+    networks:
+      - name: "metrics"
+      - name: "traefik"
+    devices:
+      - "/dev/nvidia0:/dev/nvidia0"
     restart_policy: unless-stopped
 
 # plex
