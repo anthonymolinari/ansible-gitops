@@ -140,7 +140,7 @@
 - name: tdarr
   community.docker.docker_container:
     name: tdarr
-    image: haveagitgat/tdarr:2.24.05 
+    image: haveagitgat/tdarr:2.25.01 
     ports:
       - "8265:8265"
       - "8266:8266"
