@@ -201,7 +201,7 @@
 - name: radarr
   docker_container:
     name: radarr
-    image: linuxserver/radarr@sha256:ab51919f160f5ec1246c3c724decb7f9143ceaf9a96951edab01d6c6d9fe44e9    
+    image: linuxserver/radarr@sha256:d180c6db609a4f004e1c73585f912d152a46f4f6a11f30f3bccc99e7f8cebc26    
     ports:
       - "7878:7878"
     volumes:
