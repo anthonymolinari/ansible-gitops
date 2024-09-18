@@ -83,7 +83,7 @@
 - name: wireguard
   docker_container:
     name: wireguard
-    image: linuxserver/wireguard:1.0.20210914
+    image: linuxserver/wireguard:latest
     ports:
       - "51820:51820/udp"
     volumes:
