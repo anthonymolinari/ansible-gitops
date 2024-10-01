@@ -31,7 +31,7 @@
 - name: grafana
   docker_container:
     name: grafana
-    image: grafana/grafana:11.2.1
+    image: grafana/grafana:11.2.2
     ports:
       - "3000:3000"
     networks:
