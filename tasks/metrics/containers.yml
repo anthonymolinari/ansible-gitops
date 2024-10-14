@@ -3,7 +3,7 @@
   docker_network:
     name: traefik
 
-- name: create network for grafana, loki, promtail, prometheus
+- name: create network for grafana, promtail, prometheus
   docker_network:
     name: metrics
 
@@ -42,34 +42,6 @@
     labels:
       traefik.http.routers.grafana.rule: "Host(`grafana.homelab.lan`)"
       traefik.http.services.grafana.loadbalancer.server.port: "3000"
-    restart_policy: unless-stopped
-
-# loki
-- name: loki
-  docker_container:
-    name: loki
-    image: grafana/loki:3.2.0
-    command: ["-config.file=/etc/loki/loki-config.yml", "-target=all"]
-    volumes:
-      - "{{ docker_path }}/loki/loki-config.yml:/etc/loki/loki-config.yml"
-    ports:
-      - "3100:3100"
-    networks:
-      - name: "metrics"
-      - name: "traefik"
-    restart_policy: unless-stopped
-
-# promtail
-- name: promtail
-  docker_container:
-    name: promtail
-    image: grafana/promtail:3.2.0
-    #    command: ["config.file=/etc/promtail/promtail-config.yml"]
-    volumes:
-      - "{{ docker_path }}/promtail/promtail-config.yml:/etc/promtail/promtail-config.yml"
-      - "/var/log:/var/log"
-    networks:
-      - name: "metrics"
     restart_policy: unless-stopped
 
 # prometheus
@@ -111,13 +83,4 @@
       - name: "metrics"
       - name: "traefik"
     restart_policy: unless-stopped
-
-# proxmox exporter
-#- name: proxmox exporter
-# docker_container:
-#   name: proxmox-exporter
-#   image:
-#   volumes:
-#   ports:
-#   restart_policy: unless-stopped
 
