@@ -7,11 +7,7 @@ from docker.models.containers import Container
 import docker
 import json
 import requests as req
-import logging
-import logging_loki
 import xml.etree.ElementTree as ET 
-
-logging_loki.emitter.LokiEmitter.level_tag="level"
 
 def parseConfig():
     config = None
@@ -19,13 +15,6 @@ def parseConfig():
         config_data = json.load(config_file)
         config = config_data
     return config
-
-def setupLogger(loki_endpoint):
-    handler = logging_loki.LokiHandler(url=loki_endpoint,version="1", tags={"service": "vpn-health-check"})
-    logger = logging.getLogger('health-check-logger')
-    logger.addHandler(handler)
-    logger.setLevel(logging.DEBUG)
-    return logger, handler
 
 def getKeyFromXML(path):
     tree = ET.parse(path)
@@ -43,7 +32,6 @@ def get_health(container: Container):
 def main():
 
     config = parseConfig()
-    logger, handler = setupLogger(config['loki_endpoint'])
 
     # get all api keys from service configs
     prowlarr_api_key = getKeyFromXML(config['base_path'] + config['prowlarr']['config_path']) 
@@ -61,10 +49,9 @@ def main():
     prowlarr = client.containers.get("prowlarr")
 
     if get_health(vpn) == "healthy":
-        logger.info("vpn healthly no restart required")
+        print("vpn healthly no restart required")
         return
 
-    loki_push("vpn unhealthy...restarting", "error")
     transmission.stop()
     prowlarr.stop()
 
@@ -85,11 +72,7 @@ def main():
     req.post(f"{prowlarr_url}/api/v1/indexer/testall?apikey={prowlarr_api_key}")
     req.post(f"{sonarr_url}/api/v3/indexer/testall?apikey={sonarr_api_key}")
     req.post(f"{radarr_url}/api/v3/indexer/testall?apikey={radarr_api_key}")
-    # report success to loki
-    logger.warning("successfully restarted vpn", "info")
-
 
 if __name__ == "__main__":
     main()
-
 
