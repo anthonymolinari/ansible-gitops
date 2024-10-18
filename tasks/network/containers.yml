@@ -19,21 +19,6 @@
       - name: "traefik"
     restart_policy: unless-stopped
 
-- name: create promtail volume
-  docker_volume:
-    name: promtail_data
-
-- name: promtail container
-  docker_container:
-    name: promtail
-    image: grafana/promtail:3.2.0 
-    volumes:
-      - "promtail_data:/etc/promtail"
-      - "/var/log:/var/log"
-    networks:
-      - name: "traefik"
-    restart_policy: unless-stopped
-
 - name: node_exporter container
   docker_container:
     name: node_exporter
