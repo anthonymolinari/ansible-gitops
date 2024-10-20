@@ -175,3 +175,18 @@
       TZ: "{{ timezone }}"
     restart_policy: unless-stopped
 
+- name: create n8n volume
+  docker_volumes:
+    name: n8n_data
+
+- name: n8n automation
+  docker_container:
+    name: n8n-server
+    image: docker.n8n.io/n8nio/n8n 
+    ports:
+      - "5678:5678"
+    volumes:
+      - "n8n_data:/home/node/.n8n"
+    env:
+      TZ: "{{ timezone }}"
+    restart_policy: unless-stopped
