@@ -176,7 +176,7 @@
     restart_policy: unless-stopped
 
 - name: create n8n volume
-  docker_volumes:
+  docker_volume:
     name: n8n_data
 
 - name: n8n automation
