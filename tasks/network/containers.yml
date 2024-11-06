@@ -110,7 +110,7 @@
 - name: home-assistant
   docker_container:
     name: home-assistant
-    image: homeassistant/home-assistant:2024.10    
+    image: homeassistant/home-assistant:2024.11    
     network_mode: 'host'
     volumes:
       - "/home/anthony/docker-volumes/hass/config:/config"
