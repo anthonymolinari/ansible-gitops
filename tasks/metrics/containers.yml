@@ -72,7 +72,7 @@
 - name: minio
   docker_container:
     name: minio
-    image: minio/minio@sha256:ebd2af76d40ff25ccc630533615f7ccd55fbe83d629a4b7c7a1b6311c1af3d6c 
+    image: minio/minio@sha256:ac591851803a79aee64bc37f66d77c56b0a4b6e12d9e5356380f4105510f2332 
     command: ["server", "/data", "--console-address", ":9001"]
     ports:
       - "9000:9000"
