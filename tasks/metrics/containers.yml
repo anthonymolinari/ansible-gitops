@@ -27,23 +27,6 @@
   docker_volume:
     name: grafana_data
 
-# grafana
-- name: grafana
-  docker_container:
-    name: grafana
-    image: grafana/grafana:11.2.2
-    ports:
-      - "3000:3000"
-    networks:
-      - name: "metrics"
-      - name: "traefik"
-    volumes:
-      - "grafana_data:/var/lib/grafana"
-    labels:
-      traefik.http.routers.grafana.rule: "Host(`grafana.homelab.lan`)"
-      traefik.http.services.grafana.loadbalancer.server.port: "3000"
-    restart_policy: unless-stopped
-
 # prometheus
 - name: prometheus
   docker_container:
