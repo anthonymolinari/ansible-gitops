@@ -53,7 +53,7 @@
 - name: duckdns
   docker_container:
     name: duckdns
-    image: linuxserver/duckdns@sha256:48004b34e10de8749442d4834bfa55e842410ddb561caccca022532e496c8d2e
+    image: linuxserver/duckdns@sha256:fe19b756715364a1c0d3a79a3bf979eebacfccd4580ee7133d9050f87a8166a9
     volumes:
       - "/home/anthony/docker-volumes/duckdns/config:/config"
     env:
@@ -110,7 +110,7 @@
 - name: home-assistant
   docker_container:
     name: home-assistant
-    image: homeassistant/home-assistant:2024.10    
+    image: homeassistant/home-assistant:2024.11    
     network_mode: 'host'
     volumes:
       - "/home/anthony/docker-volumes/hass/config:/config"

@@ -107,7 +107,7 @@
 - name: plex
   community.docker.docker_container:
     name: plex
-    image: linuxserver/plex:1.41.0
+    image: linuxserver/plex:1.41.2
     volumes:
       - "{{ media_dir }}:/Media"
       - "{{ docker_path }}/plex/config:/config"
@@ -180,7 +180,7 @@
 - name: sonarr
   docker_container:
     name: sonarr
-    image: linuxserver/sonarr:4.0.9-develop   
+    image: linuxserver/sonarr:4.0.10-develop   
     ports:
       - "8989:8989"
     volumes:
@@ -201,7 +201,7 @@
 - name: radarr
   docker_container:
     name: radarr
-    image: linuxserver/radarr@sha256:0147cbfc70dd269e225de166a5ac1a14311e4e20d5f2438ae21e5b921744fc24    
+    image: linuxserver/radarr@sha256:a96ac92d9341185a9ac2ff447ace25f431ae489bf3d1b621689169b9399aa439    
     ports:
       - "7878:7878"
     volumes:
@@ -222,7 +222,7 @@
 - name: deploy homarr
   docker_container:
     name: homarr
-    image: ghcr.io/ajnart/homarr:0.15.6
+    image: ghcr.io/ajnart/homarr:0.15.7
     ports:
       - "7575:7575"
     volumes:
@@ -277,7 +277,7 @@
 - name: deploy prowlarr behind vpn
   docker_container:
     name: prowlarr
-    image: linuxserver/prowlarr@sha256:3001f0ea0341f370e889467aa1825c42fb8decede85b784c7e380b9ccaad1d4e
+    image: linuxserver/prowlarr@sha256:e6d760f17399cd40093ed7e40af7160bc638e6a9690a9c8d024699b5129c1aaa
     volumes:
       - "{{ docker_path }}/prowlarr/config:/config"
     env:

@@ -31,7 +31,7 @@
 - name: prometheus
   docker_container:
     name: prometheus
-    image: prom/prometheus:v2.54.1
+    image: prom/prometheus:v3.0.0
     ports:
       - "9090:9090"
     volumes:
@@ -55,7 +55,7 @@
 - name: minio
   docker_container:
     name: minio
-    image: minio/minio@sha256:9535594ad4122b7a78c6632788a989b96d9199b483d3bd71a5ceae73a922cdfa 
+    image: minio/minio@sha256:ac591851803a79aee64bc37f66d77c56b0a4b6e12d9e5356380f4105510f2332 
     command: ["server", "/data", "--console-address", ":9001"]
     ports:
       - "9000:9000"
