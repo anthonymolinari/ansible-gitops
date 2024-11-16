@@ -1,0 +1,9 @@
+- hosts: network
+  vars:
+    pip_install_packages:
+      - name: docker
+      - name: requests
+  tasks:
+    - import_tasks: tasks/network/main.yml
+
+

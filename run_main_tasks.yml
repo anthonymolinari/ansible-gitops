@@ -1,0 +1,11 @@
+---
+
+- hosts: main
+  vars:
+    pip_install_packages:
+      - name: docker
+      - name: requests
+  tasks:
+    - import_tasks: tasks/main/main.yml
+
+

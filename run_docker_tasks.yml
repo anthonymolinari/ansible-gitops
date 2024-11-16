@@ -1,0 +1,5 @@
+--- 
+- hosts: docker
+  tasks:
+    - import_tasks: tasks/docker_tasks/cron_jobs.yml
+
