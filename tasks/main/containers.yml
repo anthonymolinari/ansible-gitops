@@ -338,8 +338,13 @@
       - "/etc/localtime:/etc/localtime:ro"
       - "{{ docker_path }}/frigate/config:/config"
       - "{{ frigate_video }}:/media/frigate"
-    devices:
-      - "/dev/dri/renderD128:/dev/dri/renderD128"
+    device_requests:
+      - device_ids: 0
+        driver: nvidia
+        capabilities:
+          - gpu
+          - compute
+          - utility
     env:
       FRIGATE_RTSP_PASSWORD: "{{ frigate_rtsp_password }}"
     restart_policy: unless-stopped
