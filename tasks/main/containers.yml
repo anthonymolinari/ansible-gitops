@@ -12,19 +12,6 @@
   docker_volume:
     name: promtail_data
 
-# promtail
-#- name: promtail
-# docker_container:
-#   name: promtail
-#   image: grafana/promtail:3.1.1
-#   volumes:
-#     - "promtail_data:/etc/promtail"
-#     - "/var/log:/var/log"
-#   networks:
-#     - name: "metrics"
-#     - name: "traefik"
-#   restart_policy: unless-stopped
-
 # traefik 
 - name: traefik reverse proxy
   docker_container:
@@ -85,23 +72,23 @@
     restart_policy: unless-stopped
 
 # nvidia exporter
-#- name: gpu-exporter
-# docker_container:
-#   name: nvidia-smi-exporter
-#   image: nvcr.io/nvidia/k8s/dcgm-exporter:3.3.5-3.4.0-ubuntu22.04
-#   ports:
-#     - "9400:9400"
-#   networks:
-#     - name: "metrics"
-#     - name: "traefik"
-#   device_requests:
-#     - device_ids: 0
-#       driver: nvidia
-#       capabilities:
-#         - gpu
-#         - compute
-#         - utility
-#   restart_policy: unless-stopped
+- name: gpu-exporter
+  docker_container:
+    name: nvidia-smi-exporter
+    image: nvcr.io/nvidia/k8s/dcgm-exporter:3.3.5-3.4.0-ubuntu22.04
+    ports:
+      - "9400:9400"
+    networks:
+      - name: "metrics"
+      - name: "traefik"
+    device_requests:
+      - device_ids: 0
+        driver: nvidia
+        capabilities:
+          - gpu
+          - compute
+          - utility
+    restart_policy: unless-stopped
 
 # plex
 - name: plex
