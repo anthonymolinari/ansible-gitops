@@ -201,7 +201,7 @@
     volumes:
       - "{{ docker_path }}/prometheus:/etc/prometheus"
     networks:
-      - name: "metrics"
+      - name: "traefik"
     restart_policy: unless-stopped
 
 # snmp exporter
@@ -212,6 +212,6 @@
     ports:
       - "9116:9116"
     networks:
-      - name: "metrics"
+      - name: "traefik"
     restart_policy: unless-stopped
 
