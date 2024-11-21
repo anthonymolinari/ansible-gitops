@@ -189,6 +189,7 @@
       - "n8n_data:/home/node/.n8n"
     env:
       TZ: "{{ timezone }}"
+      N8N_SECURE_COOKIE: "false"
     restart_policy: unless-stopped
 
 # prometheus
