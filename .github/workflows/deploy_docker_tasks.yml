@@ -1,0 +1,23 @@
+name: deploy docker tasks
+
+on:
+  woflow_dispatch:
+# push:
+#   branches: ['main']
+#   paths:
+#     - 'tasks/docker_tasks'
+#     - 'configs/**'
+#     - 'group_vars/**'
+#     - 'hosts'
+#     - 'deploy_docker_tasks.yml'
+        
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+        
+      - name: run playbook
+        run: ansible-playbook run_docker_tasks.yml --vault-password-file='${{ secrets.VUALT_PASS_FILE }}'
+

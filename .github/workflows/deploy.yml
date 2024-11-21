@@ -8,7 +8,6 @@ on:
       - 'tasks/**'
       - 'configs/**'
       - 'group_vars/**'
-      - 'templates/**'
       - 'run.yml'
       - 'hosts'
   
