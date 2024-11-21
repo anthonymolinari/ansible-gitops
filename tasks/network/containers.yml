@@ -190,3 +190,28 @@
     env:
       TZ: "{{ timezone }}"
     restart_policy: unless-stopped
+
+# prometheus
+- name: prometheus
+  docker_container:
+    name: prometheus
+    image: prom/prometheus:v3.0.0
+    ports:
+      - "9090:9090"
+    volumes:
+      - "{{ docker_path }}/prometheus:/etc/prometheus"
+    networks:
+      - name: "metrics"
+    restart_policy: unless-stopped
+
+# snmp exporter
+- name: snmp-exporter
+  docker_container:
+    name: snmp-exporter
+    image: prom/snmp-exporter
+    ports:
+      - "9116:9116"
+    networks:
+      - name: "metrics"
+    restart_policy: unless-stopped
+

@@ -26,3 +26,14 @@
     dest: "/home/anthony/docker-volumes/mosquitto/config/mosquitto.conf"
   become: true
 
+- name: ensures prometheus dir exists
+  file:
+    path: "{{ docker_path }}/prometheus"
+    state: directory
+    
+- name: copy prometheus configuration
+  copy:
+    src: "configs/metrics/prometheus.yml"
+    dest: "{{ docker_path }}/prometheus/prometheus.yml"
+
+
