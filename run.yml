@@ -16,14 +16,7 @@
   tasks:
     - import_tasks: tasks/network/main.yml
 
-- hosts: metrics
-  vars:
-    pip_install_packages:
-      - name: docker
-  tasks:
-    - import_tasks: tasks/metrics/main.yml
-
 - hosts: docker
   tasks:
-    - import_tasks: tasks/docker_tasks/cron_jobs.yml
+    - import_tasks: tasks/shared_tasks/cron_jobs.yml
 
