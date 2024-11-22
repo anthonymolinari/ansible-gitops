@@ -1,17 +1,28 @@
 ---
 
-# copy vpn health check script 
 - name: ensure health check script exists
   file:
     path: "{{ script_dir }}/vpn_health_check"
     state: directory
 
+- name: copy and install deps for script
+  copy: 
+    src: "scripts/vpn-health-check/requirements.txt
+    dest: "{{ script_dir }}/vpn_health_check/requirements.txt"
+
 - name: copy health check script 
   copy:
-    src: "vpn-health-check.py"
-    dest: "{{ script_dir }}/vpn_health_check"
+    src: "scripts/vpn-health-check/vpn-health-check.py"
+    dest: "{{ script_dir }}/vpn_health_check/vpn-health-check.py"
 
+- name: copy vpn health check config
+  copy:
+    src: "config/main/health-check.json"
+    dest: "{{ script_dir }}/vpn_health_check/health-check.json
 
-# copy vpn health check script
+- name: schedule cron job for vpn health check
+  cron:
+    name: check vpn connection
+    minute: "*/15"
+    job: "/usr/bin/python3 {{ script_dir }}/vpn_health_check/vpn-health-check.py"
 
-# set cron job for vpn health check

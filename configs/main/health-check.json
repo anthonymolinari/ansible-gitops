@@ -1,0 +1,15 @@
+{
+    "base_path": "/mnt/ssd-500GB/docker/"
+    "prowlarr": {
+        "url": "http://localhost:9696",
+        "config_path": "prowlarr/config/config.xml"
+    },
+    "sonarr": {
+        "url": "http://localhost:8989",
+        "config_path": "sonarr/config/config.xml"
+    },
+    "radarr": {
+        "url": "http://localhost:7878",
+        "config_path": "radarr/config/config.xml"
+    }
+}
