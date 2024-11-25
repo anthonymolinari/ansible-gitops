@@ -206,7 +206,7 @@
     volumes:
       - "prefect_data:~./prefect"
     env:
-      - PREFECT_ORION_API_HOST: "0.0.0.0"
+      PREFECT_ORION_API_HOST: "0.0.0.0"
     restart_policy: unless-stopped
 
 # prometheus
