@@ -198,8 +198,8 @@
 
 - name: prefect server
   docker_container:
-    name:
-      image: prefecthq/prefect:2-python:3.10
+    name: prefect-server
+    image: prefecthq/prefect:2-python:3.10
     entrypoint: ["prefect", "orion", "start"]
     ports:
       - "4200:4200"
