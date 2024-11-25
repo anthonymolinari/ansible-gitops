@@ -217,7 +217,7 @@
     ports:
       - "4200:4200"
     volumes:
-      - "{{ docker_path }}/prefect:~./prefect"
+      - "{{ docker_path }}/prefect:/root/.prefect"
     entrypoint: ["/opt/prefect/entrypoint.sh", "prefect", "server", "start"]
     env:
       PREFECT_UI_URL: "http://10.32.1.10.11:4200/api"
