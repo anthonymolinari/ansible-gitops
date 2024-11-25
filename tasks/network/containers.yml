@@ -192,6 +192,23 @@
       N8N_SECURE_COOKIE: "false"
     restart_policy: unless-stopped
 
+- name: create prefect volume
+  docker_volume:
+    name: prefect_data
+
+- name: prefect server
+  docker_container:
+    name:
+      image: prefecthq/prefect:2-python:3.10
+    entrypoint: ["prefect", "orion", "start"]
+    ports:
+      - "4200:4200"
+    volumes:
+      - "prefect_data:~./prefect"
+    env:
+      - PREFECT_ORION_API_HOST: "0.0.0.0"
+    restart_policy: unless-stopped
+
 # prometheus
 - name: prometheus
   docker_container:
