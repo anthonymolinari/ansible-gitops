@@ -206,6 +206,8 @@
       POSTGRES_USER: "{{ prefect_db_user }}"
       POSTGRES_PASSWORD: "{{ prefect_db_password }}"
       POSTGRES_DB: "prefect"
+    expose:
+      - 5432
     networks:
       - name: prefect
     restart_policy: unless-stopped
