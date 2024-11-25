@@ -4,6 +4,10 @@
   docker_network:
     name: traefik
 
+- name: create network for prefect
+  docker_network:
+    name: prefect
+
 # traefik 
 - name: traefik reverse proxy
   docker_container:
@@ -192,18 +196,36 @@
       N8N_SECURE_COOKIE: "false"
     restart_policy: unless-stopped
 
-- name: create prefect volume
-  docker_volume:
-    name: prefect_data
+- name: postgres-prefect
+  docker_container:
+    name: postgres-prefect
+    image: postgres:15.2-alpine
+    volumes:
+      - "{{docker_path}}/prefect-db/data:/var/lib/postgresql/data"
+    env:
+      POSTGRES_USER: "{{ prefect_db_user }}"
+      POSTGRES_PASSWORD: "{{ prefect_db_password }}"
+      POSTGRES_DB: "prefect"
+    networks:
+      - name: prefect
+    restart_policy: unless-stopped
 
 - name: prefect server
   docker_container:
     name: prefect-server
-    image: prefecthq/prefect:3-python3.12
+    image: prefecthq/prefect:2.11.5-python3.11
     ports:
       - "4200:4200"
     volumes:
-      - "prefect_data:~./prefect"
+      - "{{ docker_path }}/prefect:~./prefect"
+    entrypoint: ["/opt/prefect/entrypoint.sh", "prefect", "server", "start"]
+    env:
+      PREFECT_UI_URL: "http://10.32.1.10.11:4200/api"
+      PREFECT_API_URL: "http://10.32.1.10.11:4200/api"
+      PREFECT_SERVER_API_HOST: "0.0.0.0"
+      PREFECT_API_DATABASE_CONNECTION_URL: "postgresql_asyncpg://postgres-prefect:{{prefect_db_user}}:{{prefect_db_password}}:5432/prefect"
+    networks:
+      - name: prefect
     restart_policy: unless-stopped
 
 # prometheus
