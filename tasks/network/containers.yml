@@ -199,7 +199,7 @@
 - name: postgres-prefect
   docker_container:
     name: postgres-prefect
-    image: postgres:15.10-alpine
+    image: postgres:17.2-alpine
     volumes:
       - "{{docker_path}}/prefect-db/data:/var/lib/postgresql/data"
     env:
