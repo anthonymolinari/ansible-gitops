@@ -206,8 +206,8 @@
       POSTGRES_USER: "{{ prefect_db_user }}"
       POSTGRES_PASSWORD: "{{ prefect_db_password }}"
       POSTGRES_DB: "prefect"
-    expose:
-      - 5432
+    ports:
+      - "5432:5432"
     networks:
       - name: prefect
     restart_policy: unless-stopped
@@ -225,7 +225,7 @@
       PREFECT_UI_URL: "http://10.32.1.10.11:4200/api"
       PREFECT_API_URL: "http://10.32.1.10.11:4200/api"
       PREFECT_SERVER_API_HOST: "0.0.0.0"
-      PREFECT_API_DATABASE_CONNECTION_URL: "postgresql_asyncpg://postgres-prefect:{{prefect_db_user}}:{{prefect_db_password}}:5432/prefect"
+      PREFECT_API_DATABASE_CONNECTION_URL: "postgresql_asyncpg://172.24.10.11:{{prefect_db_user}}:{{prefect_db_password}}:5432/prefect"
     networks:
       - name: prefect
     restart_policy: unless-stopped
