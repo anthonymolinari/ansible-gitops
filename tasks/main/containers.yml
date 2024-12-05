@@ -335,5 +335,3 @@
     env:
       FRIGATE_RTSP_PASSWORD: "{{ frigate_rtsp_password }}"
     restart_policy: unless-stopped
-
-
