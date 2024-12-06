@@ -1,0 +1,24 @@
+name: deploy main tasks
+
+on:
+  workflow_dispatch:
+  push: 
+    branches: ['main']
+    paths: 
+      - 'tasks/main/**'
+      - 'configs/shared/**'
+      - 'configs/main/**'
+      - 'group_vars/all/**'
+      - 'group_vars/main/**'
+      - 'run_main_tasks.yml'
+      - 'hosts'
+  
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: run playbook
+        run: ansible-playbook run_main_tasks.yml --vault-password-file='${{ secrets.VAULT_PASS_FILE }}'

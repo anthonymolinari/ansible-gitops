@@ -1,16 +1,16 @@
 name: deploy shared tasks
 
 on:
-  woflow_dispatch:
-# push:
-#   branches: ['main']
-#   paths:
-#     - 'tasks/docker_tasks'
-#     - 'configs/**'
-#     - 'group_vars/**'
-#     - 'hosts'
-#     - 'deploy_docker_tasks.yml'
-        
+  workflow_dispatch:
+push:
+  branches: ['main']
+  paths:
+    - 'tasks/shared_tasks/**'
+    - 'configs/shared/**'
+    - 'group_vars/all/**'
+    - 'hosts'
+    - 'run_shared_tasks.yml'
+       
 
 jobs:
   deploy:
