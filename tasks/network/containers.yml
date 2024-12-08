@@ -165,7 +165,7 @@
 - name: omada-controller
   docker_container:
     name: omada
-    image: mbentley/omada-controller:5.14
+    image: mbentley/omada-controller:5.15
     ports:
       - "8088:8088"
       - "8043:8043"
