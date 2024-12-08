@@ -209,7 +209,7 @@
 - name: deploy homarr
   docker_container:
     name: homarr
-    image: ghcr.io/ajnart/homarr:0.15.8
+    image: ghcr.io/ajnart/homarr:0.15.9
     ports:
       - "7575:7575"
     volumes:
