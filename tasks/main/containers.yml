@@ -188,7 +188,7 @@
 - name: radarr
   docker_container:
     name: radarr
-    image: linuxserver/radarr@sha256:0aa05c3f4d74c26663ad6f387751a6fc396638bcf87fab6c9fb0f42ead5599c2    
+    image: linuxserver/radarr@sha256:9e7d22edf6c7bfca5e30324cc3a3a708c6fa0577e6e3688f09ae1cb21af3365c    
     ports:
       - "7878:7878"
     volumes:
@@ -209,7 +209,7 @@
 - name: deploy homarr
   docker_container:
     name: homarr
-    image: ghcr.io/ajnart/homarr:0.15.7
+    image: ghcr.io/ajnart/homarr:0.15.9
     ports:
       - "7575:7575"
     volumes:
@@ -264,7 +264,7 @@
 - name: deploy prowlarr behind vpn
   docker_container:
     name: prowlarr
-    image: linuxserver/prowlarr@sha256:90d1058f7ecac9c41a77cb82e7eaafddb084bf6a06628074ff5d00956259a863
+    image: linuxserver/prowlarr@sha256:fce97e356e940fda1feda7d20b501426dff62a819bcd393d958319b1a87aed9b
     volumes:
       - "{{ docker_path }}/prowlarr/config:/config"
     env:

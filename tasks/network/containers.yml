@@ -57,7 +57,7 @@
 - name: duckdns
   docker_container:
     name: duckdns
-    image: linuxserver/duckdns@sha256:fe19b756715364a1c0d3a79a3bf979eebacfccd4580ee7133d9050f87a8166a9
+    image: linuxserver/duckdns@sha256:1af77a86119e6a1638b366127b577f66d27581b3b85c03528e39f5e7b476b808
     volumes:
       - "/home/anthony/docker-volumes/duckdns/config:/config"
     env:
@@ -114,7 +114,7 @@
 - name: home-assistant
   docker_container:
     name: home-assistant
-    image: homeassistant/home-assistant:2024.11    
+    image: homeassistant/home-assistant:2024.12    
     network_mode: 'host'
     volumes:
       - "/home/anthony/docker-volumes/hass/config:/config"
@@ -165,7 +165,7 @@
 - name: omada-controller
   docker_container:
     name: omada
-    image: mbentley/omada-controller:5.14
+    image: mbentley/omada-controller:5.15
     ports:
       - "8088:8088"
       - "8043:8043"
