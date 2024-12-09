@@ -7,7 +7,7 @@
 
 - name: copy and install deps for script
   copy: 
-    src: "scripts/vpn-health-check/requirements.txt
+    src: "scripts/vpn-health-check/requirements.txt"
     dest: "{{ script_dir }}/vpn_health_check/requirements.txt"
 
 - name: copy health check script 
@@ -18,7 +18,7 @@
 - name: copy vpn health check config
   copy:
     src: "config/main/health-check.json"
-    dest: "{{ script_dir }}/vpn_health_check/health-check.json
+    dest: "{{ script_dir }}/vpn_health_check/health-check.json"
 
 - name: schedule cron job for vpn health check
   cron:
