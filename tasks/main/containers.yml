@@ -49,7 +49,7 @@
     name: sensors-exporter
     image: anthonymolinari/sensors-exporter@sha256:a71fc71454ecd72def7184f04f2869065557de8fbcacb02e12200933bfed3c1f
     ports:
-      - "9200:8282"
+      - "8282:9200"
     networks:
       - name: "metrics"
       - name: "traefik"
