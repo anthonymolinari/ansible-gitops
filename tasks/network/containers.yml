@@ -196,20 +196,20 @@
       N8N_SECURE_COOKIE: "false"
     restart_policy: unless-stopped
 
-- name: prefect server
-  docker_container:
-    name: prefect-server
-    image: prefecthq/prefect:3.1.6-python3.11
-    ports:
-      - "4200:4200"
-    volumes:
-      - "{{ docker_path }}/prefect:/root/.prefect"
-    entrypoint: ["/opt/prefect/entrypoint.sh", "prefect", "server", "start"]
-    env:
-      PREFECT_UI_URL: "http://172.24.10.11:4200/api"
-      PREFECT_API_URL: "http://172.24.10.11:4200/api"
-      PREFECT_SERVER_API_HOST: "0.0.0.0"
-    restart_policy: unless-stopped
+#- name: prefect server
+# docker_container:
+#   name: prefect-server
+#   image: prefecthq/prefect:3.1.6-python3.11
+#   ports:
+#     - "4200:4200"
+#   volumes:
+#     - "{{ docker_path }}/prefect:/root/.prefect"
+#   entrypoint: ["/opt/prefect/entrypoint.sh", "prefect", "server", "start"]
+#   env:
+#     PREFECT_UI_URL: "http://172.24.10.11:4200/api"
+#     PREFECT_API_URL: "http://172.24.10.11:4200/api"
+#     PREFECT_SERVER_API_HOST: "0.0.0.0"
+#   restart_policy: unless-stopped
 
 # prometheus
 - name: prometheus
