@@ -1,1 +1,8 @@
 ---
+
+- name: update packages
+  cron:
+    name: update apt packages
+    special_time: weekly
+    job: "sudo apt update && sudo apt upgrade -y"
+
