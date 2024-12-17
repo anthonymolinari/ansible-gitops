@@ -2,7 +2,9 @@
 
 # ansible-gitops
 
-![deployment](https://github.com/anthonymolinari/ansible-gitops/actions/workflows/deploy.yml/badge.svg)
+![main tasks](https://github.com/anthonymolinari/ansible-gitops/actions/workflows/deploy_main_tasks.yml/badge.svg)
+![network tasks](https://github.com/anthonymolinari/ansible-gitops/actions/workflows/deploy_network_tasks.yml/badge.svg)
+![shared tasks](https://github.com/anthonymolinari/ansible-gitops/actions/workflows/deploy_shared_tasks.yml/badge.svg)
 ![tests](https://github.com/anthonymolinari/ansible-gitops/actions/workflows/tests.yml/badge.svg)
 
 </div>
@@ -18,12 +20,14 @@
 - [transmission]()
 - [overseerr]()
 ### Automation
-- kestra
-- home-assistant
-- mosquitto
+- home-assistant()
+- mosquitto()
+- n8n()
+- prefect()
+- node-red()
 ### Networking
 - openvpn-client
-- bind dns server
+- bind9 dns server
 - duckdns
 - wireguard VPN
 ### Metrics & Logging
