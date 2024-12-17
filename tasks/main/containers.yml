@@ -188,7 +188,7 @@
 - name: radarr
   docker_container:
     name: radarr
-    image: linuxserver/radarr@sha256:9e7d22edf6c7bfca5e30324cc3a3a708c6fa0577e6e3688f09ae1cb21af3365c    
+    image: linuxserver/radarr@sha256:9695e8b08811b16592d61f86fde756446097bb5fdb84d98b09e42dee9f6c34c0    
     ports:
       - "7878:7878"
     volumes:
@@ -264,7 +264,7 @@
 - name: deploy prowlarr behind vpn
   docker_container:
     name: prowlarr
-    image: linuxserver/prowlarr@sha256:fce97e356e940fda1feda7d20b501426dff62a819bcd393d958319b1a87aed9b
+    image: linuxserver/prowlarr@sha256:37d58da230af6a0210d583adb49d32f1257762f8b615fddcbbde8ae3e21135ce
     volumes:
       - "{{ docker_path }}/prowlarr/config:/config"
     env:

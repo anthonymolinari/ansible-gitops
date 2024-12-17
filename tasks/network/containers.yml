@@ -69,7 +69,7 @@
 - name: duckdns
   docker_container:
     name: duckdns
-    image: linuxserver/duckdns@sha256:1af77a86119e6a1638b366127b577f66d27581b3b85c03528e39f5e7b476b808
+    image: linuxserver/duckdns@sha256:a23334302f46264c94db3f4488e1be714fd09ddd313a961d1e14ac374a7fe870
     volumes:
       - "/home/anthony/docker-volumes/duckdns/config:/config"
     env:
@@ -250,7 +250,7 @@
 - name: prefect server
   docker_container:
     name: prefect-server
-    image: prefecthq/prefect:3.1.6-python3.11
+    image: prefecthq/prefect:3.1.7-python3.11
     ports:
       - "4200:4200"
     volumes:
