@@ -36,6 +36,18 @@
       - name: "traefik"
     restart_policy: unless-stopped
 
+- name: grafana
+  docker_container:
+    name: grafana
+    image: grafana/grafana:11.4.0
+    user:
+      - "1000:1000"
+    ports:
+      - "3000:3000"
+    volumes:
+      - "{{ docker_path }}/grafana/data:/var/lib/grafana"
+    restart_policy: unless-stopped
+
 # Bind DNS
 #- name: bind docker container
 # docker_container:
