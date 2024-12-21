@@ -250,7 +250,7 @@
 - name: prefect server
   docker_container:
     name: prefect-server
-    image: prefecthq/prefect:3.1.8-python3.11
+    image: prefecthq/prefect:3.1.9-python3.11
     ports:
       - "4200:4200"
     volumes:
