@@ -123,6 +123,33 @@
       traefik.http.routers.plex.rule: "Host(`plex.homelab.lan`)"
     restart_policy: unless-stopped
 
+# Jellyfin
+- name: jellyfin
+  community.docker.docker_container:
+    name: jellyfin
+    image: jellyfin/jellyfin:10.10.3
+    volumes:
+      - "{{ media_dir }}:/media"
+      - "{{ docker_path }}/jellyfin/config:/config"
+    ports:
+      - "8096:8096/tcp"
+      - "8920:8920/tcp"
+      - "1900:1900/udp"
+      - "7359/7359/udp"
+    user: "1000:1000"
+    networks:
+      - name: "traefik"
+    device_requests:
+      - device_ids: 0
+        driver: nvidia
+        capabilities:
+          - gpu
+          - compute
+          - utility
+    labels:
+      traefik.http.routers.jellyfin.rule: "Host(`jellyfin.homelab.lan`)"
+    restart_policy: unless-stopped
+
 # tdarr 
 - name: tdarr
   community.docker.docker_container:
