@@ -293,7 +293,7 @@
 - name: deploy prowlarr behind vpn
   docker_container:
     name: prowlarr
-    image: linuxserver/prowlarr@sha256:60e25eb1a9d2401043632c3dafd5b611be3fa41fa090ff190a1bc5f76843ae03
+    image: linuxserver/prowlarr@sha256:a8f6136e9b40016a5585a169f05884efc74d999b594421aefeed73d4ad57bc4c
     volumes:
       - "{{ docker_path }}/prowlarr/config:/config"
     env:
