@@ -64,11 +64,7 @@
       - "{{downloads_dir}}:/books"
     ports:
       - "4567:80"
-    command: ["--name", "iker_neptunis", "--persist", "-s", "irc.irchighway.net:9999"]
-    networks:
-      - name: "traefik"
-    labels:
-      traefik.http.routers.openbooks.rule: "Host(`openbooks.homelab.lan`)"
+    command: ["--persist"]
     restart_policy: unless-stopped
 
 # nvidia exporter
