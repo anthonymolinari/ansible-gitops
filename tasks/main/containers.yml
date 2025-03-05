@@ -60,11 +60,11 @@
   docker_container:
     name: openbooks
     image: evanbuss/openbooks:4.5.0
+    command: ["--name", "iker_neptunis", "--persist", "-s", "irc.irchighway.net:9999"]
     volumes:
       - "{{downloads_dir}}:/books"
     ports:
       - "4567:80"
-    command: ["--persist"]
     restart_policy: unless-stopped
 
 # nvidia exporter
