@@ -266,6 +266,21 @@
       traefik.http.routers.overseerr.rule: "Host(`overseerr.homelab.lan`)"
     restart_policy: unless-stopped
 
+# jellyseerr
+- name: deploy jellyseerr
+  docker_container:
+    name: jellyseerr
+    image: fallenbagel/jellyseerr:2.3.0
+    ports:
+      - "5056:5056"
+    volumes:
+      "{{ docker_path }}/jellyseerr/config:/app/config"
+    env:
+      LOG_LEVEL: "debug"
+      TZ: "{{ timezone }}"
+      PORT: "5056"
+    restart_policy: unless-stopped
+
 # pia-vpn-container
 - name: deploy vpn-client container
   docker_container:
