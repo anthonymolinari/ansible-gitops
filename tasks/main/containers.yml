@@ -270,7 +270,7 @@
 - name: deploy jellyseerr
   docker_container:
     name: jellyseerr
-    image: fallenbagel/jellyseerr:2.3.0
+    image: fallenbagel/jellyseerr:2.4.0
     ports:
       - "5056:5056"
     volumes:
