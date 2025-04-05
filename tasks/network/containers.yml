@@ -36,17 +36,15 @@
       - name: "traefik"
     restart_policy: unless-stopped
 
-#- name: grafana
-# docker_container:
-#   name: grafana
-#   image: grafana/grafana:11.4.0
-#   user:
-#     - "1000:1000"
-#   ports:
-#     - "3000:3000"
-#   volumes:
-#     - "{{ docker_path }}/grafana/data:/var/lib/grafana"
-#   restart_policy: unless-stopped
+- name: grafana
+  docker_container:
+    name: grafana
+    image: grafana/grafana:11.4.0
+    ports:
+      - "3000:3000"
+    volumes:
+      - "{{ docker_path }}/grafana/data:/var/lib/grafana"
+    restart_policy: unless-stopped
 
 # Bind DNS
 #- name: bind docker container
@@ -208,21 +206,6 @@
       N8N_SECURE_COOKIE: "false"
     restart_policy: unless-stopped
 
-#- name: prefect server
-# docker_container:
-#   name: prefect-server
-#   image: prefecthq/prefect:3.1.6-python3.11
-#   ports:
-#     - "4200:4200"
-#   volumes:
-#     - "{{ docker_path }}/prefect:/root/.prefect"
-#   entrypoint: ["/opt/prefect/entrypoint.sh", "prefect", "server", "start"]
-#   env:
-#     PREFECT_UI_URL: "http://172.24.10.11:4200/api"
-#     PREFECT_API_URL: "http://172.24.10.11:4200/api"
-#     PREFECT_SERVER_API_HOST: "0.0.0.0"
-#   restart_policy: unless-stopped
-
 # prometheus
 - name: prometheus
   docker_container:
@@ -245,19 +228,4 @@
       - "9116:9116"
     networks:
       - name: "traefik"
-    restart_policy: unless-stopped
-
-- name: prefect server
-  docker_container:
-    name: prefect-server
-    image: prefecthq/prefect:3.3.3-python3.11
-    ports:
-      - "4200:4200"
-    volumes:
-      - "{{ docker_path }}/prefect:/root/.prefect"
-    entrypoint: ["/opt/prefect/entrypoint.sh", "prefect", "server", "start"]
-    env:
-      PREFECT_UI_URL: "http://172.24.10.10:4200/api"
-      PREFECT_API_URL: "http://172.24.10.10:4200/api"
-      PREFECT_SERVER_API_HOST: "0.0.0.0"
     restart_policy: unless-stopped
