@@ -210,7 +210,7 @@
 - name: prometheus
   docker_container:
     name: prometheus
-    image: prom/prometheus:v3.2.1
+    image: prom/prometheus:v3.3.0
     ports:
       - "9090:9090"
     volumes:
