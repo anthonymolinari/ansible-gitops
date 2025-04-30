@@ -285,7 +285,7 @@
 - name: deploy vpn-client container
   docker_container:
     name: vpn
-    image: dperson/openvpn-client@sha256:2defe3062e65ad0ecf43bc747d60d1274ebbf7a45100c5cf5448fd7114caac80
+    image: dperson/openvpn-client@sha256:d174047b57d51734143325ad7395210643025e6516ba60a937e9319dbb462293
     volumes:
       - "{{ docker_path }}/vpn-client:/vpn"
     ports:
