@@ -385,6 +385,7 @@
       - "8382:8080"
       - "8381:8181"
       - "8082:8081"
+      - "9390:9090"
     volumes:
       - "{{ docker_path }}/calibre/config:/config"
       - "{{ media_dir }}:/Books"
