@@ -375,3 +375,17 @@
     env:
       FRIGATE_RTSP_PASSWORD: "{{ frigate_rtsp_password }}"
     restart_policy: unless-stopped
+
+# calibre server
+- name: calibre
+  docker_container:
+    name: calibre
+    image: lscr.io/linuxserver/calibre:latest
+    ports:
+      - "8282:8080"
+      - "8381:8181"
+      - "8082:8081"
+    volumes:
+      - "{{ docker_path }}/calibre/config:/config"
+    restart_policy: unless-stopped
+
