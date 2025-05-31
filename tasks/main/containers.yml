@@ -382,7 +382,7 @@
     name: calibre
     image: lscr.io/linuxserver/calibre:latest
     ports:
-      - "8282:8080"
+      - "8382:8080"
       - "8381:8181"
       - "8082:8081"
     volumes:
