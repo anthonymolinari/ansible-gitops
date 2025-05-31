@@ -387,5 +387,6 @@
       - "8082:8081"
     volumes:
       - "{{ docker_path }}/calibre/config:/config"
+      - "{{ media_dir }}:/Books"
     restart_policy: unless-stopped
 
