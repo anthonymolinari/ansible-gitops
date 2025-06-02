@@ -152,7 +152,7 @@
 - name: tdarr
   community.docker.docker_container:
     name: tdarr
-    image: haveagitgat/tdarr:2.40.01 
+    image: haveagitgat/tdarr:2.42.01 
     ports:
       - "8265:8265"
       - "8266:8266"
@@ -213,7 +213,7 @@
 - name: radarr
   docker_container:
     name: radarr
-    image: linuxserver/radarr@sha256:532749cc71739130720c9d1cd8b8fbec204f6c8bd94fd633fccb4b566a672a55    
+    image: linuxserver/radarr@sha256:36e43720c130ec2d3ed80726d2134af3c6644729f4750abc830fdda7fa71d1e1    
     ports:
       - "7878:7878"
     volumes:
@@ -304,7 +304,7 @@
 - name: deploy prowlarr behind vpn
   docker_container:
     name: prowlarr
-    image: linuxserver/prowlarr@sha256:c63b71155541de52a9e60ba13fd10824a59f649812ca18701509b7b804a5253a
+    image: linuxserver/prowlarr@sha256:1a6cdd0cc2350f8527dab39bc8467c9a2553bbbcf75a2c66f882fc53d73d5deb
     volumes:
       - "{{ docker_path }}/prowlarr/config:/config"
     env:
