@@ -1,19 +1,5 @@
 ---
 
-# traefik 
-- name: traefik reverse proxy
-  docker_container:
-    name: traefik
-    image: traefik:v2.11
-    ports:
-      - "80:80"
-      - "443:443"
-      - "81:8080"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    command: ["--api.insecure=true", "--providers.docker"]
-    restart_policy: unless-stopped
-
 # node exporter
 - name: node-exporter
   docker_container:
@@ -33,6 +19,17 @@
     image: anthonymolinari/sensors-exporter@sha256:a71fc71454ecd72def7184f04f2869065557de8fbcacb02e12200933bfed3c1f
     ports:
       - "8282:9200"
+    restart_policy: unless-stopped
+
+# prometheus
+- name: prometheus
+  docker_container:
+    name: prometheus
+    image: prom/prometheus:v3.4.1
+    ports:
+      - "9090:9090"
+    volumes:
+      - "{{ docker_path }}/prometheus:/etc/prometheus"
     restart_policy: unless-stopped
 
 # openbooks

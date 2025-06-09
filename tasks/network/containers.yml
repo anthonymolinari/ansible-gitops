@@ -117,26 +117,3 @@
         tmpfs_mode: "777"
     restart_policy: unless-stopped
 
-# wireguard
-# - name: wireguard
-# docker_container:
-#   name: wireguard
-#   image: linuxserver/wireguard:latest
-#   ports:
-#     - "51820:51820/udp"
-#   volumes:
-#     - "/home/anthony/docker-volumes/wireguard/config:/config"
-#     - "/lib/modules:/lib/modules"
-#   env:
-#     PUID: "1000"
-#     PGID: "1000"
-#     SERVERURL: "mole-homelab.duckdns.org"
-#     PEERS: "desktop,laptop,phone,tablet"
-#     INTERNAL_SUBNET: 10.13.13.0/24
-#     TZ: "{{ timezone }}"
-#   capabilities:
-#     - net_admin
-#     - sys_module
-#   sysctls:
-#     net.ipv4.conf.all.src_valid_mark: 1
-#   restart_policy: unless-stopped
