@@ -1,17 +1,5 @@
 ---
 
-- name: create network for all services
-  docker_network:
-    name: traefik
-
-- name: create network for loki, promtail, node_exporter, and prometheus
-  docker_network:
-    name: metrics
-
-- name: create persistent volume for promtail
-  docker_volume:
-    name: promtail_data
-
 # traefik 
 - name: traefik reverse proxy
   docker_container:
@@ -24,8 +12,6 @@
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     command: ["--api.insecure=true", "--providers.docker"]
-    networks:
-      - name: "traefik"
     restart_policy: unless-stopped
 
 # node exporter
@@ -38,9 +24,6 @@
       - "9100:9100"
     volumes:
       - "/:/host:ro,rslave"
-    networks:
-      - name: "metrics"
-      - name: "traefik"
     restart_policy: unless-stopped
 
 # sensors exporter
@@ -50,9 +33,6 @@
     image: anthonymolinari/sensors-exporter@sha256:a71fc71454ecd72def7184f04f2869065557de8fbcacb02e12200933bfed3c1f
     ports:
       - "8282:9200"
-    networks:
-      - name: "metrics"
-      - name: "traefik"
     restart_policy: unless-stopped
 
 # openbooks
@@ -102,8 +82,6 @@
       - "32412:32412/udp"
       - "32413:32413/udp"
       - "32469:32469/tcp"
-    networks:
-      - name: "traefik"
     device_requests:
       - device_ids: 0
         driver: nvidia
@@ -115,8 +93,6 @@
       PUID: "1000"
       PGID: "1000"
       VERSION: "docker"
-    labels:
-      traefik.http.routers.plex.rule: "Host(`plex.homelab.lan`)"
     restart_policy: unless-stopped
 
 # Jellyfin
@@ -132,8 +108,6 @@
       - "8920:8920/tcp"
       - "1900:1900/udp"
       - "7359:7359/udp"
-    networks:
-      - name: "traefik"
     env:
       PUID: "1000"
       PGID: "1000"
@@ -144,8 +118,6 @@
           - gpu
           - compute
           - utility
-    labels:
-      traefik.http.routers.jellyfin.rule: "Host(`jellyfin.homelab.lan`)"
     restart_policy: unless-stopped
 
 # tdarr 
@@ -182,10 +154,6 @@
       PGID: "1000"
       NVIDIA_DRIVER_CAPABILITIES: "all"
       NVIDIA_VISIBLE_DEVICES: "all"
-    networks:
-      - name: "traefik"
-    labels:
-      traefik.http.routers.tdarr.rule: "Host(`tdarr.homelab.lan`)"
     restart_policy: unless-stopped
 
 # sonarr
@@ -203,10 +171,6 @@
       PGID: "1000"
       PUID: "1000"
       TZ: "{{ timezone }}"
-    networks:
-      - name: "traefik"
-    labels:
-      traefik.http.routers.sonarr.rule: "Host(`sonarr.homelab.lan`)"
     restart_policy: unless-stopped
 
 # radarr
@@ -224,28 +188,6 @@
       PGID: "1000"
       PUID: "1000"
       TZ: "{{ timezone }}"
-    networks:
-      - name: "traefik"
-    labels:
-      traefik.http.routers.radarr.rule: "Host(`radarr.homelab.lan`)"
-    restart_policy: unless-stopped
-
-# homarr
-- name: deploy homarr
-  docker_container:
-    name: homarr
-    image: ghcr.io/ajnart/homarr:0.15.10
-    ports:
-      - "7575:7575"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-      - "{{ docker_path }}/homarr/configs:/app/data/configs"
-      - "{{ docker_path }}/homarr/icons:/app/public/icons"
-      - "{{ docker_path }}/homarr:/data"
-    networks:
-      - name: "traefik"
-    labels:
-      traefik.http.routers.homarr.rule: "Host(`homarr.homelab.lan`)"
     restart_policy: unless-stopped
 
 # overseerr
@@ -260,10 +202,6 @@
     env:
       LOG_LEVEL: "debug"
       TZ: "{{ timezone }}"
-    networks:
-      - name: "traefik"
-    labels:
-      traefik.http.routers.overseerr.rule: "Host(`overseerr.homelab.lan`)"
     restart_policy: unless-stopped
 
 # jellyseerr
@@ -374,20 +312,5 @@
           - utility
     env:
       FRIGATE_RTSP_PASSWORD: "{{ frigate_rtsp_password }}"
-    restart_policy: unless-stopped
-
-# calibre server
-- name: calibre
-  docker_container:
-    name: calibre
-    image: lscr.io/linuxserver/calibre:latest
-    ports:
-      - "8382:8080"
-      - "8381:8181"
-      - "8082:8081"
-      - "9390:9090"
-    volumes:
-      - "{{ docker_path }}/calibre/config:/config"
-      - "{{ media_dir }}:/Books"
     restart_policy: unless-stopped
 

@@ -1,28 +1,5 @@
 ---
 
-- name: create network for all services
-  docker_network:
-    name: traefik
-
-- name: create network for prefect
-  docker_network:
-    name: prefect
-
-# traefik 
-- name: traefik reverse proxy
-  docker_container:
-    name: traefik
-    image: traefik:v2.11
-    ports:
-      - "80:80"
-      - "81:8080"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    command: ["--api.insecure=true", "--providers.docker"]
-    networks:
-      - name: "traefik"
-    restart_policy: unless-stopped
-
 - name: node_exporter container
   docker_container:
     name: node_exporter
@@ -32,36 +9,7 @@
       - "9100:9100"
     volumes:
       - "/:/host:ro,rslave"
-    networks:
-      - name: "traefik"
     restart_policy: unless-stopped
-
-#- name: grafana
-# docker_container:
-#   name: grafana
-#   image: grafana/grafana:12.0.1
-#   ports:
-#     - "3000:3000"
-#   volumes:
-#     - "{{ docker_path }}/grafana/data:/var/lib/grafana"
-#   restart_policy: unless-stopped
-
-# Bind DNS
-#- name: bind docker container
-# docker_container:
-#   name: bind-dns
-#   image: ubuntu/bind9@sha256:53d1951a13f9311d6e340d8edaae75db3b47c2b65e8a14308fff4fdd17720e01
-#   volumes:
-#     - "/home/anthony/docker-volumes/bind-dns/config:/etc/bind"
-#     - "/home/anthony/docker-volumes/bind-dns/cache:/var/cache/bind"
-#     - "/home/anthony/docker-volumes/bind-dns/records:/var/lib/bind"
-#   ports:
-#     - "53:53/udp"
-#     - "53:53/tcp"
-#   env:
-#     BIND9_USER: 'root'
-#     TZ: "{{ timezone }}"
-#   restart_policy: unless-stopped
 
 # duckdns
 - name: duckdns
@@ -78,30 +26,6 @@
       TOKEN: "{{ ddns_token }}"
     restart_policy: unless-stopped
 
-# wireguard
-- name: wireguard
-  docker_container:
-    name: wireguard
-    image: linuxserver/wireguard:latest
-    ports:
-      - "51820:51820/udp"
-    volumes:
-      - "/home/anthony/docker-volumes/wireguard/config:/config"
-      - "/lib/modules:/lib/modules"
-    env:
-      PUID: "1000"
-      PGID: "1000"
-      SERVERURL: "mole-homelab.duckdns.org"
-      PEERS: "desktop,laptop,phone,tablet"
-      INTERNAL_SUBNET: 10.13.13.0/24
-      TZ: "{{ timezone }}"
-    capabilities:
-      - net_admin
-      - sys_module
-    sysctls:
-      net.ipv4.conf.all.src_valid_mark: 1
-    restart_policy: unless-stopped
-
 # mosquitto
 - name: mosquitto
   docker_container:
@@ -116,8 +40,6 @@
     env:
       PUID: "1000"
       PGID: "1000"
-    networks:
-      - name: "traefik"
     restart_policy: unless-stopped
 
 # home assistant
@@ -148,28 +70,6 @@
       - "1880:1880"
     volumes:
       - "nodered_data:/data"
-    networks:
-      - name: "traefik"
-    restart_policy: unless-stopped
-
-# netboot-xyz
-- name: netboot server
-  docker_container:
-    name: netboot-xyz
-    image: linuxserver/netbootxyz:0.7.5
-    ports:
-      - "3110:3000"
-      - "69:69/udp"
-      - "8383:80"
-    volumes:
-      - "{{ docker_path }}/netboot-xyz/config:/config"
-      - "{{ docker_path }}/netboot-xyz/assets:/assets"
-    env:
-      PUID: "1000"
-      PGID: "1000"
-      TZ: "{{ timezone }}"
-    networks:
-      - name: "traefik"
     restart_policy: unless-stopped
 
 - name: omada-controller
@@ -189,23 +89,6 @@
       TZ: "{{ timezone }}"
     restart_policy: unless-stopped
 
-- name: create n8n volume
-  docker_volume:
-    name: n8n_data
-
-- name: n8n automation
-  docker_container:
-    name: n8n-server
-    image: docker.n8n.io/n8nio/n8n 
-    ports:
-      - "5678:5678"
-    volumes:
-      - "n8n_data:/home/node/.n8n"
-    env:
-      TZ: "{{ timezone }}"
-      N8N_SECURE_COOKIE: "false"
-    restart_policy: unless-stopped
-
 # prometheus
 - name: prometheus
   docker_container:
@@ -215,19 +98,6 @@
       - "9090:9090"
     volumes:
       - "{{ docker_path }}/prometheus:/etc/prometheus"
-    networks:
-      - name: "traefik"
-    restart_policy: unless-stopped
-
-# snmp exporter
-- name: snmp-exporter
-  docker_container:
-    name: snmp-exporter
-    image: prom/snmp-exporter
-    ports:
-      - "9116:9116"
-    networks:
-      - name: "traefik"
     restart_policy: unless-stopped
 
 # checkmk
@@ -245,7 +115,28 @@
       - type: tmpfs
         target: /opt/omd/sites/cmk/tmp
         tmpfs_mode: "777"
-    networks:
-      - name: "traefik"
     restart_policy: unless-stopped
 
+# wireguard
+# - name: wireguard
+# docker_container:
+#   name: wireguard
+#   image: linuxserver/wireguard:latest
+#   ports:
+#     - "51820:51820/udp"
+#   volumes:
+#     - "/home/anthony/docker-volumes/wireguard/config:/config"
+#     - "/lib/modules:/lib/modules"
+#   env:
+#     PUID: "1000"
+#     PGID: "1000"
+#     SERVERURL: "mole-homelab.duckdns.org"
+#     PEERS: "desktop,laptop,phone,tablet"
+#     INTERNAL_SUBNET: 10.13.13.0/24
+#     TZ: "{{ timezone }}"
+#   capabilities:
+#     - net_admin
+#     - sys_module
+#   sysctls:
+#     net.ipv4.conf.all.src_valid_mark: 1
+#   restart_policy: unless-stopped
