@@ -89,17 +89,6 @@
       TZ: "{{ timezone }}"
     restart_policy: unless-stopped
 
-# prometheus
-- name: prometheus
-  docker_container:
-    name: prometheus
-    image: prom/prometheus:v3.4.1
-    ports:
-      - "9090:9090"
-    volumes:
-      - "{{ docker_path }}/prometheus:/etc/prometheus"
-    restart_policy: unless-stopped
-
 # checkmk
 - name: check-mk
   docker_container:
