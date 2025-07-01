@@ -96,7 +96,7 @@
 - name: jellyfin
   docker_container:
     name: jellyfin
-    image: linuxserver/jellyfin@sha256:c9bdf96db6d206272a69edcfc54e771190dc8b4f6a6c2bb2e4d91f485824e470 
+    image: linuxserver/jellyfin@sha256:d325675bce77eda246f13d0aa2bf94002d4e426e6e1783594cf9b6df164fcb23 
     volumes:
       - "{{ media_dir }}:/media"
       - "{{ docker_path }}/jellyfin/config:/config"
