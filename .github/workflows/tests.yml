@@ -9,7 +9,7 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       
       - name: ansible syntax validation
         run: ansible-playbook run_main_tasks.yml --syntax-check
