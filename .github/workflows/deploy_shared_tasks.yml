@@ -16,7 +16,7 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         
       - name: run playbook
         run: ansible-playbook run_shared_tasks.yml --vault-password-file='${{ secrets.VUALT_PASS_FILE }}'
