@@ -21,17 +21,6 @@
       - "8282:9200"
     restart_policy: unless-stopped
 
-# prometheus
-#- name: prometheus
-# docker_container:
-#   name: prometheus
-#   image: prom/prometheus:v3.4.1
-#   ports:
-#     - "9090:9090"
-#   volumes:
-#     - "{{ docker_path }}/prometheus:/etc/prometheus"
-#   restart_policy: unless-stopped
-
 # openbooks
 - name: openbooks 
   docker_container:
@@ -90,31 +79,6 @@
       PUID: "1000"
       PGID: "1000"
       VERSION: "docker"
-    restart_policy: unless-stopped
-
-# Jellyfin
-- name: jellyfin
-  docker_container:
-    name: jellyfin
-    image: linuxserver/jellyfin@sha256:5cdc58132f8ef832a8910f732d3fe0144b4f9d091fe6f5409fb1b75d787c1be8 
-    volumes:
-      - "{{ media_dir }}:/media"
-      - "{{ docker_path }}/jellyfin/config:/config"
-    ports:
-      - "8096:8096/tcp"
-      - "8920:8920/tcp"
-      - "1900:1900/udp"
-      - "7359:7359/udp"
-    env:
-      PUID: "1000"
-      PGID: "1000"
-    device_requests:
-      - device_ids: 0
-        driver: nvidia
-        capabilities:
-          - gpu
-          - compute
-          - utility
     restart_policy: unless-stopped
 
 # tdarr 
@@ -201,21 +165,6 @@
       TZ: "{{ timezone }}"
     restart_policy: unless-stopped
 
-# jellyseerr
-- name: deploy jellyseerr
-  docker_container:
-    name: jellyseerr
-    image: fallenbagel/jellyseerr:2.7.3
-    ports:
-      - "5056:5056"
-    volumes:
-      "{{ docker_path }}/jellyseerr/config:/app/config"
-    env:
-      LOG_LEVEL: "debug"
-      TZ: "{{ timezone }}"
-      PORT: "5056"
-    restart_policy: unless-stopped
-
 # pia-vpn-container
 - name: deploy vpn-client container
   docker_container:
@@ -283,47 +232,4 @@
       - "/dev/sdc"
       - "/dev/sdd"
       - "/dev/sde"
-    restart_policy: unless-stopped
-
-# frigate nvr
-- name: deploy frigate nvr
-  docker_container:
-    name: frigate
-    image: ghcr.io/blakeblackshear/frigate:stable
-    ports:
-      - "8971:8971"
-      - "8554:8554"
-      - "5000:5000"
-      - "8555:8555/tcp"
-      - "8555:8555/udp"
-    volumes:
-      - "/etc/localtime:/etc/localtime:ro"
-      - "{{ docker_path }}/frigate/config:/config"
-      - "{{ frigate_video }}:/media/frigate"
-    device_requests:
-      - device_ids: 0
-        driver: nvidia
-        capabilities:
-          - gpu
-          - compute
-          - utility
-    env:
-      FRIGATE_RTSP_PASSWORD: "{{ frigate_rtsp_password }}"
-    restart_policy: unless-stopped
-
-# zwift offline server
-- name: deploy zoffline
-  docker_container:
-    name: zwift-offline 
-    image: zoffline/zoffline:zoffline_1.0.153811
-    ports:
-      - "443:443"
-      - "80:80"
-      - "3024:3024/udp"
-      - "3025:3025"
-      - "53:53/udp"
-    volumes:
-      - "{{ docker_path }}/zoffline/storage:/usr/src/app/zwift-offline/storage"
-    env:
-      TZ: "{{ timezone }}"
     restart_policy: unless-stopped

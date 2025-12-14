@@ -1,20 +1,5 @@
 ---
 
-- name: ensures bind config dir exists
-  file:
-    path: "/home/anthony/docker-volumes/bind-dns/config"
-    state: directory
-
-- name: copy bind config
-  copy:
-    src: "configs/network/named.conf"
-    dest: "/home/anthony/docker-volumes/bind-dns/config/named.conf"
-
-- name: copy zone config
-  copy:
-    src: "configs/network/homelab-lan.zone"
-    dest: "/home/anthony/docker-volumes/bind-dns/config/homelab-lan.zone"
-
 - name: ensure mosquitto dir exists
   file:
     path: "/home/anthony/docker-volumes/mosquitto/config"

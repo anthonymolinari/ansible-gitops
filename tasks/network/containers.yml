@@ -88,21 +88,3 @@
     env:
       TZ: "{{ timezone }}"
     restart_policy: unless-stopped
-
-# checkmk
-- name: check-mk
-  docker_container:
-    name: checkmk
-    image: checkmk/check-mk-raw:2.4.0
-    ports:  
-      - "8080:5000"
-      - "8000:8000"
-    volumes:
-      - "{{ docker_path }}/checkmk:/omd/sites"
-      - "/etc/localtime:/etc/localtime:ro"
-    mounts:
-      - type: tmpfs
-        target: /opt/omd/sites/cmk/tmp
-        tmpfs_mode: "777"
-    restart_policy: unless-stopped
-
