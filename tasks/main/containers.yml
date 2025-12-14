@@ -52,6 +52,22 @@
           - utility
     restart_policy: unless-stopped
 
+# emby
+- name: emby
+  docker_container:
+    name: emby
+    image: emby/embyserver:4.9.2.8
+    ports:
+      - "8096:8096"
+      - "8920:8920"
+    volumes:
+      - "{{ media_dir }}:/Media"
+      - "{{ docker_path }}/emby:/config"
+    env:
+      UID: "1000"
+      GID: "1000"
+    restart_policy: unless-stopped
+
 # plex
 - name: plex
   community.docker.docker_container:
