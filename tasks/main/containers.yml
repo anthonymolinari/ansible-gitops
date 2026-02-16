@@ -56,7 +56,7 @@
 - name: emby
   docker_container:
     name: emby
-    image: emby/embyserver:4.10.0.2
+    image: emby/embyserver:4.10.0.3
     ports:
       - "8096:8096"
       - "8920:8920"
