@@ -174,6 +174,22 @@
       TZ: "{{ timezone }}"
     restart_policy: unless-stopped
 
+- name: lazylibrarian
+  docker_container:
+    name: lazylibrarian
+    image: linuxserver/lazylibrarian:latest
+    ports:
+      - "5299:5299"
+    volumes:
+      - "{{ docker_path }}/lazylibrarian/config:/config"
+      - "{{ media_dir }}:/books"
+      - "{{ downloads_dir }}/torrents:/downloads"
+    env:
+      PGID: "1000"
+      PUID: "1000"
+      DOCKER_MODS: "linuxserver/mods:universial-calibre|linuxserver/mods:lazylibrarian-ffmpeg"
+    restart_policy: unless-stopped
+
 # overseerr
 - name: deploy overseerr
   docker_container:
