@@ -268,6 +268,7 @@
       - "8081:8081"
     volumes:
       - "{{ docker_path }}/calibre/config:/config"
+      - "{{ media_dir }}/Books/books:/data/books"
     env:
       PUID: "1000"
       PGID: "1000"
