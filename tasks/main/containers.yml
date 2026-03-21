@@ -182,7 +182,7 @@
       - "5299:5299"
     volumes:
       - "{{ docker_path }}/lazylibrarian/config:/config"
-      - "{{ media_dir }}:/books"
+      - "{{ docker_path }}/calibre/config:/books"
       - "{{ downloads_dir }}/torrents:/downloads"
     env:
       PGID: "1000"
