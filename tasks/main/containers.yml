@@ -256,3 +256,23 @@
       - "/dev/sdd"
       - "/dev/sde"
     restart_policy: unless-stopped
+
+# calibre web
+- name: deploy calibre 
+  docker_container:
+    name: calibre-web
+    image: lscr.io/linuxserver/calibre:9.5.0
+    ports:
+      - "8080:8080"
+      - "8181:8181"
+      - "8081:8081"
+    volumes:
+      - "{{ docker_path }}/calibre/config:/config"
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "{{ timezone }}"
+    restart_policy: unless-stopped
+
+
+
