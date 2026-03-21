@@ -264,7 +264,7 @@
     image: lscr.io/linuxserver/calibre:9.5.0
     ports:
       - "8080:8080"
-      - "8181:8181"
+      - "8281:8181"
       - "8081:8081"
     volumes:
       - "{{ docker_path }}/calibre/config:/config"
