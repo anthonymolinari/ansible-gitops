@@ -151,22 +151,6 @@
       TZ: "{{ timezone }}"
     restart_policy: unless-stopped
 
-- name: lazylibrarian
-  docker_container:
-    name: lazylibrarian
-    image: linuxserver/lazylibrarian:latest
-    ports:
-      - "5299:5299"
-    volumes:
-      - "{{ docker_path }}/lazylibrarian/config:/config"
-      - "{{ docker_path }}/calibre/config:/books"
-      - "{{ downloads_dir }}/torrents:/downloads"
-    env:
-      PGID: "1000"
-      PUID: "1000"
-      DOCKER_MODS: "linuxserver/mods:universial-calibre|linuxserver/mods:lazylibrarian-ffmpeg"
-    restart_policy: unless-stopped
-
 # overseerr
 - name: deploy overseerr
   docker_container:
@@ -266,5 +250,39 @@
       PUID: "1000"
       PGID: "1000"
       TZ: "{{ timezone }}"
+    restart_policy: unless-stopped
+
+# shelfmark
+- name: deploy shelfmark
+  docker_container:
+    name: shelfmark
+    image: ghcr.io/calibrain/shelfmark:latest
+    ports:
+      - "8084:8084"
+    volumes:
+      - "{{ docker_path }}/shelfmark/config:/config"
+      - "{{ media_dir }}/Books/books:/books"
+      - "{{ docker_path }}/calibre/config:/calibre"
+      - "{{ downloads_dir }}/torrents:/downloads"
+    env:
+      PUID: "1000"
+      PGID: "1000"
+    restart_policy: unless-stopped
+
+# lazy librarian
+- name: lazylibrarian
+  docker_container:
+    name: lazylibrarian
+    image: linuxserver/lazylibrarian:latest
+    ports:
+      - "5299:5299"
+    volumes:
+      - "{{ docker_path }}/lazylibrarian/config:/config"
+      - "{{ docker_path }}/calibre/config:/books"
+      - "{{ downloads_dir }}/torrents:/downloads"
+    env:
+      PGID: "1000"
+      PUID: "1000"
+      DOCKER_MODS: "linuxserver/mods:universial-calibre|linuxserver/mods:lazylibrarian-ffmpeg"
     restart_policy: unless-stopped
 
