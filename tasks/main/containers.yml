@@ -252,6 +252,23 @@
       TZ: "{{ timezone }}"
     restart_policy: unless-stopped
 
+- name: deploy calibre web automated
+  docker_container:
+    name: calibre-web-automated
+    image: crocodilestick/calibre-web-automated:latest
+    ports:
+      - "8083:8083"
+    volumes:
+      - "{{ docker_path }}/calibre-automated/config:/config"
+      - "{{ media_dir }}/Books/ingest:/cwa-book-ingest"
+      - "{{ docker_path }}/calibre/config/Calibre Library:/calibre-library"
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "{{ timezone }}"
+      HARDCOVER_TOKEN: "{{ hardcover_token }}"
+    restart_policy: unless-stopped
+
 # shelfmark
 - name: deploy shelfmark
   docker_container:
@@ -267,22 +284,5 @@
     env:
       PUID: "1000"
       PGID: "1000"
-    restart_policy: unless-stopped
-
-# lazy librarian
-- name: lazylibrarian
-  docker_container:
-    name: lazylibrarian
-    image: linuxserver/lazylibrarian:latest
-    ports:
-      - "5299:5299"
-    volumes:
-      - "{{ docker_path }}/lazylibrarian/config:/config"
-      - "{{ docker_path }}/calibre/config:/books"
-      - "{{ downloads_dir }}/torrents:/downloads"
-    env:
-      PGID: "1000"
-      PUID: "1000"
-      DOCKER_MODS: "linuxserver/mods:universial-calibre|linuxserver/mods:lazylibrarian-ffmpeg"
     restart_policy: unless-stopped
 
