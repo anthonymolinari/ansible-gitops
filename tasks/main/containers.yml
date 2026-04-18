@@ -278,7 +278,7 @@
       - "8084:8084"
     volumes:
       - "{{ docker_path }}/shelfmark/config:/config"
-      - "{{ media_dir }}/Books/books:/books"
+      - "{{ media_dir }}/Books/ingest:/books" # ingest for cwa
       - "{{ docker_path }}/calibre/config:/calibre"
       - "{{ downloads_dir }}/torrents:/downloads"
     env:
