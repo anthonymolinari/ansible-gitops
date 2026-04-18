@@ -2,19 +2,19 @@ name: deploy shared tasks
 
 on:
   workflow_dispatch:
-push:
-  branches: ['main']
-  paths:
-    - 'tasks/shared_tasks/**'
-    - 'configs/shared/**'
-    - 'group_vars/all/**'
-    - 'hosts'
-    - 'run_shared_tasks.yml'
-       
+  push:
+    branches: ['main']
+    paths:
+      - 'tasks/shared_tasks/**'
+      - 'configs/shared/**'
+      - 'group_vars/all/**'
+      - 'hosts'
+      - 'run_shared_tasks.yml'
 
 jobs:
   deploy:
     runs-on: self-hosted
+
     steps:
       - uses: actions/checkout@v6
         
