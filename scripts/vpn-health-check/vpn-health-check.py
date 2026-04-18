@@ -27,7 +27,7 @@ def getKeyFromXML(path):
     return None
 
 
-def get_health(container: Container):
+def get_health(container):
     api_client = APIClient()
     inspect_results = api_client.inspect_container(container.name)
     return inspect_results['State']['Health']['Status']
