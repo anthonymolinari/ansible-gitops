@@ -12,6 +12,19 @@
       - "/:/host:ro,rslave"
     restart_policy: unless-stopped
 
+# uptime kuma
+- name: uptime kuma
+  docker_container:
+    name: uptime-kuma
+    image: louislam/uptime-kuma:2
+    ports:
+      - "3001:3001"
+    volumes:
+      - "{{ docker_path }}/uptime-kuma/data:/app/data"
+    env:
+      TZ: "{{ timezone }}"
+    restart_policy: unless-stopped
+
 # sensors exporter
 - name: sensors-exporter
   docker_container:
