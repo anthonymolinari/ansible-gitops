@@ -21,18 +21,6 @@
       - "8282:9200"
     restart_policy: unless-stopped
 
-# openbooks
-- name: openbooks 
-  docker_container:
-    name: openbooks
-    image: evanbuss/openbooks:4.5.0
-    command: ["--name", "iker_neptunis", "--persist", "-s", "irc.irchighway.net:9999"]
-    volumes:
-      - "{{downloads_dir}}:/books"
-    ports:
-      - "4567:80"
-    restart_policy: unless-stopped
-
 # nvidia exporter
 - name: gpu-exporter
   docker_container:
@@ -232,24 +220,6 @@
       - "/dev/sdc"
       - "/dev/sdd"
       - "/dev/sde"
-    restart_policy: unless-stopped
-
-# calibre web
-- name: deploy calibre 
-  docker_container:
-    name: calibre-web
-    image: lscr.io/linuxserver/calibre:9.7.0
-    ports:
-      - "8080:8080"
-      - "8281:8181"
-      - "8081:8081"
-    volumes:
-      - "{{ docker_path }}/calibre/config:/config"
-      - "{{ media_dir }}/Books/books:/data/books"
-    env:
-      PUID: "1000"
-      PGID: "1000"
-      TZ: "{{ timezone }}"
     restart_policy: unless-stopped
 
 - name: deploy calibre web automated
