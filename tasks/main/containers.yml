@@ -21,6 +21,7 @@
       - "3001:3001"
     volumes:
       - "{{ docker_path }}/uptime-kuma/data:/app/data"
+      - "/var/run/docker.sock:/var/run/docker.sock"
     env:
       TZ: "{{ timezone }}"
     restart_policy: unless-stopped
