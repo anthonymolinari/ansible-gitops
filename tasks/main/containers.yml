@@ -276,7 +276,8 @@
     name: kosync
     image: koreader/kosync:latest
     ports: 
-      - "7200:7200"
+      - "7200:7200" 
+      - "17200:17200"
     volumes:
       - "{{ docker_path }}/kosync/logs/app:/app/koreader-sync-server/logs"
       - "{{ docker_path }}/kosync/logs/redis:/var/log/redis"
