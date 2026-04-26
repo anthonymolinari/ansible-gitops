@@ -270,16 +270,3 @@
       PGID: "1000"
     restart_policy: unless-stopped
 
-# koreader sync server
-- name: kosync
-  docker_container:
-    name: kosync
-    image: koreader/kosync:latest
-    ports: 
-      - "7200:7200" 
-      - "17200:17200"
-    volumes:
-      - "{{ docker_path }}/kosync/logs/app:/app/koreader-sync-server/logs"
-      - "{{ docker_path }}/kosync/logs/redis:/var/log/redis"
-      - "{{ docker_path }}/kosync/data/redis:/var/lib/redis"
-    restart_policy: unless-stopped
