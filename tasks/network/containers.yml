@@ -17,7 +17,7 @@
     name: duckdns
     image: linuxserver/duckdns@sha256:abbeb230a2d670c7b4182f3df92b98d5ce6874dd6459c8a640746940782bb68b
     volumes:
-      - "/home/anthony/docker-volumes/duckdns/config:/config"
+      - "{{ docker_path }}/duckdns/config:/config"
     env:
       PUID: "1000"
       PGID: "1000"
@@ -56,22 +56,18 @@
       - "/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20230525115147-if00:/dev/ttyACM0"
     restart_policy: unless-stopped
 
-# node-red data
-- name: create node-red volume
-  docker_volume:
-    name: nodered_data
-
-# node-red
-- name: node-red
+- name: deloy forgejo
   docker_container:
-    name: node-red
-    image: nodered/node-red:4.1
+    name: forgejo
+    image: codeberg.org/forgejo/forgejo:15
     ports:
-      - "1880:1880"
+      - '3000:3000'
+      - '222:22'
     volumes:
-      - "nodered_data:/data"
+      - "{{ docker_path }}/forgejo/data:/data"
+      - "/etc/localtime:/etc/localtime:ro"
     restart_policy: unless-stopped
-
+  
 - name: omada-controller
   docker_container:
     name: omada
