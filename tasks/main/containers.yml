@@ -155,9 +155,9 @@
       - "{{ docker_path }}/bazarr/config:/config"
       - "{{ media_dir }}:/media"
     ENV:
-      - PUID: "1000"
-      - PGID: "1000"
-      - TZ: "{{ timezone }}"env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "{{ timezone }}"env:
     restart_policy: unless-stopped
 
 # overseerr
