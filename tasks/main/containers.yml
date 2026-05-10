@@ -154,10 +154,10 @@
     volumes:
       - "{{ docker_path }}/bazarr/config:/config"
       - "{{ media_dir }}:/media"
-    ENV:
+    env:
       PUID: "1000"
       PGID: "1000"
-      TZ: "{{ timezone }}"env:
+      TZ: "{{ timezone }}"
     restart_policy: unless-stopped
 
 # overseerr
