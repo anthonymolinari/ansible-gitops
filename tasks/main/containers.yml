@@ -114,7 +114,7 @@
 - name: sonarr
   docker_container:
     name: sonarr
-    image: linuxserver/sonarr:4.0.17-develop   
+    image: linuxserver/sonarr:4.0.18-develop   
     ports:
       - "8989:8989"
     volumes:
