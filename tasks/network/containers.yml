@@ -59,7 +59,7 @@
 - name: deloy forgejo
   docker_container:
     name: forgejo
-    image: codeberg.org/forgejo/forgejo:15
+    image: codeberg.org/forgejo/forgejo:16
     ports:
       - '3000:3000'
       - '222:22'
